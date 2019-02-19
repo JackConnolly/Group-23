@@ -14,6 +14,14 @@ public class Cards {
 //making the array which will hold the rest of the cards
 	ArrayList<String> remainderCards = new ArrayList<>();
 
+//making the arrays for the two players hands
+	ArrayList<String> playerOne = new ArrayList<>();
+	ArrayList<String> playerTwo = new ArrayList<>();
+
+	public Cards(){
+
+	}
+
 	public void setPlaces(){
 
 //adding cards to places array
@@ -43,6 +51,7 @@ public class Cards {
 		weapons.add("Horseshoe");
 		weapons.add("Water Bucket");
 		weapons.add("Trophy");
+		weapons.add("Revolver");
 	}
 
 	public String winningCards(){
@@ -63,15 +72,38 @@ public class Cards {
 		weapons.remove(random3);
 
 //adding the remainder cards to one arraylist
-		for (int i=places.size(); i>=0; i--){
-
-
-
-		}
+		remainderCards.addAll(places);
+		remainderCards.addAll(people);
+		remainderCards.addAll(weapons);
 
 		return "";
 
 	}
+
+//handing out the remaining cards to the players
+	public void setPlayerOnesHand(){
+
+		for (int i=5; i>=0; i--){
+
+			int random = new Random().nextInt(remainderCards.size());
+			playerOne.add(remainderCards.get(random));
+			remainderCards.remove(random);
+
+		}
+
+	}
+
+	public void setPlayerTwosHand(){
+
+		for (int i=5; i>=0; i--){
+
+			playerTwo.add(remainderCards.get(i));
+			remainderCards.remove(i);
+
+		}
+
+	}
+
 //getter methods
 	public ArrayList<String> getPlaces(){
 
@@ -89,6 +121,26 @@ public class Cards {
 
 		return weapons;
 
+	}
+
+	public ArrayList<String> getSelectedCards(){
+
+		return selectedCards;
+	}
+
+	public ArrayList<String> getRemainingCards(){
+
+		return remainderCards;
+	}
+
+	public ArrayList<String> getPlayerOnesHand(){
+
+		return playerOne;
+	}
+
+	public ArrayList<String> getPlayerTwosHand(){
+
+		return playerTwo;
 	}
 
 }
