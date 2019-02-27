@@ -143,4 +143,21 @@ public class Cards {
 		return playerTwo;
 	}
 
+	public void printCards(){
+
+		Cards c = new Cards();
+
+		c.setPlaces();
+		c.setPeople();
+		c.setWeapons();
+		c.winningCards();
+		c.setPlayerOnesHand();
+		c.setPlayerTwosHand();
+
+		System.out.println("Player Ones Cards are " + c.getPlayerOnesHand());
+		System.out.println("Player Twos Cards are " + c.getPlayerTwosHand());
+		System.out.println("The Winning Cards are " + c.getSelectedCards());
+
+	}
+
 }
