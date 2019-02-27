@@ -88,17 +88,7 @@ public void initializeBoard(int columns, int rows, ArrayList<String> rooms){
 		System.out.print("|____|");
 	}
 	
-public static void main(String[] args){
 
-	
-	Board b = new Board();
-	Cards c = new Cards();
-	/**hard coding size of board because I hard coded placement of rooms
-	*/
-	c.setPlaces();
-	/** trying to add all players to all players array */
-	b.initializeBoard(4, 5, c.getPlaces());
-}
 
 
 

@@ -1,6 +1,9 @@
 public class Rules {
+	
+	public Rules(){}
+	
 	//println(  + )
-	public static void main(String[] args) {
+	public void printRules() {
 
 		System.out.println("Welcome To Clue!");
 		//System.out.println("Rules:\nFor the First Demo there are only 2 players the Human & Computer");
