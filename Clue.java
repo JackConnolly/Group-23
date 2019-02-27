@@ -12,5 +12,7 @@ public class Clue {
 	c.setPlaces();
 	/** trying to add all players to all players array */
 	b.initializeBoard(4, 5, c.getPlaces());
+	
+	c.printCards();
 }
 }

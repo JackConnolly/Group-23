@@ -77,6 +77,7 @@ public void initializeBoard(int columns, int rows, ArrayList<String> rooms){
 			printSquare();
 			}
 		}
+		System.out.println("");
 				
 	}
 	

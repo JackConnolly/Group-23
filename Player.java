@@ -1,6 +1,6 @@
 public class Player{
 	
-	//Player class organizes turns of the players but primarily returns tokens with different values (x and y position, cards, etc)
+	//Player class organizes turns of the players but primarily returns tokens with different values
 	//includes computer (AI) players.)
 	
 	public int initialMoveX = 0;
