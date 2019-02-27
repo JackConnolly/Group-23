@@ -24,7 +24,7 @@ public void initializeBoard(int columns, int rows, ArrayList<String> rooms){
 			for(int i = 0; i < holder.length() - rooms.get(j).length() + 3; i++){
 				if(j < rooms.size()/2)
 				rooms.set(j, " " + rooms.get(j));
-				
+				 
 			}
 		}
 	}
@@ -34,7 +34,7 @@ public void initializeBoard(int columns, int rows, ArrayList<String> rooms){
 	for (int i = 0; i < rows; i++){
 		System.out.println("");
 		if(i % 2 != 0){
-			for(int x = 0; x < holder.length() - 3; x++){
+			for(int x = 0; x < holder.length()  ; x++){
 			System.out.print(" ");
 			}
 		}
@@ -44,37 +44,49 @@ public void initializeBoard(int columns, int rows, ArrayList<String> rooms){
 			/**setting rooms on left side of board j == 0 */
 			if(i == 0 && j == 0){
 				board[i][j].setRoomAccess(rooms.get(0));
-				System.out.print(rooms.get(0) + "__|");
+				System.out.print(rooms.get(0));
+				printSquare();
 			}
 			else if(i == 2 && j == 0){
 				board[i][j].setRoomAccess(rooms.get(1));
-				System.out.print(rooms.get(1) + "__|");
+				System.out.print(rooms.get(1));
+				printSquare();
 			}
 			else if(i == 4 && j == 0){
 				board[i][j].setRoomAccess(rooms.get(2));
-				System.out.print(rooms.get(2) + "__|");
+				System.out.print(rooms.get(2));
+				printSquare();
 			}
 			/**setting rooms on right side of board j == 3 */
 			else if(i == 0 && j == 3){
 				board[i][j].setRoomAccess(rooms.get(3));
-				System.out.print("|__" + rooms.get(3));
+				printSquare();
+				System.out.print(rooms.get(3));
 			}
 			else if(i == 2 && j == 3){
 				board[i][j].setRoomAccess(rooms.get(4));
-				System.out.print("|__" + rooms.get(4));
+				printSquare();
+				System.out.print(rooms.get(4));
 			}
 			else if(i == 4 && j == 3){
 				board[i][j].setRoomAccess(rooms.get(5));
-				System.out.print("|__" + rooms.get(5));
+				printSquare();
+				System.out.print(rooms.get(5));
 			}
 				else{	
-			System.out.print("|____|");
+			printSquare();
 			}
 		}
 				
 	}
+	
+	
 }
 	
+	/**prints empty square */
+	public void printSquare(){
+		System.out.print("|____|");
+	}
 	
 public static void main(String[] args){
 
@@ -84,6 +96,7 @@ public static void main(String[] args){
 	/**hard coding size of board because I hard coded placement of rooms
 	*/
 	c.setPlaces();
+	/** trying to add all players to all players array */
 	b.initializeBoard(4, 5, c.getPlaces());
 }
 
