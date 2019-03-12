@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -28,6 +29,8 @@ import javafx.event.EventHandler;
 
 /* Creates private button to handle events
 */
+    
+    
     private Button createButton(String text) {
       Button button = new Button(text);
       button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -40,6 +43,8 @@ import javafx.event.EventHandler;
       BorderPane root = new BorderPane();
       GridPane grid = new GridPane();
       VBox actionKeys = new VBox();
+      HBox  = new VBox();
+
 
       Button move = new Button("Move");
 
@@ -70,12 +75,10 @@ import javafx.event.EventHandler;
       actionKeys.getChildren().add(move);
       root.setCenter(grid);
       root.setLeft(actionKeys);
+      root.setMargin(grid, new Insets(10,10,10,10));
+      root.setMargin(actionKeys, new Insets(10,10,10,10));
 
-      grid.setGridLinesVisible(true);
-
-
-
-
+      //grid.setGridLinesVisible(true);
 
 
 
@@ -93,3 +96,4 @@ import javafx.event.EventHandler;
 
 
   }//END OF APP
+
