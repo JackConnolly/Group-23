@@ -17,8 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
-import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 
   public class PanePlay extends Application{
@@ -29,8 +32,6 @@ import javafx.event.EventHandler;
 
 /* Creates private button to handle events
 */
-    
-    
     private Button createButton(String text) {
       Button button = new Button(text);
       button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -42,11 +43,45 @@ import javafx.event.EventHandler;
       // Setup the panes
       BorderPane root = new BorderPane();
       GridPane grid = new GridPane();
-      VBox actionKeys = new VBox();
-      HBox  = new VBox();
+
+      VBox actionKeys = new VBox(20);
+      // setting preferred width for VBox actionKeys
+      actionKeys.setPrefWidth(150);
+
+      VBox notePad = new VBox(20);
+      // setting preferred width for VBox notePad
+      notePad.setPrefWidth(150);
+
+      HBox statusBar = new HBox();
+      statusBar.setPrefWidth(600);
 
 
-      Button move = new Button("Move");
+      // Creating and Adding Buttons for VBox actionKeys
+      Button rollDice = new Button("Roll Dice");
+      Button suspectPlayer = new Button("Suspect Player");
+      Button moveLeft = new Button("Move Left");
+      Button moveRight = new Button("Move Right");
+      Button moveUp = new Button("Move Up");
+      Button moveDown = new Button("Move Down");
+      actionKeys.getChildren().add(suspectPlayer);
+      actionKeys.getChildren().add(moveLeft);
+      actionKeys.getChildren().add(moveRight);
+      actionKeys.getChildren().add(moveUp);
+      actionKeys.getChildren().add(moveDown);
+
+      //Creating and Adding buttons to Vbox notePad
+      Button yesChar= new Button("Yes");
+      Button noChar = new Button("No");
+      Button yesWeapon = new Button("Yes");
+      Button noWeapon = new Button("No");
+      notePad.getChildren().add(yesChar);
+      notePad.getChildren().add(noChar);
+      notePad.getChildren().add(yesWeapon);
+      notePad.getChildren().add(noWeapon);
+
+
+      statusBar.getChildren().add(rollDice);
+
 
       int numRows = 5 ;
       int numColumns = 5 ;
@@ -72,17 +107,16 @@ import javafx.event.EventHandler;
           grid.add(button, i % 5, i / 5);
         }
 
-      actionKeys.getChildren().add(move);
+      
       root.setCenter(grid);
       root.setLeft(actionKeys);
-      root.setMargin(grid, new Insets(10,10,10,10));
-      root.setMargin(actionKeys, new Insets(10,10,10,10));
+      root.setRight(notePad);
+      root.setBottom(statusBar);
 
-      //grid.setGridLinesVisible(true);
+      grid.setGridLinesVisible(true);
 
 
-
-      Scene scene = new Scene(root, 800, 600);
+      Scene scene = new Scene(root, 900, 700);
       primaryStage.setTitle("PANE PLAY");
       primaryStage.setScene(scene);
       primaryStage.show();
@@ -96,4 +130,3 @@ import javafx.event.EventHandler;
 
 
   }//END OF APP
-
