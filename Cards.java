@@ -1,25 +1,49 @@
+/** CPSC Team 23
+*Class Cards extends Clue
+*@author Hailey Allen/ group 23
+*/
+
 import java.util.ArrayList;
 import java.util.Random;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 
-public class Cards {
+public class Cards{
 
-//introducing the cards array
-	ArrayList<String> places = new ArrayList<>();
-	ArrayList<String> people = new ArrayList<>();
-	ArrayList<String> weapons = new ArrayList<>();
+//Introducing the various card type arrays
+	private ArrayList<String> places = new ArrayList<>();
+	private ArrayList<String> people = new ArrayList<>();
+	private ArrayList<String> weapons = new ArrayList<>();
 
-//making the array list which will have the randomized weapon, place, and person 
-	ArrayList<String> selectedCards = new ArrayList<>();
+//Making the 'winning' array of winning cards
+	private ArrayList<String> selectedCards = new ArrayList<>();
 
-//making the array which will hold the rest of the cards
-	ArrayList<String> remainderCards = new ArrayList<>();
+//Making the array which will hold the rest of the cards
+	private ArrayList<String> remainderCards = new ArrayList<>();
 
-//making the arrays for the two players hands
-	ArrayList<String> playerOne = new ArrayList<>();
-	ArrayList<String> playerTwo = new ArrayList<>();
+//Making the arrays for the two players hands
+	private ArrayList<String> playerOne = new ArrayList<>();
+	private ArrayList<String> playerTwo = new ArrayList<>();
 
+//Constructor with no parameters; sets the default 
 	public Cards(){
-
+		this.setPlaces();
+		this.setPeople();
+		this.setWeapons();
+		this.winningCards();
+		this.setPlayerOnesHand();
+		this.setPlayerTwosHand();
 	}
 
 	public void setPlaces(){
@@ -143,21 +167,16 @@ public class Cards {
 		return playerTwo;
 	}
 
+	public static void main(String[] args){
 
-public void printCards(){
+		Cards c = new Cards();
 
+		System.out.println("Player Ones Cards are " + c.getPlayerOnesHand());
+		System.out.println("Player Twos Cards are " + c.getPlayerTwosHand());
+		System.out.println("The Winning Cards are " + c.getSelectedCards());
 
-		setPlaces();
-		setPeople();
-		setWeapons();
-		winningCards();
-		setPlayerOnesHand();
-		setPlayerTwosHand();
-
-		System.out.println("Player Ones Cards are " + getPlayerOnesHand());
-		System.out.println("Player Twos Cards are " + getPlayerTwosHand());
-		System.out.println("The Winning Cards are " + getSelectedCards());
 
 	}
+
 
 }
