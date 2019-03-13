@@ -28,11 +28,21 @@ import javafx.event.EventHandler;
 
   public class PanePlay extends Application{
 
+    //Dice roll class is here for my own sake of debugging the board
+  public int diceRoll(){
+   int min = 1;
+   int max = 6;
+   int rollAmount = (int)(Math.random() * max) + 1;
+   System.out.println(rollAmount);
+   return rollAmount;
+ }
+
     public static void main(String[] args){
       launch(args);
     }
 
 /* Creates private button to handle events
+
 */
     private Button createButton(String text){
       Button createB = new Button(text);
@@ -40,27 +50,6 @@ import javafx.event.EventHandler;
       createB.setOnAction(e -> System.out.println(text));// Setting up the action to print the text to console
       return createB;
       }
-	  
-	  	  /* Function to check player position and display image onto button
-	  */
-	  public HBox[] displayPlayers(Player player1, Player player2){
-		  HBox hBox1 = new HBox();
-		  HBox hBox2 = new HBox();
-		  Label label = new Label(" ");
-		  int player1Position[] = player1.getPlayerPosition();
-		  int player2Position[] = player2.getPlayerPosition();
-		  ImageView token1 = new ImageView( getClass().getResource(player1.getPlayerToken()).toExternalForm());
-          ImageView token2 = new ImageView( getClass().getResource(player2.getPlayerToken()).toExternalForm());
-		  if (player1Position == player2Position){
-			  hBox1.getChildren().addAll( token1, label, token2);
-		  }
-		  else {
-			  hBox1.getChildren().addAll(token1);
-			  hBox2.getChildren().addAll(token2);
-		  }	  
-		  HBox[] boxes = new HBox[]{hBox1, hBox2};
-		  return boxes;
-	  }
 
     public void start(Stage primaryStage) throws Exception{
       //Setup the 2d array
@@ -73,10 +62,6 @@ import javafx.event.EventHandler;
       VBox actionKeys = new VBox(20);
       // setting preferred width for VBox actionKeys
       actionKeys.setPrefWidth(150);
-
-	// setting player names and initial positions
-	  Player player1 = new Player("Anna", 1, 1, "player1.png");
-	  Player player2 = new Player("Jack", 1, 0, "player2.png");
 
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -95,7 +80,8 @@ import javafx.event.EventHandler;
       Button moveRight = new Button("Move Right");
       Button moveUp = new Button("Move Up");
       Button moveDown = new Button("Move Down");
-      actionKeys.getChildren().addAll(suspectPlayer,moveLeft,moveRight,moveUp,moveDown);
+      Label moveAmount = new Label("Movements Allowed: ");
+      actionKeys.getChildren().addAll(suspectPlayer,moveLeft,moveRight,moveUp,moveDown,rollDice,moveAmount);
 
 
       //Creating and Adding buttons to Vbox notePad
@@ -105,8 +91,23 @@ import javafx.event.EventHandler;
       Button noWeapon = new Button("No");
       notePad.getChildren().addAll(yesChar,noChar,yesWeapon,noWeapon);
 
-      actionKeys.getChildren().add(rollDice);
 
+      // Anon inner class
+      rollDice.setOnAction(new EventHandler<ActionEvent>()
+      {
+        @Override
+        public void handle(ActionEvent event)
+        {
+          PanePlay p = new PanePlay();
+
+          //double amount = Double.parseDouble(txtName.getText()
+          moveAmount.setText("Movements Allowed: " + Integer.toString(p.diceRoll()));
+          //diceRoll();
+
+          //balance.setText("Balance: $");
+
+        }
+      });
 
       int numRows = 5;
       int numColumns = 5;
@@ -130,11 +131,6 @@ import javafx.event.EventHandler;
       // Makes the buttons in a 5 x 5
       for (int i = 0 ; i < 25  ; i++){
           Button button = createButton(Integer.toString(i+1));
-		  HBox[] boxes = displayPlayers(player1, player2);
-		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[0]);
-		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[1]);
           grid.add(button, i % 5, i / 5);
         }
 
