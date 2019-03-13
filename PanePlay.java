@@ -28,6 +28,10 @@ import javafx.event.EventHandler;
 
   public class PanePlay extends Application{
 
+    // Variables for the dynamic buttons
+    private int numRows = 5;
+    private int numColumns = 5;
+
     //Dice roll class is here for my own sake of debugging the board
   public int diceRoll(){
    int min = 1;
@@ -53,6 +57,8 @@ import javafx.event.EventHandler;
 
     public void start(Stage primaryStage) throws Exception{
       //Setup the 2d array
+      //ArrayList<Integer> boardList = new ArrayList<Integer>[5][5];
+      //boardList[0][0] = 1;
 
 
 
@@ -99,18 +105,12 @@ import javafx.event.EventHandler;
         public void handle(ActionEvent event)
         {
           PanePlay p = new PanePlay();
-
-          //double amount = Double.parseDouble(txtName.getText()
           moveAmount.setText("Movements Allowed: " + Integer.toString(p.diceRoll()));
-          //diceRoll();
-
-          //balance.setText("Balance: $");
 
         }
       });
 
-      int numRows = 5;
-      int numColumns = 5;
+
 
       // Makes the rows and columns a dynamic size
       for (int row = 0 ; row < numRows ; row++ ){
@@ -130,7 +130,8 @@ import javafx.event.EventHandler;
 
       // Makes the buttons in a 5 x 5
       for (int i = 0 ; i < 25  ; i++){
-          Button button = createButton(Integer.toString(i+1));
+          Button button = new Button();//createButton(Integer.toString(i + 1));
+          button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
           grid.add(button, i % 5, i / 5);
         }
 
