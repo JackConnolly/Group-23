@@ -33,7 +33,6 @@ import javafx.event.EventHandler;
     }
 
 /* Creates private button to handle events
-
 */
     private Button createButton(String text){
       Button createB = new Button(text);
@@ -41,6 +40,27 @@ import javafx.event.EventHandler;
       createB.setOnAction(e -> System.out.println(text));// Setting up the action to print the text to console
       return createB;
       }
+	  
+	  	  /* Function to check player position and display image onto button
+	  */
+	  public HBox[] displayPlayers(Player player1, Player player2){
+		  HBox hBox1 = new HBox();
+		  HBox hBox2 = new HBox();
+		  Label label = new Label(" ");
+		  int player1Position[] = player1.getPlayerPosition();
+		  int player2Position[] = player2.getPlayerPosition();
+		  ImageView token1 = new ImageView( getClass().getResource(player1.getPlayerToken()).toExternalForm());
+          ImageView token2 = new ImageView( getClass().getResource(player2.getPlayerToken()).toExternalForm());
+		  if (player1Position == player2Position){
+			  hBox1.getChildren().addAll( token1, label, token2);
+		  }
+		  else {
+			  hBox1.getChildren().addAll(token1);
+			  hBox2.getChildren().addAll(token2);
+		  }	  
+		  HBox[] boxes = new HBox[]{hBox1, hBox2};
+		  return boxes;
+	  }
 
     public void start(Stage primaryStage) throws Exception{
       //Setup the 2d array
@@ -53,6 +73,10 @@ import javafx.event.EventHandler;
       VBox actionKeys = new VBox(20);
       // setting preferred width for VBox actionKeys
       actionKeys.setPrefWidth(150);
+
+	// setting player names and initial positions
+	  Player player1 = new Player("Anna", 1, 1, "player1.png");
+	  Player player2 = new Player("Jack", 1, 0, "player2.png");
 
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -106,6 +130,11 @@ import javafx.event.EventHandler;
       // Makes the buttons in a 5 x 5
       for (int i = 0 ; i < 25  ; i++){
           Button button = createButton(Integer.toString(i+1));
+		  HBox[] boxes = displayPlayers(player1, player2);
+		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
+			  button.setGraphic(boxes[0]);
+		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
+			  button.setGraphic(boxes[1]);
           grid.add(button, i % 5, i / 5);
         }
 
