@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 public class CardsGUI extends Application{
 	
@@ -33,71 +34,101 @@ public class CardsGUI extends Application{
 		ArrayList<String> playerOne = new ArrayList<>(c.getPlayerOnesHand());
 		ArrayList<String> playerTwo = new ArrayList<>(c.getPlayerTwosHand());
 
-		
-
-//creating the labels for all of player ones hand
-		/**Label p10 = new Label (playerOne.get(0));
-		Label p11 = new Label(playerOne.get(1));
-		Label p12 = new Label(playerOne.get(2));
-		Label p13 = new Label(playerOne.get(3));
-		Label p14 = new Label(playerOne.get(4));
-		Label p15 = new Label(playerOne.get(5));
-
-//creating the labels for all of player twos hand
-		Label p20 = new Label(playerTwo.get(0));
-		Label p21 = new Label(playerTwo.get(1));
-		Label p22 = new Label(playerTwo.get(2));
-		Label p23 = new Label(playerTwo.get(3));
-		Label p24 = new Label(playerTwo.get(4));
-		Label p25 = new Label(playerTwo.get(5));
-		*/
-
-/*
-		for(int i=0; i<=1; i++){
-			grid.add(rectangle+i, i, i+5);
-			grid.add(new Label(playerOne.get(i)), i, i+5);
-		}		
-
-		for(int i=0; i<=12; i++){
-			grid.add(rectangle1, i+5, i);
-			//grid.add(new Label(playerTwo.get(i)), i+5, i);
-		}
-
-		GridPane gridpane = new GridPane();
-		int rowNum=4;
-		int colNum=4;
-		for(int row=0; row<rowNum; row++)
-		{
-			for (int col=0; col<colNum; col++)
-			{
-				Rectangle rectangle = new Rectangle();
-				rectangle.setWidth(2);
-				rectangle.setHeight(2);
-				rectangle.setFill(Color.BLUE);
-				Label play = new Label(playerOne.get(i))
-				GridPane.setRowIndex(rectangle, row);
-				GridPane.setColumnIndex(rectangle, col);
-				gridpane.getChildren().addAll(rectangle, play);
-			}
-		}
-
+/** Beginning all of the hard-coded rectangles and
+	the corresponding labels for all 12 cards;
+	6 cards per each players hand
 */
 
-		BorderPane pane = new BorderPane();
-		HBox h = new HBox();
-		VBox v1 = new VBox();
-		VBox v2 = new VBox();
+	//Player One
 
-		Rectangle rectangle = new Rectangle(10, 10, 10, 10);
+//player one, card one
+		Rectangle rectangle = new Rectangle(100, 100, 100, 100);
+		Label player = new Label(playerOne.get(0));
 		rectangle.setFill(Color.BLUE);
+//player one, card two
+		Rectangle rectangle3 = new Rectangle(100, 100, 100, 100);
+		Label player3 = new Label(playerOne.get(1));
+		rectangle3.setFill(Color.BLUE);
+//player one, card three
+		Rectangle rectangle5 = new Rectangle(100, 100, 100, 100);
+		Label player5 = new Label(playerOne.get(2));
+		rectangle5.setFill(Color.BLUE);
+//player one, card four
+		Rectangle rectangle7 = new Rectangle(100, 100, 100, 100);
+		Label player7 = new Label(playerOne.get(3));
+		rectangle7.setFill(Color.BLUE);
+//player one, card five
+		Rectangle rectangle9 = new Rectangle(100, 100, 100, 100);
+		Label player9 = new Label(playerOne.get(4));
+		rectangle9.setFill(Color.BLUE);
+//player one, card six
+		Rectangle rectangle11 = new Rectangle(100, 100, 100, 100);
+		Label player11 = new Label(playerOne.get(5));
+		rectangle11.setFill(Color.BLUE);
 
-		v1.getChildren().add(rectangle);
-		pane.setLeft(v1);
+		//Player Two
+
+//player two, card one
+		Rectangle rectangle2 = new Rectangle(100, 100, 100, 100);
+		Label player2 = new Label(playerTwo.get(0));
+		rectangle2.setFill(Color.RED);
+//player two, card two
+		Rectangle rectangle4 = new Rectangle(100, 100, 100, 100);
+		Label player4 = new Label(playerTwo.get(0));
+		rectangle4.setFill(Color.RED);
+//player two, card three
+		Rectangle rectangle6 = new Rectangle(100, 100, 100, 100);
+		Label player6 = new Label(playerTwo.get(2));
+		rectangle6.setFill(Color.RED);
+//player two, card four
+		Rectangle rectangle8 = new Rectangle(100, 100, 100, 100);
+		Label player8 = new Label(playerTwo.get(3));
+		rectangle8.setFill(Color.RED);
+//player two, card five
+		Rectangle rectangle10 = new Rectangle(100, 100, 100, 100);
+		Label player10 = new Label(playerTwo.get(4));
+		rectangle10.setFill(Color.RED);
+//player two, card six
+		Rectangle rectangle12 = new Rectangle(100, 100, 100, 100);
+		Label player12 = new Label(playerTwo.get(5));
+		rectangle12.setFill(Color.RED);
+
+//setting up HBox so they will all be beside one another
+		StackPane stack = new StackPane();
+		StackPane stack2 = new StackPane();
+
+		HBox h = new HBox();
+
+		FlowPane flow = new FlowPane();
+		flow.setVgap(5);
+		flow.setHgap(5);
+
+		FlowPane flow2 = new FlowPane();
+		flow2.setVgap(8);
+		flow2.setHgap(8);
+
+		FlowPane flow3 = new FlowPane();
+		flow3.setVgap(5);
+		flow3.setHgap(5);
+
+		FlowPane flow4 = new FlowPane();
+		flow4.setVgap(8);
+		flow4.setHgap(8);
+
+		flow.getChildren().addAll(rectangle, rectangle2, rectangle3, rectangle4, rectangle5, rectangle6);
+		flow2.getChildren().addAll(player, player2, player3, player4, player5, player6);
 		
-		Scene scene = new Scene(pane, 100, 100);
+		flow3.getChildren().addAll(rectangle7, rectangle8, rectangle9, rectangle10, rectangle11, rectangle12);
+		flow4.getChildren().addAll(player7, player8, player9, player10, player11, player12);
+
+		stack.getChildren().addAll(flow, flow2);
+		stack2.getChildren().addAll(flow3, flow4);
+
+		h.getChildren().addAll(stack, stack2);
+
+		Scene scene = new Scene(h, 500, 500);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
 	}
-
 }

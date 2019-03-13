@@ -49,33 +49,33 @@ public class Cards{
 	public void setPlaces(){
 
 //adding cards to places array
-		places.add("Library");
-		places.add("Kitchen");
-		places.add("Living Room");
-		places.add("Dining Room");
-		places.add("Office");
-		places.add("Bedroom");
+		places.add(" Library ");
+		places.add(" Kitchen ");
+		places.add(" Living Room ");
+		places.add(" Dining Room ");
+		places.add(" Office ");
+		places.add(" Bedroom ");
 
 	}
 
 	public void setPeople(){
 
 //adding cards to people array
-		people.add("Miss Scarlet");
-		people.add("Mr.Green");
-		people.add("Mrs.White");
-		people.add("Professor Plum");
+		people.add(" Miss Scarlet ");
+		people.add(" Mr.Green ");
+		people.add(" Mrs.White ");
+		people.add(" Professor Plum ");
 
 	}
 
 	public void setWeapons(){
 
 //adding cards to weapons array
-		weapons.add("Candlestick");
-		weapons.add("Horseshoe");
-		weapons.add("Water Bucket");
-		weapons.add("Trophy");
-		weapons.add("Revolver");
+		weapons.add(" Candlestick ");
+		weapons.add(" Horseshoe ");
+		weapons.add(" Water Bucket ");
+		weapons.add(" Trophy ");
+		weapons.add(" Revolver ");
 	}
 
 	public String winningCards(){
