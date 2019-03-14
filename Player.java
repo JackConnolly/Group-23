@@ -1,6 +1,6 @@
 /** Player class holds player positions, names, tokens, and keeps track of moveAmount
 * @author Anna Barrett
-* last updated by: Kylie Sicat
+* last updated by: Jack Connolly
 * @since 03-13-19
 */
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Player {
 	private String token;
 	private int moveAmount;
 
-	// Constructors 
+	// Constructors
 	public Player(String n) {
 
 		name = n;
@@ -50,9 +50,9 @@ public class Player {
 
 	}
 
-	// Setter Methods 
+	// Setter Methods
 
-	/** Sets the Players position & calls the checkRoom method 
+	/** Sets the Players position & calls the checkRoom method
 	* @param xDistance distance player travelled horizontally
 	* @param yDistance distance player travelled vertically
 	*/
@@ -95,7 +95,7 @@ public class Player {
 	}
 
 	public void setMoveAmount(int move) {
-	
+
 		moveAmount = move;
 
 	}
@@ -106,29 +106,29 @@ public class Player {
 	public void checkRoom() {
 	// Room position for Library
 		if (xPos == 0 && yPos == 0) {
-			System.out.println("Youve reached the Library Congratualations you've won. ");
+			System.out.println("You've reached the Library, but there doesn't seem to be a murder here... ");
 
 		// Room position for Kitchen
 		} else if (xPos == 4 && yPos == 0 ) {
-			System.out.println("Youve reached the Kitchen Congratualations you've won. ");
+			System.out.println("You've reached the Kitchen, but there doesn't seem to be a murder here...");
 
 		// Room position for Living Room
 		}  else if (xPos == 0 && yPos == 2 ) {
-			System.out.println("Youve reached the Living Room Congratualations you've won. ");
+			System.out.println("You've reached the Living Room, but there doesn't seem to be a murder here...");
 
 		// Room position for Dining Room
 		}  else if (xPos == 4 && yPos == 2 ) {
-			System.out.println("Youve reached the Dining Room Congratualations you've won. ");
+			System.out.println("You've reached the Dining Room, but there doesn't seem to be a murder here...");
 
 		// Room position for Bedroom
 		}  else if (xPos == 0 && yPos == 4 ) {
-			System.out.println("Youve reached the Bedroom Congratualations you've won. ");
+			System.out.println("You've reached the Bedroom, but there doesn't seem to be a murder here... ");
 
 		// Room position for Office
 		}  else if (xPos == 4 && yPos == 4 ) {
-			System.out.println("Youve reached Office Congratualations you've won. ");
+			System.out.println("You've reached Office, and you found the murder scene! You Win! ");
 		}
-		
+
 	}
 
 
