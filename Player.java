@@ -1,48 +1,136 @@
-public class Player{
-	
-	//Player class organizes turns of the players but primarily returns tokens with different values
-	//includes computer (AI) players.)
-	
-	public int initialMoveX = 0;
-	public int initialMoveY = 0;
-	
-	//public void changeMove extends movement ()
-		//public void getMove(){
-			
-			//int xPos = movementX;
-			//int yPos = movementY;
+/** Player class holds player positions, names, tokens, and keeps track of moveAmount
+* @author Anna Barrett
+* last updated by: Kylie Sicat
+* @since 03-13-19
+*/
+import java.util.ArrayList;
 
-	
-	public class humanPlayer{
-		
-		System.out.println("Enter number of players: ");
-		
-		Scanner scanner = new Scanner(System.in);
-		
-		int numPlayers = scanner.nextLine();
-		
-		String[] currentPlayers = {numPlayers};
-		
-		public static void setToken (){
-			
-			for (int i = 0; i < numPlayers; i++){
-				
-				System.out.println("Type in the token you want to play as: ");
-				System.out.println("% ! # &");
-				
-				Scanner scanner = new Scanner(System.in);
-		
-				String playerToken = scanner.nextLine();
-				
-				currentPlayers[i] = playerToken;
+public class Player {
+
+	//Instance variables
+	private String name;
+	private int xPos;
+	private int yPos;
+	private String token;
+	private int moveAmount;
+
+	// Constructors 
+	public Player(String n) {
+
+		name = n;
+	}
+
+	public Player(String name, int xpos, int ypos, String token) {
+
+		this.name = name;
+		this.xPos = xpos;
+		this.yPos = ypos;
+		this.token = token;
+
+	}
+
+	//Getter Methods
+
+	public String getPlayerToken() {
+
+		return token;
+
+	}
+
+	public int getMoveAmount() {
+
+		return moveAmount;
+
+	}
+	//returns array of ints coresponding to player position [x, y]
+	public int[] getPlayerPosition() {
+
+		int[] a = new int[]{xPos, yPos};
+		return a;
+
+	}
+
+	// Setter Methods 
+
+	/** Sets the Players position & calls the checkRoom method 
+	* @param xDistance distance player travelled horizontally
+	* @param yDistance distance player travelled vertically
+	*/
+	public void setPlayerPosition(int xDistance, int yDistance) {
+
+		// checks if not being moved moved variable is equal to false
+		boolean moved = false;
+
+		// checks if the xPosition plus the xDistance is between 0 and 4 and if moveAmount is greater than 0
+		// Between 0 - 4 refers to the array index of the Board
+		if (xPos + xDistance >= 0 && xPos + xDistance <= 4 && moveAmount > 0) {
+
+			if (!moved) {
+
+			moveAmount = moveAmount - 1;
+			moved = true;
+
 			}
-			
+		xPos += xDistance;
 		}
-				
-				//assign playerToken to arraylist
-				
-			
+		// checks if the yPosition plus the yDistance is between 0 and 4 and if moveAmount is greater than 0
+		// Between 0 - 4 refers to the array index of the Board
+		if(yPos + yDistance >= 0 && yPos + yDistance <= 4 && moveAmount > 0){
+			if(!moved){
+			moveAmount = moveAmount - 1;
+			moved = true;
+			}
+		yPos += yDistance;
 		}
-			
-		//token class for the GUI (gives position and card associated with each player)
+
+		//Calls method to check if player is on room access space
+		checkRoom();
+
+	}
+
+	public void setPlayerToken(String imageName) {
+
+		token = imageName;
+
+	}
+
+	public void setMoveAmount(int move) {
+	
+		moveAmount = move;
+
+	}
+
+	/**
+	* checks if Player has reached a room
+	*/
+	public void checkRoom() {
+	// Room position for Library
+		if (xPos == 0 && yPos == 0) {
+			System.out.println("Youve reached the Library Congratualations you've won. ");
+
+		// Room position for Kitchen
+		} else if (xPos == 4 && yPos == 0 ) {
+			System.out.println("Youve reached the Kitchen Congratualations you've won. ");
+
+		// Room position for Living Room
+		}  else if (xPos == 0 && yPos == 2 ) {
+			System.out.println("Youve reached the Living Room Congratualations you've won. ");
+
+		// Room position for Dining Room
+		}  else if (xPos == 4 && yPos == 2 ) {
+			System.out.println("Youve reached the Dining Room Congratualations you've won. ");
+
+		// Room position for Bedroom
+		}  else if (xPos == 0 && yPos == 4 ) {
+			System.out.println("Youve reached the Bedroom Congratualations you've won. ");
+
+		// Room position for Office
+		}  else if (xPos == 4 && yPos == 4 ) {
+			System.out.println("Youve reached Office Congratualations you've won. ");
+		}
+		
+	}
+
+
+
 }

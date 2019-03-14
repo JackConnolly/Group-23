@@ -1,3 +1,9 @@
+/** Card Class which holds cards of the weapons, suspects, and rooms
+* @author Hailey Allen
+* Last updated by: Kylie Sicat
+* @since 03-13-19
+*/
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -104,7 +110,8 @@ public class Cards {
 
 	}
 
-//getter methods
+//Getter Methods
+
 	public ArrayList<String> getPlaces(){
 
 		return places;
@@ -143,20 +150,20 @@ public class Cards {
 		return playerTwo;
 	}
 
-	public void printCards(){
 
-		Cards c = new Cards();
+public void printCards(){
 
-		c.setPlaces();
-		c.setPeople();
-		c.setWeapons();
-		c.winningCards();
-		c.setPlayerOnesHand();
-		c.setPlayerTwosHand();
 
-		System.out.println("Player Ones Cards are " + c.getPlayerOnesHand());
-		System.out.println("Player Twos Cards are " + c.getPlayerTwosHand());
-		System.out.println("The Winning Cards are " + c.getSelectedCards());
+		setPlaces();
+		setPeople();
+		setWeapons();
+		winningCards();
+		setPlayerOnesHand();
+		setPlayerTwosHand();
+
+		System.out.println("Player Ones Cards are " + getPlayerOnesHand());
+		System.out.println("Player Twos Cards are " + getPlayerTwosHand());
+		System.out.println("The Winning Cards are " + getSelectedCards());
 
 	}
 
