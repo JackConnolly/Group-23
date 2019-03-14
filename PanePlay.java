@@ -1,7 +1,7 @@
 /**
 * This is the GUI Board for the Game Clue
 * @author Jack Connolly, Anna Barrett, Kylie Sicat, Hailey Allen, Jung Ho Kim
-* last updated by: Kylie Sicat
+* last updated by: Jack Connolly
 * @since 03-13-19
 */
 import java.util.ArrayList;
@@ -60,15 +60,6 @@ import javafx.scene.image.*;
 
     }
 
-/** Creates private button to handle events
-*/
-    private Button createButton(String text){
-    	Button createB = new Button(text);
-    	createB.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);// Max val is a constant
-    	createB.setOnAction(e -> System.out.println(text));// Setting up the action to print the text to console
-      return createB;
-      }
-	  
 	  //Function to check player position and display image onto button
 	  public HBox[] displayPlayers(Player player1, Player player2){
 		  HBox hBox1 = new HBox();
