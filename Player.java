@@ -1,48 +1,85 @@
-public class Player{
-	
-	//Player class organizes turns of the players but primarily returns tokens with different values
-	//includes computer (AI) players.)
-	
-	public int initialMoveX = 0;
-	public int initialMoveY = 0;
-	
-	//public void changeMove extends movement ()
-		//public void getMove(){
-			
-			//int xPos = movementX;
-			//int yPos = movementY;
+/** Player class holds player positions, names, tokens, and keeps track of moveAmount
+@Author Anna Barrett
+*/
+import java.util.ArrayList;
 
+public class Player{
+
+//instance variables
+private String name;
+private int xpos;
+private int ypos;
+private String token;
+private int moveAmount;
+private ArrayList<String> cards;
+
+
+public Player(String n){
+	name = n;
+}
+
+public Player(String name, int xpos, int ypos, String token){
+	this.name = name;
+	this.xpos = xpos;
+	this.ypos = ypos;
+	this.token = token;
+}
+
+//returns xpos
+public int getXPosition(){
+	return xpos;
+}
+
+//returns ypos
+public int getYPosition(){
+	return ypos;
+}
+
+
+//Setter for player position
+public void setPlayerPosition(int xDistance, int yDistance){
+	boolean moved = false;
+	if(xpos + xDistance >= 0 && xpos + xDistance <= 4 && moveAmount > 0 && xDistance != 0){
+		if(!moved){
+		moveAmount = moveAmount - 1;
+		moved = true;
+		}
+		xpos += xDistance;
+		
+	}
+	if(ypos + yDistance >= 0 && ypos + yDistance <= 4 && moveAmount > 0){
+		if(!moved){
+		moveAmount = moveAmount - 1;
+		moved = true;
+		}
+		ypos += yDistance;
+	}
+}
+
+public ArrayList<String> getCards(){
+	return cards;
+}
+
+public void setCards(ArrayList<String> cards){
+	this.cards = cards;
+}
 	
-	public class humanPlayer{
-		
-		System.out.println("Enter number of players: ");
-		
-		Scanner scanner = new Scanner(System.in);
-		
-		int numPlayers = scanner.nextLine();
-		
-		String[] currentPlayers = {numPlayers};
-		
-		public static void setToken (){
-			
-			for (int i = 0; i < numPlayers; i++){
-				
-				System.out.println("Type in the token you want to play as: ");
-				System.out.println("% ! # &");
-				
-				Scanner scanner = new Scanner(System.in);
-		
-				String playerToken = scanner.nextLine();
-				
-				currentPlayers[i] = playerToken;
-			}
-			
-		}
-				
-				//assign playerToken to arraylist
-				
-			
-		}
-			
-		//token class for the GUI (gives position and card associated with each player)
+	
+
+public void setPlayerToken(String imageName){
+	token = imageName;
+}
+
+public String getPlayerToken(){
+	return token;
+}
+
+public int getMoveAmount(){
+	return moveAmount;
+}
+
+public void setMoveAmount(int move){
+	moveAmount = move;
+}
+
 }
