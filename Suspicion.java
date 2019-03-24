@@ -8,53 +8,97 @@
 public class Suspicion {
 
 	// Instance Variables
-	private Weapon suspectWeapon;
-	private Room suspectRoom;
-	private Person suspectPerson;
+	private Weapon weapon;
+	private Room room;
+	private Person person;
 
-	private boolean weaponCorrect;
-	private boolean roomCorrect;
-	private boolean personCorrect;
+	private boolean weaponFlag;
+	private boolean roomFlag;
+	private boolean personFlag;
+
+	//Constructors
+
+	public Suspicion(Weapon weapon, Room room, Person person) {
+		this.weapon = weapon;
+		this.room = room;
+		this.person = person;
+	}
 
 	//Getter Methods
 
-	public void getSuspectWeapon() {
+	public Weapon getWeapon() {
+
+		return weapon;
 
 	}
 
-	public void getSuspectRoom() {
+	public Room getRoom() {
+
+		return room;
 
 	}
 
-	public void getSuspectPerson() {
+	public Person getPerson() {
+
+		return person;
 
 	}
 
 	//Setter
 
-	public Weapon setSuspectWeapon(Weapon weapon) {
+	public void setWeapon(Weapon weapon) {
 
-		return suspectWeapon;
+		this.weapon = weapon;
 
-	}
-
-	public Room setSuspectRoom(Room room ) {
-
-		return suspectRoom;
+		
 
 	}
 
-	public Person setSuspectPerson(Person person ) {
+	public void setRoom(Room room ) {
 
-		return suspectPerson;
+		this.room = room;
 
+
+		
+
+	}
+
+	public void setPerson(Person person ) {
+
+		this.person = person;
+
+	}
+
+	public void setPersonFlag(boolean pf) {
+
+		this.personFlag = pf;
+	}
+
+	public void setRoomFlag(boolean rf) {
+
+		this.roomFlag = rf;
+	} 
+
+	public void setWeaponFlag(boolean wf) {
+
+		this.weaponFlag = wf;
 	}
 
 	//method where user can say yes or no for all 3
-	public checkSuspected() {
+	public void setFlags(boolean pf, boolean rf, boolean wf) {
+		this.setPersonFlag(pf);
+		this.setRoomFlag(rf);
+		this.setWeaponFlag(wf);
 
-		
+	// method which verifies whether suspected cards are correct according to the winning cards??
+
 	}
+
+	public String toString() {
+
+		return "Weapon " + weapon.getName() + "; Room " + room.getName() + "; Person " + person.getName();
+	}
+
 
 
 

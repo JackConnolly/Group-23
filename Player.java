@@ -9,6 +9,8 @@ public class Player {
 
 	//Instance variables
 	private String name;
+	private ArrayList<Suspicion> suspected;
+	private ArrayList<Accusation> accused;
 	private int xPos;
 	private int yPos;
 	private String token;
@@ -18,6 +20,8 @@ public class Player {
 	public Player(String n) {
 
 		name = n;
+		this.suspected = new ArrayList<Suspicion>();
+		this.accused = new ArrayList<Accusation>();
 	}
 
 	public Player(String name, int xpos, int ypos, String token) {
@@ -26,6 +30,8 @@ public class Player {
 		this.xPos = xpos;
 		this.yPos = ypos;
 		this.token = token;
+		this.suspected = new ArrayList<Suspicion>();
+		this.accused = new ArrayList<Accusation>();
 
 	}
 
@@ -129,6 +135,31 @@ public class Player {
 			System.out.println("You've reached Office, and you found the murder scene! You Win! ");
 		}
 
+	}
+
+
+	/** adds players choice of suspected
+	*
+	*/
+	public Suspicion addSuspected(Weapon weapon, Room room , Person person) {
+		//Creates new suspicion
+		Suspicion s = new Suspicion(weapon, room, person);
+		// adds players choice of suspected to an arrayList of type suspicion
+		suspected.add(s);
+		return s;
+	}
+
+	public ArrayList<Suspicion> getSuspectedList() {
+		return suspected;
+	}
+	
+	/**
+	*
+	*/
+	public Accusation addAccusation(Weapon weapon, Room room , Person person) {
+		Accusation a = new Accusation(weapon, room, person);
+		accused.add(a);
+		return a;
 	}
 
 
