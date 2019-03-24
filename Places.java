@@ -15,10 +15,19 @@ public class Places extends Cards2{
 	private static String winPlace = new String();
 
 /**
-*Sets the default object Places by setting the places
+*Sets the default object Places
 *@param no parameters
 */
 	public Places(){
+	}
+
+/**
+*Sets the object Places by setting the name
+*@param name
+*/
+
+	public Places(String name){
+		super(name);
 	}
 
 /**

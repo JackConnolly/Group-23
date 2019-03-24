@@ -14,10 +14,19 @@ public class People extends Cards2{
 	private static String winPeople = new String();
 
 /**
-*Sets the default object People by setting the people
+*Sets the default object People
 *@param parameters not used
 */
 	public People(){
+	}
+
+/**
+*Sets the object People by setting the name
+*@param name
+*/
+
+	public People(String name){
+		super(name);
 	}
 
 /**

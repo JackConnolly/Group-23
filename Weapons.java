@@ -14,10 +14,19 @@ public class Weapons extends Cards2{
 	private static String winWeapon = new String();
 
 /**
-*Sets the default object Weapons by setting the weapons
+*Sets the default object Weapons
 *@param parameters not used
 */
 	public Weapons(){
+	}
+
+/**
+*Sets the object Weapons by setting the name
+*@param name
+*/
+
+	public Weapons(String name){
+		super(name);
 	}
 
 /**

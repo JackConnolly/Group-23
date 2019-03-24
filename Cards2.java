@@ -25,6 +25,8 @@ be used throughout the class
 	private static ArrayList<String> playerOne = new ArrayList<>();
 	private static ArrayList<String> playerTwo = new ArrayList<>();
 
+	private String name;
+
 	public static Places places = new Places();
 	public static People people = new People();
 	public static Weapons weapons = new Weapons();
@@ -36,7 +38,17 @@ sets the default variable used
 */
 
 	public Cards2(){
+	}
 
+/**
+Constructor which sets the name of the 
+weapon, place, or person beign accsued
+in clue
+@param name 
+*/
+
+	public Cards2(String name){
+		this.name = name;
 	}
 
 /**
@@ -130,6 +142,10 @@ them to the array selectedCards
 		}
 	}
 
+	public void setName(String name){
+		this.name = name;
+	}
+
 //getter methods
 
 	public ArrayList<String> getSelectedCards(){
@@ -150,6 +166,10 @@ them to the array selectedCards
 	public ArrayList<String> getPlayerTwosHand(){
 
 		return playerTwo;
+	}
+
+	public String getName(){
+		return name;
 	}
 
 /**
