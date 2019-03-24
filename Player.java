@@ -39,7 +39,7 @@ public int getYPosition(){
 //Setter for player position
 public void setPlayerPosition(int xDistance, int yDistance){
 	boolean moved = false;
-	if(xpos + xDistance >= 0 && xpos + xDistance <= 4 && moveAmount > 0 && xDistance != 0){
+	if(xpos + xDistance >= 0 && xpos + xDistance <= 4 && moveAmount > 0 && xDistance != 0 ){
 		if(!moved){
 		moveAmount = moveAmount - 1;
 		moved = true;
@@ -56,6 +56,7 @@ public void setPlayerPosition(int xDistance, int yDistance){
 	}
 }
 
+
 public ArrayList<String> getCards(){
 	return cards;
 }
@@ -66,11 +67,11 @@ public void setCards(ArrayList<String> cards){
 	
 	
 
-public void setPlayerToken(String imageName){
+public void setToken(String imageName){
 	token = imageName;
 }
 
-public String getPlayerToken(){
+public String getToken(){
 	return token;
 }
 
