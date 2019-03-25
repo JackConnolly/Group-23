@@ -27,9 +27,9 @@ be used throughout the class
 
 	private String name;
 
-	public static Places places = new Places();
-	public static People people = new People();
-	public static Weapons weapons = new Weapons();
+	public static Room places = new Room();
+	public static Person people = new Person();
+	public static Weapon weapons = new Weapon();
 
 /**
 Constructor with no parameters; 
@@ -55,16 +55,16 @@ in clue
 Sets the winning cards from the arrays
 weapons, places, and people and adds
 them to the array selectedCards
-@param weapons of object type Weapons (to access weapons array)
-@param people of object type People (to access people array)
-@param places of object type Places (to access places array)
+@param weapons of object type Weapon (to access weapons array)
+@param people of object type Person (to access people array)
+@param places of object type Room (to access places array)
 */
 
 	public static void addSelectedCards(){
 
 //adding the winning cards to the array selectedCards
-		selectedCards.add(places.getWinningPlaces());
-		selectedCards.add(people.getWinningPeople());
+		selectedCards.add(places.getWinningRoom());
+		selectedCards.add(people.getWinningPerson());
 		selectedCards.add(weapons.getWinningWeapon());
 
 	}
@@ -80,14 +80,14 @@ them to the array selectedCards
 
 	public static void addRemainingCards(){
 
-		Places places = new Places();
-		People people = new People();
-		Weapons weapons = new Weapons();
+		Room places = new Room();
+		Person people = new Person();
+		Weapon weapons = new Weapon();
 
 //adding the remaining cards (not winning) to remainderCards
-		remainderCards.addAll(places.getPlaces());
-		remainderCards.addAll(people.getPeople());
-		remainderCards.addAll(weapons.getWeapons());
+		remainderCards.addAll(places.getRoom());
+		remainderCards.addAll(people.getPerson());
+		remainderCards.addAll(weapons.getWeapon());
 
 	}
 
@@ -176,10 +176,11 @@ them to the array selectedCards
 The main method of the class which
 prints off player one and twos cards,
 as well as the winning cards which
-have been randomly chosen
+have been randomly chosen- only used 
+for trouble shooting
 */
 
-	public static String printCards(){
+/**	public static void main(String[] args){
 
 		Cards c = new Cards();
 		addSelectedCards();
@@ -187,8 +188,11 @@ have been randomly chosen
 		playerOnesHand();
 		playerTwosHand();
 
-		return "The Winning Cards are " + c.getSelectedCards() + " Player Ones Cards are " + c.getPlayerOnesHand() + "Player Twos Cards are " + c.getPlayerTwosHand();
+		System.out.println("Player One " + c.getPlayerOnesHand() + "Player 2 " + c.getPlayerTwosHand() + "Winning " + c.getSelectedCards());
 
+		//return "The Winning Cards are " + c.getSelectedCards() + " Player Ones Cards are " + c.getPlayerOnesHand() + "Player Twos Cards are " + c.getPlayerTwosHand();
 	}
+*/
+	
 
 }
