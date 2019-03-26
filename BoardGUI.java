@@ -287,12 +287,12 @@ import javafx.scene.control.CheckBoxTreeItem;
 
         //PLayer 1
         CheckBoxTreeItem<String> people = new CheckBoxTreeItem<String> ("People");
-        CheckBoxTreeItem<String> places = new CheckBoxTreeItem<String> ("Places");
+        CheckBoxTreeItem<String> places = new CheckBoxTreeItem<String> ("Rooms");
         CheckBoxTreeItem<String> items = new CheckBoxTreeItem<String> ("Items");
 
         //PLayer 2
         CheckBoxTreeItem<String> people2 = new CheckBoxTreeItem<String> ("People");
-        CheckBoxTreeItem<String> places2 = new CheckBoxTreeItem<String> ("Places");
+        CheckBoxTreeItem<String> places2 = new CheckBoxTreeItem<String> ("Rooms");
         CheckBoxTreeItem<String> items2 = new CheckBoxTreeItem<String> ("Items");
         // Tertiary branches
 
@@ -311,7 +311,7 @@ import javafx.scene.control.CheckBoxTreeItem;
         //Player 1 places
         CheckBoxTreeItem<String> place1 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place2 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Living Room");
         CheckBoxTreeItem<String> place4 = new CheckBoxTreeItem<String> ("Dining Room");
         CheckBoxTreeItem<String> place5 = new CheckBoxTreeItem<String> ("Office");
         CheckBoxTreeItem<String> place6 = new CheckBoxTreeItem<String> ("Bedroom");
@@ -319,7 +319,7 @@ import javafx.scene.control.CheckBoxTreeItem;
         //Player 2 places
         CheckBoxTreeItem<String> place12 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place22 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Living Room");
         CheckBoxTreeItem<String> place42 = new CheckBoxTreeItem<String> ("Dining Room");
         CheckBoxTreeItem<String> place52 = new CheckBoxTreeItem<String> ("Office");
         CheckBoxTreeItem<String> place62 = new CheckBoxTreeItem<String> ("Bedroom");
@@ -427,7 +427,7 @@ import javafx.scene.control.CheckBoxTreeItem;
 
 
       Scene scene = new Scene(root, 800, 600);
-      primaryStage.setTitle("BoardGUI");
+      primaryStage.setTitle("Group 23 CLUE");
       primaryStage.setScene(scene);
       primaryStage.show();
 
