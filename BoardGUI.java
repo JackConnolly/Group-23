@@ -21,6 +21,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
+import javafx.scene.control.cell.CheckBoxTreeCell;
+import javafx.scene.control.TreeView;
+import javafx.scene.control.CheckBoxTreeItem;
 
 /**
 * This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
@@ -117,7 +120,6 @@ import javafx.scene.image.*;
       // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button = new Button();
-
 		      HBox[] boxes = displayPlayers(player1, player2);
 		      if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
 			       button.setGraphic(boxes[0]);
@@ -218,30 +220,7 @@ import javafx.scene.image.*;
 	  );
       actionKeys.getChildren().addAll(suspectPlayer,moveLeft,moveRight,moveUp,moveDown, endTurn);
 
-      //Creating Labels for the places
-      Label library = new Label("Library");
-      Label kitchen = new Label("Kitchen");
-      Label livingRoom = new Label("Living Room");
-      Label diningRoom = new Label("Dining Room");
-      Label office = new Label("Office");
-      Label bedroom = new Label("Bedroom");
-      notePad.getChildren().addAll(library, kitchen, livingRoom, diningRoom, office, bedroom);
 
-
-      //Creating Labels for the people
-      Label ppl1 = new Label("Miss Scarlet");
-      Label ppl2 = new Label("Mr.Green");
-      Label ppl3 = new Label("Mrs.White");
-      Label ppl4 = new Label("Professor Plum");
-      notePad.getChildren().addAll(ppl1, ppl2, ppl3, ppl4);
-
-      //Creating Labels for the weapons
-      Label candlestick = new Label("Candlestick");
-      Label horseshoe = new Label("Horseshoe");
-      Label waterBucket = new Label("Water Bucket");
-      Label trophy = new Label("Trophy");
-      Label revolver = new Label("Revolver");
-      notePad.getChildren().addAll(candlestick, horseshoe, waterBucket, trophy, revolver);
 
 
 	  // Anon inner class
@@ -289,11 +268,158 @@ import javafx.scene.image.*;
 			       button.setGraphic(boxes[1]);
              grid.add(button, i % 5, i / 5);
         }
+/*  THe following is the GUI for the notepad, I had to do the
+ long way for a couple of things, because for some reason addAll wasnt working
+ for some nodes. This is my first time working with th UI nodes so im sure
+ ill get more proficient
+*/
+
+
+        VBox rootRight = new VBox();
+
+        // Root item is master branch of tree
+        CheckBoxTreeItem<String> rootItem = new CheckBoxTreeItem<String> ("Player One");
+        CheckBoxTreeItem<String> rootItem2 = new CheckBoxTreeItem<String> ("Player Two");
+
+
+
+        //Secondary branches
+
+        //PLayer 1
+        CheckBoxTreeItem<String> people = new CheckBoxTreeItem<String> ("People");
+        CheckBoxTreeItem<String> places = new CheckBoxTreeItem<String> ("Places");
+        CheckBoxTreeItem<String> items = new CheckBoxTreeItem<String> ("Items");
+
+        //PLayer 2
+        CheckBoxTreeItem<String> people2 = new CheckBoxTreeItem<String> ("People");
+        CheckBoxTreeItem<String> places2 = new CheckBoxTreeItem<String> ("Places");
+        CheckBoxTreeItem<String> items2 = new CheckBoxTreeItem<String> ("Items");
+        // Tertiary branches
+
+        //Player 1 People
+        CheckBoxTreeItem<String> person1 = new CheckBoxTreeItem<String> ("Miss Scarlet");
+        CheckBoxTreeItem<String> person2 = new CheckBoxTreeItem<String> ("Mr. Green");
+        CheckBoxTreeItem<String> person3 = new CheckBoxTreeItem<String> ("Mrs.White");
+        CheckBoxTreeItem<String> person4 = new CheckBoxTreeItem<String> ("Prof. Plum");
+
+        //Player 2 people
+        CheckBoxTreeItem<String> person12 = new CheckBoxTreeItem<String> ("Miss Scarlet");
+        CheckBoxTreeItem<String> person22 = new CheckBoxTreeItem<String> ("Mr. Green");
+        CheckBoxTreeItem<String> person32 = new CheckBoxTreeItem<String> ("Mrs.White");
+        CheckBoxTreeItem<String> person42 = new CheckBoxTreeItem<String> ("Prof. Plum");
+
+        //Player 1 places
+        CheckBoxTreeItem<String> place1 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place2 = new CheckBoxTreeItem<String> ("Library");
+        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place4 = new CheckBoxTreeItem<String> ("Dining Room");
+        CheckBoxTreeItem<String> place5 = new CheckBoxTreeItem<String> ("Office");
+        CheckBoxTreeItem<String> place6 = new CheckBoxTreeItem<String> ("Bedroom");
+
+        //Player 2 places
+        CheckBoxTreeItem<String> place12 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place22 = new CheckBoxTreeItem<String> ("Library");
+        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place42 = new CheckBoxTreeItem<String> ("Dining Room");
+        CheckBoxTreeItem<String> place52 = new CheckBoxTreeItem<String> ("Office");
+        CheckBoxTreeItem<String> place62 = new CheckBoxTreeItem<String> ("Bedroom");
+
+        //Player 1 items
+        CheckBoxTreeItem<String> item1 = new CheckBoxTreeItem<String> ("Trophy");
+        CheckBoxTreeItem<String> item2 = new CheckBoxTreeItem<String> ("Revolver");
+        CheckBoxTreeItem<String> item3 = new CheckBoxTreeItem<String> ("Candlestick");
+        CheckBoxTreeItem<String> item4 = new CheckBoxTreeItem<String> ("Bucket");
+        CheckBoxTreeItem<String> item5 = new CheckBoxTreeItem<String> ("Horse Shoe");
+
+        //Player 2 items2
+        CheckBoxTreeItem<String> item12 = new CheckBoxTreeItem<String> ("Trophy");
+        CheckBoxTreeItem<String> item22 = new CheckBoxTreeItem<String> ("Revolver");
+        CheckBoxTreeItem<String> item32 = new CheckBoxTreeItem<String> ("Candlestick");
+        CheckBoxTreeItem<String> item42 = new CheckBoxTreeItem<String> ("Bucket");
+        CheckBoxTreeItem<String> item52 = new CheckBoxTreeItem<String> ("Horse Shoe");
+
+  /* Not sure why this doesnt work ??
+        people.getChildren().addAll(person1,person2,person3,person4);
+        places.getChildren().addAll(place1,place2,place3,place4,place5,place6);
+        items.getChildren().addAll(item1,item2,item3,item4,item5);
+
+      So I have to do it the long way
+  */
+        people.getChildren().add(person1);
+        people.getChildren().add(person2);
+        people.getChildren().add(person3);
+        people.getChildren().add(person4);
+
+        places.getChildren().add(place1);
+        places.getChildren().add(place2);
+        places.getChildren().add(place3);
+        places.getChildren().add(place4);
+        places.getChildren().add(place5);
+        places.getChildren().add(place6);
+
+        items.getChildren().add(item1);
+        items.getChildren().add(item2);
+        items.getChildren().add(item3);
+        items.getChildren().add(item4);
+        items.getChildren().add(item5);
+
+        //Player 2
+        people2.getChildren().add(person12);
+        people2.getChildren().add(person22);
+        people2.getChildren().add(person32);
+        people2.getChildren().add(person42);
+
+        places2.getChildren().add(place12);
+        places2.getChildren().add(place22);
+        places2.getChildren().add(place32);
+        places2.getChildren().add(place42);
+        places2.getChildren().add(place52);
+        places2.getChildren().add(place62);
+
+        items2.getChildren().add(item12);
+        items2.getChildren().add(item22);
+        items2.getChildren().add(item32);
+        items2.getChildren().add(item42);
+        items2.getChildren().add(item52);
+
+        rootItem.getChildren().add(people);
+        rootItem.getChildren().add(places);
+        rootItem.getChildren().add(items);
+
+        rootItem2.getChildren().add(people2);
+        rootItem2.getChildren().add(places2);
+        rootItem2.getChildren().add(items2);
+
+
+        //Player 1 notebook
+         TreeView<String> checkTree = new TreeView<String>();
+        checkTree.setRoot(rootItem);
+        checkTree.setCellFactory(CheckBoxTreeCell.<String>forTreeView());
+
+        //Plaer 2 notebook
+         TreeView<String> checkTree2 = new TreeView<String>();
+        checkTree2.setRoot(rootItem2);
+        checkTree2.setCellFactory(CheckBoxTreeCell.<String>forTreeView());
+
+        //Not sure if there is a method for setting all leaves setIndependent
+        //So I did it the long way
+        people.setIndependent(true);
+        rootItem.setIndependent(true);
+        items.setIndependent(true);
+        places.setIndependent(true);
+
+        people2.setIndependent(true);
+        rootItem2.setIndependent(true);
+        items2.setIndependent(true);
+        places2.setIndependent(true);
+
+
+        rootRight.getChildren().addAll(checkTree,checkTree2);
 
 
       root.setCenter(grid);
       root.setLeft(actionKeys);
-      root.setRight(notePad);
+      root.setRight(rootRight);
       root.setTop(statusBar);
       root.setPadding(insetOne);
 
@@ -301,7 +427,7 @@ import javafx.scene.image.*;
 
 
       Scene scene = new Scene(root, 800, 600);
-      primaryStage.setTitle("PANE PLAY");
+      primaryStage.setTitle("BoardGUI");
       primaryStage.setScene(scene);
       primaryStage.show();
 
