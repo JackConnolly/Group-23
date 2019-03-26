@@ -215,7 +215,7 @@ public void chooseAction(Player currPlayer, Player otherPlayer) {
 		
 		System.out.println("Do you want to suspect or accuse (s/a) ?");
 		Scanner keyboard = new Scanner(System.in);
-		String choice = keyboard.nextLine();
+		String choice = (keyboard.nextLine()).toLowerCase();
 		//String choiceDesc = "";
 		if (choice.equals("s")) {
 			suspect(currPlayer, otherPlayer);
@@ -284,8 +284,9 @@ public void suspect(Player currPlayer, Player otherPlayer) {
 		System.out.println("Do you wish to contest against your opponent's Suspicion? Type 'Y' or 'N'.");
 		Scanner keyboard3 = new Scanner(System.in);
 		String otherPlayerChoice = keyboard3.nextLine();
+		String choiceToContest = new String(otherPlayerChoice.toLowerCase());
 
-		if (otherPlayerChoice.equals("y")) {
+		if (choiceToContest.equals("y")) {
 			System.out.println("Do you contest the person?");
 			boolean pf = true;
 			Scanner keyboard4 = new Scanner(System.in);
@@ -313,6 +314,20 @@ public void suspect(Player currPlayer, Player otherPlayer) {
 
 			//s.setWeaponFlag(wf);
 			System.out.println("weapon flag" + wf);
+
+			System.out.println("Do you contest the Room?");
+			boolean rf = true;
+			Scanner keyboard6 = new Scanner(System.in);
+			String roomFlag = keyboard6.nextLine();
+			if (roomFlag.toLowerCase() == "y") { 
+				rf = true;
+
+			} else if (roomFlag.toLowerCase() == "n") {
+				rf = false;
+			}
+
+			//s.setWeaponFlag(wf);
+			System.out.println("room flag" + rf);
 		}
 
 
