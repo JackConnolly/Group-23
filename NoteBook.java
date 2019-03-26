@@ -50,16 +50,16 @@ contains all the card names
 */
 	public static void setArrayCards(){
 
-		Room place = new Room();
+		Room room = new Room();
 		Weapon weapon = new Weapon();
-		Person people = new Person();
+		Person person = new Person();
 
-		place.setRoom();
+		room.setRoom();
 		weapon.setWeapon();
-		people.setPerson();
+		person.setPerson();
 			
-		arrayCards.addAll(place.getRoom());
-		arrayCards.addAll(people.getPerson());
+		arrayCards.addAll(room.getRoom());
+		arrayCards.addAll(person.getPerson());
 		arrayCards.addAll(weapon.getWeapon());
 
 	}

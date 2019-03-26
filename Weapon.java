@@ -10,7 +10,7 @@ import java.util.Random;
 public class Weapon extends Cards{
 
 //introducing the instance variable of weapons
-	private static ArrayList<String> weapons = new ArrayList<>();
+	private static ArrayList<String> weapon = new ArrayList<>();
 	private static String winWeapon = new String();
 
 /**
@@ -38,11 +38,11 @@ be accused to the array weapons
 
 	public void setWeapon(){
 
-		weapons.add(" Candlestick ");
-		weapons.add(" Horseshoe ");
-		weapons.add(" Water Bucket ");
-		weapons.add(" Trophy ");
-		weapons.add(" Revolver ");
+		weapon.add(" Candlestick ");
+		weapon.add(" Horseshoe ");
+		weapon.add(" Water Bucket ");
+		weapon.add(" Trophy ");
+		weapon.add(" Revolver ");
 	}
 
 /**
@@ -52,7 +52,7 @@ be accused to the array weapons
 */
 	public ArrayList<String> getWeapon(){
 
-		return weapons;
+		return weapon;
 
 	}
 
@@ -68,8 +68,8 @@ be accused to the array weapons
 		setWeapon();
 		int rand = new Random().nextInt(5);
 
-		winWeapon = weapons.get(rand);
-		weapons.remove(rand);
+		winWeapon = weapon.get(rand);
+		weapon.remove(rand);
 
 		return winWeapon;
 	}

@@ -1,9 +1,3 @@
-/**
-* This is the GUI Board for the Game Clue
-* @author Jack Connolly, Anna Barrett, Kylie Sicat, Hailey Allen, Jung Ho Kim
-* last updated by: Jack Connolly
-* @since 03-13-19
-*/
 import java.util.ArrayList;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
@@ -29,19 +23,24 @@ import javafx.event.EventHandler;
 import javafx.scene.image.*;
 
 /**
-* GUI class for Board Game Clue
+* This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
+* remove logic from the GUI
+* @author Jack Connolly, Anna Barrett, Kylie Sicat, Hailey Allen, Jung Ho Kim
+* last updated by: Jack Connolly
+* @since 03-13-19
 */
-  public class PanePlay extends Application{
+
+  public class BoardGUI extends Application{
 
 	//Game Instance Variables
 	private Player player1;
 	private Player player2;
 	private Player turn;
-	
-    // Variables for the dynamic buttons
-    private int numRows = 5;
-    private int numColumns = 5;
-	
+
+  // Variables for the dynamic buttons
+  private int numRows = 5;
+  private int numColumns = 5;
+
 	//Dice roll class is here for my own sake of debugging the board
  	public int diceRoll() {
  		int min = 1;
@@ -52,36 +51,32 @@ import javafx.scene.image.*;
  	}
 
 
-    public static void main(String[] args) {
-    	
+  public static void main(String[] args) {
     	Rules r = new Rules();
     	r.printRules();
     	launch(args);
-
     }
-
-	  //Function to check player position and display image onto button
-	  public HBox[] displayPlayers(Player player1, Player player2){
-		  HBox hBox1 = new HBox();
-		  HBox hBox2 = new HBox();
-		  Label label = new Label(" ");
-		  int player1Position[] = player1.getPlayerPosition();
-		  int player2Position[] = player2.getPlayerPosition();
-		  ImageView token1 = new ImageView( getClass().getResource(player1.getPlayerToken()).toExternalForm());
-          ImageView token2 = new ImageView( getClass().getResource(player2.getPlayerToken()).toExternalForm());
-		  if (player1Position == player2Position){
+	//Function to check player position and display image onto button
+  public HBox[] displayPlayers(Player player1, Player player2){
+	   HBox hBox1 = new HBox();
+	   HBox hBox2 = new HBox();
+	   Label label = new Label(" ");
+	   int player1Position[] = player1.getPlayerPosition();
+	   int player2Position[] = player2.getPlayerPosition();
+	   ImageView token1 = new ImageView( getClass().getResource(player1.getPlayerToken()).toExternalForm());
+     ImageView token2 = new ImageView( getClass().getResource(player2.getPlayerToken()).toExternalForm());
+		 if (player1Position == player2Position){
 			  hBox1.getChildren().addAll( token1, label, token2);
-		  }
-		  else {
+		  } else {
 			  hBox1.getChildren().addAll(token1);
 			  hBox2.getChildren().addAll(token2);
-		  }	  
+		  }
 		  HBox[] boxes = new HBox[]{hBox1, hBox2};
 		  return boxes;
 	  }
 
-    public void start(Stage primaryStage) throws Exception{
-      //Setup the 2d array
+  public void start(Stage primaryStage) throws Exception{
+
 
       // Setup the panes
       BorderPane root = new BorderPane();
@@ -90,10 +85,10 @@ import javafx.scene.image.*;
       // setting preferred width for VBox actionKeys
       actionKeys.setPrefWidth(150);
 
-	// setting player names and initial positions
-	  player1 = new Player("Anna", 1, 1, "player1.png");
-	  player2 = new Player("Jack", 1, 0, "player2.png");
-	  turn = player1;
+	    // setting player names and initial positions
+	    player1 = new Player("Anna", 1, 1, "player1.png");
+	    player2 = new Player("Jack", 1, 0, "player2.png");
+	    turn = player1;
 
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -107,60 +102,60 @@ import javafx.scene.image.*;
 
       // Creating and Adding Buttons for VBox actionKeys
       Button rollDice = new Button("Roll Dice");
-	  Button endTurn = new Button("End Turn");
+	    Button endTurn = new Button("End Turn");
       Button suspectPlayer = new Button("Suspect Player");
-	  Label moveAmount = new Label("Movement Allowed: ");
-      
-	  Button moveLeft = new Button("Move Left");
-	  moveLeft.setOnAction(new EventHandler<ActionEvent>()
-	   {
+	    Label moveAmount = new Label("Movement Allowed: ");
+
+	    Button moveLeft = new Button("Move Left");
+	    moveLeft.setOnAction(new EventHandler<ActionEvent>()
+	    {
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
-	   		turn.setPlayerPosition(-1, 0);
+	   	turn.setPlayerPosition(-1, 0);
 			grid.getChildren().clear(); //clears Board
-// Redrawing Board
+      // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button = new Button();
-	      
-		  HBox[] boxes = displayPlayers(player1, player2);
-		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[0]);
-		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[1]);
-          button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
-		  grid.add(button, i % 5, i / 5);
-		  
+
+		      HBox[] boxes = displayPlayers(player1, player2);
+		      if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
+			       button.setGraphic(boxes[0]);
+		      if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
+			       button.setGraphic(boxes[1]);
+             button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		         moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
+		         grid.add(button, i % 5, i / 5);
+
         }
 	   	}
 	   }
 	  );
-	  
+
       Button moveRight = new Button("Move Right");
 	  	moveRight.setOnAction(new EventHandler<ActionEvent>()
 	   {
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
-	   		turn.setPlayerPosition(1, 0);
+	   	turn.setPlayerPosition(1, 0);
 			grid.getChildren().clear(); //clears Board
-// Redrawing Board
+      // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button =  new Button();
-		  HBox[] boxes = displayPlayers(player1, player2);
+		      HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[0]);
+			    button.setGraphic(boxes[0]);
 		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[1]);
-		  button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
+			    button.setGraphic(boxes[1]);
+		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
         }
 	   	}
 	   }
 	  );
-      
+
 	  Button moveUp = new Button("Move Up");
 	  	moveUp.setOnAction(new EventHandler<ActionEvent>()
 	   {
@@ -184,31 +179,31 @@ import javafx.scene.image.*;
 	   	}
 	   }
 	  );
-	  
+
       Button moveDown = new Button("Move Down");
-	  	  moveDown.setOnAction(new EventHandler<ActionEvent>()
+	  	moveDown.setOnAction(new EventHandler<ActionEvent>()
 	   {
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
-	   		turn.setPlayerPosition(0, 1);
+	   	turn.setPlayerPosition(0, 1);
 			grid.getChildren().clear(); //clears Board
-// Redrawing Board
+      // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button = new Button();
-		  HBox[] boxes = displayPlayers(player1, player2);
+		      HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[0]);
+			    button.setGraphic(boxes[0]);
 		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[1]);
-		  button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
+			    button.setGraphic(boxes[1]);
+		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
-        }			
+        }
 	  }
 	   }
 	  );
-	  
+
 	  endTurn.setOnAction(new EventHandler<ActionEvent>()
 	   {
 	   	@Override
@@ -231,7 +226,7 @@ import javafx.scene.image.*;
       Label office = new Label("Office");
       Label bedroom = new Label("Bedroom");
       notePad.getChildren().addAll(library, kitchen, livingRoom, diningRoom, office, bedroom);
-     
+
 
       //Creating Labels for the people
       Label ppl1 = new Label("Miss Scarlet");
@@ -239,7 +234,7 @@ import javafx.scene.image.*;
       Label ppl3 = new Label("Mrs.White");
       Label ppl4 = new Label("Professor Plum");
       notePad.getChildren().addAll(ppl1, ppl2, ppl3, ppl4);
-     
+
       //Creating Labels for the weapons
       Label candlestick = new Label("Candlestick");
       Label horseshoe = new Label("Horseshoe");
@@ -248,22 +243,22 @@ import javafx.scene.image.*;
       Label revolver = new Label("Revolver");
       notePad.getChildren().addAll(candlestick, horseshoe, waterBucket, trophy, revolver);
 
-	  
+
 	  // Anon inner class
       rollDice.setOnAction(new EventHandler<ActionEvent>()
       {
         @Override
         public void handle(ActionEvent event)
         {
-          PanePlay p = new PanePlay();
-		  int move = p.diceRoll();
+          BoardGUI p = new BoardGUI();
+		      int move = p.diceRoll();
           moveAmount.setText("Movements Allowed: " + Integer.toString(move));
-			turn.setMoveAmount(move);
+			    turn.setMoveAmount(move);
         }
       });
 
-      actionKeys.getChildren().add(rollDice);
-	  actionKeys.getChildren().add(moveAmount);
+        actionKeys.getChildren().add(rollDice);
+	      actionKeys.getChildren().add(moveAmount);
 
 
 
@@ -285,14 +280,14 @@ import javafx.scene.image.*;
 
       // Makes the buttons in a 5 x 5
       for (int i = 0 ; i < 25  ; i++){
-          Button button = new Button(); 
-		  button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		  HBox[] boxes = displayPlayers(player1, player2);
-		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[0]);
-		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[1]);
-          grid.add(button, i % 5, i / 5);
+          Button button = new Button();
+		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		      HBox[] boxes = displayPlayers(player1, player2);
+		      if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
+			       button.setGraphic(boxes[0]);
+		      if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
+			       button.setGraphic(boxes[1]);
+             grid.add(button, i % 5, i / 5);
         }
 
 
