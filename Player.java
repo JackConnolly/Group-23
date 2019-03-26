@@ -33,6 +33,19 @@ public class Player {
 		this.suspected = new ArrayList<Suspicion>();
 		this.accused = new ArrayList<Accusation>();
 
+	
+	}
+
+	public int[] getPlayerPosition() {
+
+		int[] a = new int[]{xPos, yPos};
+		return a;
+
+	}
+
+	
+	public String getName(){
+		return name;
 	}
 
 	//Getter Methods
@@ -48,14 +61,19 @@ public class Player {
 		return moveAmount;
 
 	}
-	//returns array of ints coresponding to player position [x, y]
-	public int[] getPlayerPosition() {
+	
+	//returns xpos
+public int getXPosition(){
+	return xPos;
+}
 
-		int[] a = new int[]{xPos, yPos};
-		return a;
-
-	}
-
+//returns ypos
+public int getYPosition(){
+	return yPos;
+}
+public String getToken(){
+	return token;
+}
 	// Setter Methods
 
 	/** Sets the Players position & calls the checkRoom method
@@ -69,7 +87,7 @@ public class Player {
 
 		// checks if the xPosition plus the xDistance is between 0 and 4 and if moveAmount is greater than 0
 		// Between 0 - 4 refers to the array index of the Board
-		if (xPos + xDistance >= 0 && xPos + xDistance <= 4 && moveAmount > 0) {
+		if (xPos + xDistance >= 0 && xPos + xDistance <= 4 && moveAmount > 0 && xDistance != 0) {
 
 			if (!moved) {
 

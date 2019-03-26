@@ -11,8 +11,8 @@ import java.util.*;
 public class Room extends Cards{
 
 //introducing the instance variable of places
-	private static ArrayList<String> places = new ArrayList<String>();
-	private static String winPlace = new String();
+	private static ArrayList<String> room = new ArrayList<String>();
+	private static String winRoom = new String();
 
 /**
 *Sets the default object Places
@@ -38,12 +38,12 @@ be accused to the array places
 */
 	public static void setRoom(){
 
-		places.add(" Library ");
-		places.add(" Kitchen ");
-		places.add(" Living Room ");
-		places.add(" Dining Room ");
-		places.add(" Office ");
-		places.add(" Bedroom ");
+		room.add(" Library ");
+		room.add(" Kitchen ");
+		room.add(" Living Room ");
+		room.add(" Dining Room ");
+		room.add(" Office ");
+		room.add(" Bedroom ");
 
 	}
 
@@ -54,7 +54,7 @@ be accused to the array places
 */
 	public ArrayList<String> getRoom(){
 
-		return places;
+		return room;
 
 	}
 
@@ -70,10 +70,10 @@ be accused to the array places
 		setRoom();
 		int rand = new Random().nextInt(6);
 
-		winPlace = places.get(rand);
-		places.remove(rand);
+		winRoom = room.get(rand);
+		room.remove(rand);
 
-		return winPlace;
+		return winRoom;
 	}
 
 }

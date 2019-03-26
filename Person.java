@@ -10,8 +10,8 @@ import java.util.Random;
 public class Person extends Cards{
 
 //introducing the instance variable of person
-	private static ArrayList<String> people = new ArrayList<>();
-	private static String winPeople = new String();
+	private static ArrayList<String> person = new ArrayList<>();
+	private static String winPerson = new String();
 
 /**
 *Sets the default object Person
@@ -38,10 +38,10 @@ be accused to the array people
 
 	public void setPerson(){
 
-		people.add(" Miss Scarlet ");
-		people.add(" Mr.Green ");
-		people.add(" Mrs.White ");
-		people.add(" Professor Plum ");
+		person.add(" Miss Scarlet ");
+		person.add(" Mr.Green ");
+		person.add(" Mrs.White ");
+		person.add(" Professor Plum ");
 
 	}
 
@@ -52,7 +52,7 @@ be accused to the array people
 */
 	public ArrayList<String> getPerson(){
 
-		return people;
+		return person;
 
 	}
 
@@ -68,10 +68,10 @@ be accused to the array people
 		setPerson();
 		int rand = new Random().nextInt(4);
 
-		winPeople = people.get(rand);
-		people.remove(rand);
+		winPerson = person.get(rand);
+		person.remove(rand);
 
-		return winPeople;
+		return winPerson;
 	}
 
 }

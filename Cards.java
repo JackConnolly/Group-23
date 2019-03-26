@@ -27,9 +27,9 @@ be used throughout the class
 
 	private String name;
 
-	public static Room places = new Room();
-	public static Person people = new Person();
-	public static Weapon weapons = new Weapon();
+	public static Room room = new Room();
+	public static Person person = new Person();
+	public static Weapon weapon = new Weapon();
 
 /**
 Constructor with no parameters; 
@@ -63,9 +63,9 @@ them to the array selectedCards
 	public static void addSelectedCards(){
 
 //adding the winning cards to the array selectedCards
-		selectedCards.add(places.getWinningRoom());
-		selectedCards.add(people.getWinningPerson());
-		selectedCards.add(weapons.getWinningWeapon());
+		selectedCards.add(room.getWinningRoom());
+		selectedCards.add(person.getWinningPerson());
+		selectedCards.add(weapon.getWinningWeapon());
 
 	}
 
@@ -80,14 +80,14 @@ them to the array selectedCards
 
 	public static void addRemainingCards(){
 
-		Room places = new Room();
-		Person people = new Person();
-		Weapon weapons = new Weapon();
+		Room room = new Room();
+		Person person = new Person();
+		Weapon weapon = new Weapon();
 
 //adding the remaining cards (not winning) to remainderCards
-		remainderCards.addAll(places.getRoom());
-		remainderCards.addAll(people.getPerson());
-		remainderCards.addAll(weapons.getWeapon());
+		remainderCards.addAll(room.getRoom());
+		remainderCards.addAll(person.getPerson());
+		remainderCards.addAll(weapon.getWeapon());
 
 	}
 
