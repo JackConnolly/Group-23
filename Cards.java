@@ -62,6 +62,10 @@ them to the array selectedCards
 
 	public static void addSelectedCards(){
 
+		Room room = new Room();
+		Person person = new Person();
+		Weapon weapon = new Weapon();
+
 //adding the winning cards to the array selectedCards
 		selectedCards.add(room.getWinningRoom());
 		selectedCards.add(person.getWinningPerson());
@@ -180,19 +184,12 @@ have been randomly chosen- only used
 for trouble shooting
 */
 
-/**	public static void main(String[] args){
-
-		Cards c = new Cards();
+	public final void setAllCards(){
 		addSelectedCards();
 		addRemainingCards();
 		playerOnesHand();
 		playerTwosHand();
-
-		System.out.println("Player One " + c.getPlayerOnesHand() + "Player 2 " + c.getPlayerTwosHand() + "Winning " + c.getSelectedCards());
-
-		//return "The Winning Cards are " + c.getSelectedCards() + " Player Ones Cards are " + c.getPlayerOnesHand() + "Player Twos Cards are " + c.getPlayerTwosHand();
 	}
-*/
 	
 
 }

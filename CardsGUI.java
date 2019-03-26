@@ -1,10 +1,7 @@
 /** Implements Cards class logic to create Cards GUI
 * @author Hailey Allen
-* @since 03-13-19
+* @since 03-26-19
 */
-
-
-
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -39,13 +36,15 @@ public class CardsGUI extends Application{
 	public void start(Stage primaryStage) throws Exception{
 
 		Cards c = new Cards();
+		c.setAllCards();
 
 		ArrayList<String> playerOne = new ArrayList<>(c.getPlayerOnesHand());
 		ArrayList<String> playerTwo = new ArrayList<>(c.getPlayerTwosHand());
 
-/** Beginning all of the hard-coded rectangles and
-	the corresponding labels for all 12 cards;
-	6 cards per each players hand
+/** 
+Beginning all of the hard-coded rectangles and
+the corresponding labels for all 12 cards;
+6 cards per each players hand
 */
 
 	//Player One
@@ -142,79 +141,37 @@ public class CardsGUI extends Application{
 
 		HBox h = new HBox();
 		HBox h2 = new HBox();
+		HBox h3 = new HBox();
+		HBox h4 = new HBox();
+		HBox h5 = new HBox();
+
 		VBox v = new VBox();
+		VBox v2 = new VBox();
 
-		FlowPane flow = new FlowPane();
-		FlowPane flow2 = new FlowPane();
-		FlowPane flow3 = new FlowPane();
-		FlowPane flow4 = new FlowPane();
-		FlowPane flow5 = new FlowPane();
-		FlowPane flow6 = new FlowPane();
-		FlowPane flow7 = new FlowPane();
-		FlowPane flow8 = new FlowPane();
-		FlowPane flow9 = new FlowPane();
-		FlowPane flow10 = new FlowPane();
-		FlowPane flow11 = new FlowPane();
-		FlowPane flow12 = new FlowPane();
+		stack.getChildren().addAll(rectangle, player);
+		stack2.getChildren().addAll(rectangle2, player2);
+		stack3.getChildren().addAll(rectangle3, player3);
+		stack4.getChildren().addAll(rectangle4, player4);
+		stack5.getChildren().addAll(rectangle5, player5);
+		stack6.getChildren().addAll(rectangle6, player6);
+		stack7.getChildren().addAll(rectangle7, player7);
+		stack8.getChildren().addAll(rectangle8, player8);
+		stack9.getChildren().addAll(rectangle9, player9);
+		stack10.getChildren().addAll(rectangle10, player10);
+		stack11.getChildren().addAll(rectangle11, player11);
+		stack12.getChildren().addAll(rectangle12, player12);
 
-		FlowPane play = new FlowPane();
-		FlowPane play2 = new FlowPane();
-		FlowPane play3 = new FlowPane();
-		FlowPane play4 = new FlowPane();
-		FlowPane play5 = new FlowPane();
-		FlowPane play6 = new FlowPane();
-		FlowPane play7 = new FlowPane();
-		FlowPane play8 = new FlowPane();
-		FlowPane play9 = new FlowPane();
-		FlowPane play10 = new FlowPane();
-		FlowPane play11 = new FlowPane();
-		FlowPane play12 = new FlowPane();
-		
-		flow.getChildren().add(rectangle);
-		flow2.getChildren().add(rectangle2);
-		flow3.getChildren().add(rectangle3);
-		flow4.getChildren().add(rectangle4);
-		flow5.getChildren().add(rectangle5);
-		flow6.getChildren().add(rectangle6);
-		flow7.getChildren().add(rectangle7);
-		flow8.getChildren().add(rectangle8);
-		flow9.getChildren().add(rectangle9);
-		flow10.getChildren().add(rectangle10);
-		flow11.getChildren().add(rectangle11);
-		flow12.getChildren().add(rectangle12);
-
-		play.getChildren().add(player);
-		play2.getChildren().add(player2);
-		play3.getChildren().add(player3);
-		play4.getChildren().add(player4);
-		play5.getChildren().add(player5);
-		play6.getChildren().add(player6);
-		play7.getChildren().add(player7);
-		play8.getChildren().add(player8);
-		play9.getChildren().add(player9);
-		play10.getChildren().add(player10);
-		play11.getChildren().add(player11);
-		play12.getChildren().add(player12);
-
-		stack.getChildren().addAll(flow, play);
-		stack2.getChildren().addAll(flow2, play2);
-		stack3.getChildren().addAll(flow3, play3);
-		stack4.getChildren().addAll(flow4, play4);
-		stack5.getChildren().addAll(flow5, play5);
-		stack6.getChildren().addAll(flow6, play6);
-		stack7.getChildren().addAll(flow7, play7);
-		stack8.getChildren().addAll(flow8, play8);
-		stack9.getChildren().addAll(flow9, play9);
-		stack10.getChildren().addAll(flow10, play10);
-		stack11.getChildren().addAll(flow11, play11);
-		stack12.getChildren().addAll(flow12, play12);
-
-		h.getChildren().addAll(stack, stack2, stack3, stack4, stack5, stack6);
-		h2.getChildren().addAll(stack7, stack8, stack9, stack10, stack11, stack12);
+		h.getChildren().addAll(stack, stack2, stack3);
+		h2.getChildren().addAll(stack4, stack5, stack6);
+		h3.getChildren().addAll(stack7, stack8, stack9);
+		h4.getChildren().addAll(stack10, stack11, stack12);
 
 		v.getChildren().addAll(h, h2);
+		v2.getChildren().addAll(h3, h4);
 
-		Scene scene = new Scene(v, 500, 500);
+		h5.getChildren().addAll(v, v2);
+
+		Scene scene = new Scene(h5, 500, 500);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
