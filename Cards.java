@@ -16,20 +16,24 @@ be used throughout the class
 */
 
 //Making the 'winning' array of winning cards
-	private static ArrayList<String> selectedCards = new ArrayList<>();
+	private ArrayList<String> selectedCards = new ArrayList<>();
 
 //Making the array which will hold the rest of the cards
-	private static ArrayList<String> remainderCards = new ArrayList<>();
+	private ArrayList<String> remainderCards = new ArrayList<>();
 
 //Making the arrays for the two players hands
-	private static ArrayList<String> playerOne = new ArrayList<>();
-	private static ArrayList<String> playerTwo = new ArrayList<>();
+	private ArrayList<String> playerOne = new ArrayList<>();
+	private ArrayList<String> playerTwo = new ArrayList<>();
 
 	private String name;
 
-	public static Room room = new Room();
-	public static Person person = new Person();
-	public static Weapon weapon = new Weapon();
+	//public Room room = new Room();
+	//public Person person = new Person();
+	//public Weapon weapon = new Weapon();
+
+	private Room winningRoom;
+	private Weapon winningWeapon;
+	private Person winningPerson;
 
 /**
 Constructor with no parameters; 
@@ -59,17 +63,51 @@ them to the array selectedCards
 @param people of object type Person (to access people array)
 @param places of object type Room (to access places array)
 */
+	
+	public Room getWinningRoom() {
+		return winningRoom;
 
-	public static void addSelectedCards(){
+	}
+	public Weapon getWinningWeapon() {
+		return winningWeapon;
 
-		Room room = new Room();
-		Person person = new Person();
-		Weapon weapon = new Weapon();
+	}
+	public Person getWinningPerson() {
+		return winningPerson;
+
+	}
+
+	public void setWinningRoom(Room room) {
+		this.winningRoom = room;
+
+	}
+	public void setWinningWeapon(Weapon weapon) {
+		this.winningWeapon = weapon;
+
+	}
+	public void setWinningPerson(Person person) {
+		this.winningPerson = person;
+
+
+	}
+
+
+
+	public void addSelectedCards(){
+
+		RoomEnum roomEnum = new RoomEnum();
+		PersonEnum personEnum = new PersonEnum();
+		WeaponEnum weaponEnum = new WeaponEnum();
+
+		this.setWinningRoom(new Room(roomEnum.getWinningRoom()));
+		this.setWinningWeapon(new Weapon(weaponEnum.getWinningWeapon()));
+		this.setWinningPerson(new Person(personEnum.getWinningPerson()));
+	
 
 //adding the winning cards to the array selectedCards
-		selectedCards.add(room.getWinningRoom());
-		selectedCards.add(person.getWinningPerson());
-		selectedCards.add(weapon.getWinningWeapon());
+		//selectedCards.add(roomEnum.getWinningRoom());
+		//selectedCards.add(personEnum.getWinningPerson());
+		//selectedCards.add(weaponEnum.getWinningWeapon());
 
 	}
 
@@ -82,11 +120,11 @@ them to the array selectedCards
 @param places of object type Places (to access places array)
 */
 
-	public static void addRemainingCards(){
+	public void addRemainingCards(){
 
-		Room room = new Room();
-		Person person = new Person();
-		Weapon weapon = new Weapon();
+		RoomEnum room = new RoomEnum();
+		PersonEnum person = new PersonEnum();
+		WeaponEnum weapon = new WeaponEnum();
 
 //adding the remaining cards (not winning) to remainderCards
 		remainderCards.addAll(room.getRoom());
@@ -95,7 +133,7 @@ them to the array selectedCards
 
 	}
 
-	public static void playerOnesHand(){
+	public void playerOnesHand(){
 
 //using a for loop to repeat this process 6 times
 
@@ -134,7 +172,7 @@ them to the array selectedCards
 
 	}
 
-	public static void playerTwosHand(){
+	public void playerTwosHand(){
 
 //using a for loop to repeat this process 6 times
 

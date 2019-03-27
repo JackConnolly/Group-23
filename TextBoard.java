@@ -12,37 +12,43 @@ public class TextBoard{
 	private Player turn;
 	private ArrayList<String> rooms;
 	private int length; //length of longest room name
+	private static Scanner scan = new Scanner(System.in);
 	private Square[][] board;
+	private Cards cards;
 	
 	//Constructor
-		TextBoard(Player player1, Player player2, ArrayList<String> room){
+		TextBoard(Player player1, Player player2, ArrayList<String> rooms, Cards cards){
 		this.player1 = player1;
 		this.player2 = player2;
 		turn = player1;
-		rooms = room;
-		
+		this.rooms = rooms;
+		this.cards = cards;
+	}
+
+	public Cards getCards() {
+		return cards;
 	}
 	
 	//adds space to the front of room names to make them line up
 	//returns longest name
 	public String formatNames(){
-	String holder = "";
-	for(String i:rooms){
-		if(i.length() > holder.length())
-			holder = i;
-	}
-	length = holder.length();
-	for(int j = 0; j < rooms.size(); j++){
-		if(rooms.get(j) != holder){
-			for(int i = 0; i < holder.length() - rooms.get(j).length() + 3; i++){
-				if(j < rooms.size()/2)
-				rooms.set(j, " " + rooms.get(j));
-				 
+		String holder = "";
+		for(String i:rooms){
+			if(i.length() > holder.length())
+				holder = i;
+		}
+		length = holder.length();
+		for(int j = 0; j < rooms.size(); j++){
+			if(rooms.get(j) != holder){
+				for(int i = 0; i < holder.length() - rooms.get(j).length() + 3; i++){
+					if(j < rooms.size()/2)
+					rooms.set(j, " " + rooms.get(j));
+					 
+				}
 			}
 		}
+		return holder;
 	}
-	return holder;
-}
 
 //prints square and checks for players
 	public void printSquare(int row, int column){
@@ -63,11 +69,60 @@ public class TextBoard{
 	//Prints Board
 	public void printBoard(int columns, int rows){
 
+	board = new Square[rows][columns];
 	length = formatNames().length();
 	
-	reprintBoard(columns, rows);
 
-
+//putting spaces in front of squares that do not have a room
+	for (int i = 0; i < rows; i++){
+		System.out.println("");
+		if(i % 2 != 0){
+			for(int x = 0; x < length  ; x++){ 
+			System.out.print(" ");
+			}
+		}
+		//begins printing board
+		for (int j = 0; j < columns; j++){
+			board[i][j] = new Square();
+			
+			//setting rooms on left side of board j == 0 
+			if(i == 0 && j == 0){
+				board[i][j].setRoomAccess(rooms.get(0));
+				System.out.print(rooms.get(0));
+				printSquare(i, j);
+			}
+			else if(i == 2 && j == 0){
+				board[i][j].setRoomAccess(rooms.get(1));
+				System.out.print(rooms.get(1));
+				printSquare(i, j);
+			}
+			else if(i == 4 && j == 0){
+				board[i][j].setRoomAccess(rooms.get(2));
+				System.out.print(rooms.get(2));
+				printSquare(i, j);
+			}
+			//setting rooms on right side of board j == 4
+			else if(i == 0 && j == 4){
+				board[i][j].setRoomAccess(rooms.get(3));
+				printSquare(i, j);
+				System.out.print(rooms.get(3));
+			}
+			else if(i == 2 && j == 4){
+				board[i][j].setRoomAccess(rooms.get(4));
+				printSquare(i, j);
+				System.out.print(rooms.get(4));
+			}
+			else if(i == 4 && j == 4){
+				board[i][j].setRoomAccess(rooms.get(5));
+				printSquare(i, j);
+				System.out.print(rooms.get(5));
+			}
+				else{	
+			printSquare(i, j);
+			}
+		}
+		System.out.println("");	
+	}
 	}
 	
 	//Reprints Board
@@ -132,12 +187,13 @@ public class TextBoard{
 	
 public static void main(String[] args){
 	
-	Room c = new Room();
-	c.setRoom();
+	RoomEnum r = new RoomEnum();
+	r.setPrintRoom();
+	Cards c = new Cards();
 	Player player1 = new Player("Anna", 0, 0, "#");
+	c.setAllCards();
 	Player player2 = new Player("Jack", 4, 4, "$");
-	TextBoard b = new TextBoard(player1, player2, c.getRoom());
-	System.out.println(c.getRoom());
+	TextBoard b = new TextBoard(player1, player2, r.getPrintRoom(), c);
 	b.printBoard( 5, 5);
 	b.displayPrompt();
 
@@ -146,21 +202,17 @@ public static void main(String[] args){
 
 public void checkForRoom(){
 	if(board[turn.getXPosition()][turn.getYPosition()].hasRoomAccess()){
-	
+				System.out.println("You are in the " + board[turn.getXPosition()][turn.getYPosition()].getRoomAccess());
 				/**
 				* @toDo - if in room, not sure how you store the Room but with Cards it is supposed to be a separate class/ Object or if it
 				* is easier to store it as a string? 
 				*/
 				String room = board[turn.getXPosition()][turn.getYPosition()].getRoomAccess();
-				System.out.print(room + " ");
-				for (int i = 0; i < room.length(); i ++){
-					if (room.charAt(i) == ' ')
-					room = room.replace(" ", "");
-				}
+				//Room roomObj = new Room(room);
 				if (turn == player1){
-					chooseAction(player1, player2, room);
+					chooseAction(player1, player2, new Room(room.toLowerCase()));
 				} else {
-					chooseAction(player2, player1, room);
+					chooseAction(player2, player1, new Room(room.toLowerCase()));
 				}
 				
 
@@ -169,7 +221,7 @@ public void checkForRoom(){
 
 /** From Clue class I created - Kylie
 */
-public void chooseAction(Player currPlayer, Player otherPlayer, String room) {
+public void chooseAction(Player currPlayer, Player otherPlayer, Room room) {
 //@todo move to its own method
 		
 		System.out.println("Do you want to suspect or accuse (s/a) ? Press any other key to skip.");
@@ -188,13 +240,12 @@ public void chooseAction(Player currPlayer, Player otherPlayer, String room) {
 
 }
 
-public void suspect(Player currPlayer, Player otherPlayer, String room) {
+public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 		Suspicion s;
 		System.out.println("What person would you like to suspect? professor plum, miss scarlet, mr. green or mrs. white?");
 		Scanner keyboard1 = new Scanner(System.in);
 		String personName = keyboard1.nextLine();
 		Person person = new Person(personName.toLowerCase());
-		Room currentRoom = new Room(room);
 	while (true){
 			if (personName.equals("professor plum")){
 				person = new Person(personName);
@@ -204,11 +255,11 @@ public void suspect(Player currPlayer, Player otherPlayer, String room) {
 				person = new Person(personName);
 				break;
 
-			} else if (personName.equals("mr. green")) {
+			} else if (personName.equals("mr.green")) {
 				person = new Person(personName);
 				break;
 
-			} else if (personName.equals("mrs. white")) {
+			} else if (personName.equals("mrs.white")) {
 				person = new Person(personName);
 				break;
 
@@ -216,42 +267,35 @@ public void suspect(Player currPlayer, Player otherPlayer, String room) {
 				System.out.println("invalid person options for persons are professor plum, miss scarlet, mr. green & mrs. white");
 			} // end of if (personName.toLowerCase() == "professor plum")
 	} //end of while (true)
-		System.out.println("What weapon would you like to suspect? candlestick, horseshoe, water bucket, trophy or revolver."); 
+	
+		System.out.println("What weapon would you like to suspect? candlestick, horseshoe, water bucker, trophy or revolver."); 
 		Scanner keyboard2 = new Scanner(System.in);
 		String weaponName = keyboard2.nextLine();
-		Weapon weapon = new Weapon(weaponName.toLowerCase());	
-		while (true){
-
+		Weapon weapon = new Weapon(weaponName.toLowerCase());
 		if (weaponName.equals("candlestick")) {
 				weapon = new Weapon(weaponName);
-				break;
 				
 			} else if (weaponName.equals("horseshoe")) {
 				weapon = new Weapon(weaponName);
-				break;
 
 			} else if (weaponName.equals("water bucket")) {
 				weapon = new Weapon(weaponName);
-				break;
 
 			} else if (weaponName.equals("trophy")) {
 				weapon = new Weapon(weaponName);
-				break;
 
 			} else if (weaponName.equals("revolver")) {
 				weapon = new Weapon(weaponName);
-				break;
 
 			} else {
 				System.out.println("invalid weapon option. the possible weapons are candlestick, horseshoe, water bucker, trophy or revolver.");
 			}
-} // end of while (true)
 		
 
-		s = currPlayer.addSuspected(weapon, currentRoom, person);
+		s = currPlayer.addSuspected(weapon, room, person);
 		System.out.println("suspected: " + s); 
 
-		System.out.println("otherPlayer =" + otherPlayer.getName());
+		System.out.println("otherPlayer =" + otherPlayer);
 		System.out.println("Do you wish to contest against your opponent's Suspicion? Type 'Y' or 'N'.");
 		Scanner keyboard3 = new Scanner(System.in);
 		String otherPlayerChoice = keyboard3.nextLine();
@@ -289,59 +333,73 @@ public void suspect(Player currPlayer, Player otherPlayer, String room) {
 
 	}
 
-	public void accuse(Player currPlayer, String room) {
-		
+	public void accuse(Player currPlayer, Room room) {
+
 		Accusation a;
-		Room currentRoom = new Room(room);
+		System.out.println("What person would you like to accuse? professor plum, miss scarlet, mr. green or mrs. white");
 		Scanner keyboard1 = new Scanner(System.in);
 		String personName = keyboard1.nextLine();
 		Person person = new Person(personName);
 		boolean invalid = true ;
-		//while (invalid) {
-			while (true){
-				System.out.println("What person would you like to suspect? professor plum, miss scarlet, mr. green or mrs. white");
-			if (personName.toLowerCase() == "professor plum") {
-				invalid = false;
+		while (true) {
+			if (personName.equals("professor plum")){
 				person = new Person(personName);
 				break;
 				
-
-			} else if (personName.toLowerCase() == "miss scarlet") {
-				invalid = false;
+			} else if (personName.equals("miss scarlet")) {
 				person = new Person(personName);
 				break;
 
-			} else if (personName.toLowerCase() == "mr. green") {
-				invalid = false;
+			} else if (personName.equals("mr.green")) {
 				person = new Person(personName);
 				break;
 
-			} else if (personName.toLowerCase() == "mrs. white") {
-				invalid = false;
+			} else if (personName.equals("mrs.white")) {
 				person = new Person(personName);
 				break;
 
 			} else {
 				System.out.println("invalid person options for persons are professor plum, miss scarlet, mr. green & mrs. white");
 			} // end of if (personName.toLowerCase() == "professor plum")
-		} //end of while(true)
-		//}
+		}
 		// if statements for each name of person // else invalid
-		System.out.println("What weapon would you like to suspect ? candlestick, horseshoe, water bucker, trophy or revolver?");
+		System.out.println("What weapon would you like to accuse ? candlestick, horseshoe, water bucker, trophy or revolver?");
 		Scanner keyboard2 = new Scanner(System.in);
 		String weaponName = keyboard2.nextLine();
 		Weapon weapon = new Weapon(weaponName);
-		a = currPlayer.addAccusation(weapon, currentRoom, person);
+		currPlayer.setAccused(weapon, room, person);
+		a = currPlayer.getAccused();
 		System.out.println("accused: " + a);
+		boolean winner = checkWinner(a,this.getCards());
+		System.out.println("winner="+ winner);
 		// if statements for each weapon // else invalid
 
 
 	}
 
+	public boolean checkWinner(Accusation accused, Cards cards) {
+		//toDo keeps reading false
+		if ( accused != null && cards != null && cards.getWinningRoom() != null
+			&& cards.getWinningWeapon() != null && cards.getWinningPerson() != null) {
+			if ( accused.getRoom().getName().trim().toLowerCase().equals(cards.getWinningRoom().getName().trim().toLowerCase())
+				&& accused.getWeapon().getName().trim().toLowerCase().equals(cards.getWinningWeapon().getName().trim().toLowerCase()) 
+				&& accused.getPerson().getName().trim().toLowerCase().equals(cards.getWinningPerson().getName().trim().toLowerCase()) ) {
+				return true;
+			} else {
+				System.out.println("the winning cards are" + cards.getWinningRoom() + " " + cards.getWinningWeapon() + " " + cards.getWinningPerson());
+				return false;
+
+			}
+			
+		} else {
+			return false;
+		}
+	}
+
 //funtion controls and deals with user input and appropriate response
 public void displayPrompt(){
 	while (true){
-	Scanner scan = new Scanner(System.in);
+	
 	String action;
 	System.out.println("Press [R] to roll the dice");
 	scan = new Scanner(System.in);

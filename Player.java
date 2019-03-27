@@ -10,7 +10,7 @@ public class Player {
 	//Instance variables
 	private String name;
 	private ArrayList<Suspicion> suspected;
-	private ArrayList<Accusation> accused;
+	private Accusation accused;
 	private int xPos;
 	private int yPos;
 	private String token;
@@ -21,7 +21,7 @@ public class Player {
 
 		name = n;
 		this.suspected = new ArrayList<Suspicion>();
-		this.accused = new ArrayList<Accusation>();
+		//this.accused = new Accusation();
 	}
 
 	public Player(String name, int xpos, int ypos, String token) {
@@ -31,9 +31,7 @@ public class Player {
 		this.yPos = ypos;
 		this.token = token;
 		this.suspected = new ArrayList<Suspicion>();
-		this.accused = new ArrayList<Accusation>();
-
-	
+		//this.accused = new Accusation();
 	}
 
 	public int[] getPlayerPosition() {
@@ -63,17 +61,22 @@ public class Player {
 	}
 	
 	//returns xpos
-public int getXPosition(){
-	return xPos;
-}
+	public int getXPosition(){
+		return xPos;
+	}
 
 //returns ypos
-public int getYPosition(){
-	return yPos;
-}
-public String getToken(){
-	return token;
-}
+	public int getYPosition(){
+		return yPos;
+	}
+	public String getToken(){
+		return token;
+	}
+
+	public Accusation getAccused() {
+		return accused;
+
+	}
 	// Setter Methods
 
 	/** Sets the Players position & calls the checkRoom method
@@ -174,11 +177,15 @@ public String getToken(){
 	/**
 	*
 	*/
-	public Accusation addAccusation(Weapon weapon, Room room , Person person) {
-		Accusation a = new Accusation(weapon, room, person);
-		accused.add(a);
-		return a;
+	public void setAccused(Weapon weapon, Room room , Person person) {
+		this.accused = new Accusation(weapon, room, person);
+		//return this.accused;
 	}
+
+	//public ArrayList<Accusation> getAccusedList() {
+	//	return accused;
+	//}
+	
 
 
 
