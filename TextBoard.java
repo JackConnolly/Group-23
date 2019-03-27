@@ -69,61 +69,11 @@ public class TextBoard{
 	//Prints Board
 	public void printBoard(int columns, int rows){
 
-	board = new Square[rows][columns];
 	length = formatNames().length();
-	
+	reprintBoard(5, 5);
+	}
 
-//putting spaces in front of squares that do not have a room
-	for (int i = 0; i < rows; i++){
-		System.out.println("");
-		if(i % 2 != 0){
-			for(int x = 0; x < length  ; x++){ 
-			System.out.print(" ");
-			}
-		}
-		//begins printing board
-		for (int j = 0; j < columns; j++){
-			board[i][j] = new Square();
-			
-			//setting rooms on left side of board j == 0 
-			if(i == 0 && j == 0){
-				board[i][j].setRoomAccess(rooms.get(0));
-				System.out.print(rooms.get(0));
-				printSquare(i, j);
-			}
-			else if(i == 2 && j == 0){
-				board[i][j].setRoomAccess(rooms.get(1));
-				System.out.print(rooms.get(1));
-				printSquare(i, j);
-			}
-			else if(i == 4 && j == 0){
-				board[i][j].setRoomAccess(rooms.get(2));
-				System.out.print(rooms.get(2));
-				printSquare(i, j);
-			}
-			//setting rooms on right side of board j == 4
-			else if(i == 0 && j == 4){
-				board[i][j].setRoomAccess(rooms.get(3));
-				printSquare(i, j);
-				System.out.print(rooms.get(3));
-			}
-			else if(i == 2 && j == 4){
-				board[i][j].setRoomAccess(rooms.get(4));
-				printSquare(i, j);
-				System.out.print(rooms.get(4));
-			}
-			else if(i == 4 && j == 4){
-				board[i][j].setRoomAccess(rooms.get(5));
-				printSquare(i, j);
-				System.out.print(rooms.get(5));
-			}
-				else{	
-			printSquare(i, j);
-			}
-		}
-		System.out.println("");	
-	}
-	}
+
 	
 	//Reprints Board
 	public void reprintBoard(int columns, int rows){
@@ -202,12 +152,13 @@ public static void main(String[] args){
 
 public void checkForRoom(){
 	if(board[turn.getXPosition()][turn.getYPosition()].hasRoomAccess()){
-				System.out.println("You are in the " + board[turn.getXPosition()][turn.getYPosition()].getRoomAccess());
 				/**
 				* @toDo - if in room, not sure how you store the Room but with Cards it is supposed to be a separate class/ Object or if it
 				* is easier to store it as a string? 
 				*/
 				String room = board[turn.getXPosition()][turn.getYPosition()].getRoomAccess();
+				room = room.replace(" ", "");
+				System.out.println("You are in the " + room);
 				//Room roomObj = new Room(room);
 				if (turn == player1){
 					chooseAction(player1, player2, new Room(room.toLowerCase()));
@@ -265,6 +216,7 @@ public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 
 			} else {
 				System.out.println("invalid person options for persons are professor plum, miss scarlet, mr. green & mrs. white");
+				suspect(currPlayer, otherPlayer, room);
 			} // end of if (personName.toLowerCase() == "professor plum")
 	} //end of while (true)
 	
@@ -289,13 +241,14 @@ public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 
 			} else {
 				System.out.println("invalid weapon option. the possible weapons are candlestick, horseshoe, water bucker, trophy or revolver.");
+				suspect(currPlayer, otherPlayer, room);
 			}
 		
 
 		s = currPlayer.addSuspected(weapon, room, person);
 		System.out.println("suspected: " + s); 
 
-		System.out.println("otherPlayer =" + otherPlayer);
+		System.out.println("otherPlayer =" + otherPlayer.getName());
 		System.out.println("Do you wish to contest against your opponent's Suspicion? Type 'Y' or 'N'.");
 		Scanner keyboard3 = new Scanner(System.in);
 		String otherPlayerChoice = keyboard3.nextLine();
@@ -305,31 +258,51 @@ public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 			boolean pf = true;
 			Scanner keyboard4 = new Scanner(System.in);
 			String personFlag = keyboard4.nextLine();
-			if (personFlag.toLowerCase() == "y") { 
+			if (personFlag.toLowerCase().charAt(0) == 'y') { 
 				pf = true;
 
-			} else if (personFlag.toLowerCase() == "n") {
+			} else if (personFlag.toLowerCase().charAt(0) == 'n') {
 				pf = false;
 			}
 			//.setPersonFlag(pf);
 
 			System.out.println("person flag" + pf);
-
+			if (pf)
+			System.out.println(otherPlayer.getName() + " contested that " + personName + " commited the murder.");
+			
 			System.out.println("Do you contest the weapon?");
 			boolean wf = true;
 			Scanner keyboard5 = new Scanner(System.in);
 			String weaponFlag = keyboard5.nextLine();
-			if (weaponFlag.toLowerCase() == "y") { 
+			if (weaponFlag.toLowerCase().charAt(0) == 'y') { 
 				wf = true;
 
-			} else if (weaponFlag.toLowerCase() == "n") {
+			} else if (weaponFlag.toLowerCase().charAt(0) == 'n') {
 				wf = false;
 			}
 
 			//s.setWeaponFlag(wf);
+			if (wf){
+				System.out.println(otherPlayer.getName() + " contested that " + weaponName + " could have been used in the murder.");
+			}
 			System.out.println("weapon flag" + wf);
-		}
+			
+			System.out.println("Do you contest the room?");
+			boolean rf = true;
+			Scanner keyboard6 = new Scanner(System.in);
+			String roomFlag = keyboard6.nextLine();
+			if (roomFlag.toLowerCase().charAt(0) == 'y') { 
+				rf = true;
 
+			} else if (roomFlag.toLowerCase().charAt(0) == 'n' ){
+				rf = false;
+			}
+			//s.setWeaponFlag(wf);
+			if (rf){
+				System.out.println(otherPlayer.getName() + " contested that the murder could have happened here.");
+			}
+			System.out.println("room flag" + rf);
+		}
 
 	}
 
