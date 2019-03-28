@@ -32,8 +32,8 @@ be accused to the array places
 
 		room.add(" Library ");
 		room.add(" Kitchen ");
-		room.add(" Living Room ");
-		room.add(" Dining Room ");
+		room.add(" Living_Room ");
+		room.add(" Dining_Room ");
 		room.add(" Office ");
 		room.add(" Bedroom ");
 
@@ -43,8 +43,8 @@ be accused to the array places
 
 		printRoom.add(" Library ");
 		printRoom.add(" Kitchen ");
-		printRoom.add(" Living Room ");
-		printRoom.add(" Dining Room ");
+		printRoom.add(" Living_Room ");
+		printRoom.add(" Dining_Room ");
 		printRoom.add(" Office ");
 		printRoom.add(" Bedroom ");
 
