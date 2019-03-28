@@ -32,7 +32,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.*;
-import javafx.scene.control*;
+import javafx.scene.control.*;
 
 /**
 * This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
