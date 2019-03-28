@@ -133,27 +133,27 @@ public class Player {
 	public void checkRoom() {
 	// Room position for Library
 		if (xPos == 0 && yPos == 0) {
-			System.out.println("You've reached the Library, but there doesn't seem to be a murder here... ");
+			System.out.println("You've reached the Library");
 
 		// Room position for Kitchen
 		} else if (xPos == 4 && yPos == 0 ) {
-			System.out.println("You've reached the Kitchen, but there doesn't seem to be a murder here...");
+			System.out.println("You've reached the Kitchen");
 
 		// Room position for Living Room
 		}  else if (xPos == 0 && yPos == 2 ) {
-			System.out.println("You've reached the Living Room, but there doesn't seem to be a murder here...");
+			System.out.println("You've reached the Living Room");
 
 		// Room position for Dining Room
 		}  else if (xPos == 4 && yPos == 2 ) {
-			System.out.println("You've reached the Dining Room, but there doesn't seem to be a murder here...");
+			System.out.println("You've reached the Dining Room");
 
 		// Room position for Bedroom
 		}  else if (xPos == 0 && yPos == 4 ) {
-			System.out.println("You've reached the Bedroom, but there doesn't seem to be a murder here... ");
+			System.out.println("You've reached the Bedroom");
 
 		// Room position for Office
 		}  else if (xPos == 4 && yPos == 4 ) {
-			System.out.println("You've reached Office, and you found the murder scene! You Win! ");
+			System.out.println("You've reached Office");
 		}
 
 	}
