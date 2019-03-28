@@ -64,42 +64,6 @@ contains all the card names
 
 	}
 
-/**
-Cross-checks the arrayCards and 
-arrayNo with the players cards in
-order to automatically set the list
-to change based on the recieved cards
-@param no parameters
-@return void
-*/
-
-
-	public void syncPlayersCards(int a){
-
-		Cards c = new Cards();
-
-		c.addSelectedCards();
-		c.addRemainingCards();
-		c.playerOnesHand();
-		c.playerTwosHand();
-
-		ArrayList<String> playOne = new ArrayList<>();
-		ArrayList<String> playTwo = new ArrayList<>();
-		playOne.addAll(c.getPlayerOnesHand());
-		playTwo.addAll(c.getPlayerTwosHand());
-
-		if(a == 1){
-
-			for (int i = 0; i <= 5; i++){
-
-				a = i;
-
-			}
-
-		}
-
-	}
-
 //getter methods
 
 	public static ArrayList<String> getArrayCards(){
@@ -110,18 +74,6 @@ to change based on the recieved cards
 	public static ArrayList<Integer> getArrayNo(){
 
 		return arrayNo;
-	}
-
-	public static void main(String[] args){
-
-		setArrayNo();
-		setArrayCards();
-
-		//Cards c = new Cards();
-
-		System.out.println(getArrayCards());
-		System.out.println(getArrayNo());
-		//System.out.println(c.printCards());
 	}
 
 }
