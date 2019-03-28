@@ -32,12 +32,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.*;
+import javafx.scene.control*;
 
 /**
 * This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
 * remove logic from the GUI
 * @author Jack Connolly, Anna Barrett, Kylie Sicat, Hailey Allen, Jung Ho Kim
-* last updated by: Hailey Allen
+* last updated by: Jack Connolly
 * @since 03-13-19
 */
 
@@ -226,7 +227,28 @@ import javafx.scene.text.*;
 	  }
 	   }
 	  );
-      actionKeys.getChildren().addAll(suspectPlayer,moveLeft,moveRight,moveUp,moveDown, endTurn);
+	  
+	  
+	      // Creates ComboBox of type string, adds suspects to it
+    ComboBox<String> peopleBox = new ComboBox<String>();
+    peopleBox.getItems().addAll(
+    "Miss Scarlet",
+    "Mr. Green",
+    "Mrs. White",
+    "Prof Plum");
+    peopleBox.setPromptText("People");
+    //Creates ComboBox type string, adds weapons
+    ComboBox<String> weaponBox = new ComboBox<String>();
+    weaponBox.getItems().addAll(
+    "Revolver",
+    "Bucket",
+    "Candlestick",
+    "Trophy",
+    "Horse Shoe");
+    weaponBox.setPromptText("Weapons");
+
+      actionKeys.getChildren().addAll(suspectPlayer,peopleBox,weaponBox,moveLeft,moveRight,moveUp,moveDown, endTurn);
+
 
 
 
