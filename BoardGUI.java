@@ -116,6 +116,7 @@ import javafx.scene.control.*;
       Button rollDice = new Button("Roll Dice");
 	    Button endTurn = new Button("End Turn");
       Button suspectPlayer = new Button("Suspect Player");
+      Button accusePlayer = new Button("Accuse Player");
 	    Label moveAmount = new Label("Movement Allowed: ");
 
 	    Button moveLeft = new Button("Move Left");
@@ -227,8 +228,8 @@ import javafx.scene.control.*;
 	  }
 	   }
 	  );
-	  
-	  
+
+
 	      // Creates ComboBox of type string, adds suspects to it
     ComboBox<String> peopleBox = new ComboBox<String>();
     peopleBox.getItems().addAll(
@@ -247,7 +248,53 @@ import javafx.scene.control.*;
     "Horse Shoe");
     weaponBox.setPromptText("Weapons");
 
-      actionKeys.getChildren().addAll(suspectPlayer,peopleBox,weaponBox,moveLeft,moveRight,moveUp,moveDown, endTurn);
+    //event handlers for suspect and accuse buttons
+
+    accusePlayer.setOnAction(new EventHandler<ActionEvent>()
+     {
+      @Override
+      public void handle(ActionEvent event)
+      {
+        System.out.println("Who would you like to accuse?");
+    }
+     }
+    );
+
+    suspectPlayer.setOnAction(new EventHandler<ActionEvent>()
+     {
+      @Override
+      public void handle(ActionEvent event)
+      {
+        System.out.println("Who would you like to suspect?");
+    }
+     }
+    );
+
+
+  // Event handler for ComboBox, first time trying this
+    peopleBox.setOnAction(new EventHandler<ActionEvent>()
+     {
+      @Override
+      public void handle(ActionEvent event)
+      {
+        String selected = peopleBox.getValue();
+        System.out.println(selected);
+    }
+     }
+    );
+
+    weaponBox.setOnAction(new EventHandler<ActionEvent>()
+     {
+      @Override
+      public void handle(ActionEvent event)
+      {
+        String selected = weaponBox.getValue();
+        System.out.println(selected);
+    }
+     }
+    );
+
+      actionKeys.getChildren().addAll(suspectPlayer,accusePlayer,peopleBox,weaponBox,moveLeft,moveRight,moveUp,moveDown, endTurn);
 
 
 
@@ -310,6 +357,8 @@ import javafx.scene.control.*;
         // Root item is master branch of tree
         CheckBoxTreeItem<String> rootItem = new CheckBoxTreeItem<String> ("Player One");
         CheckBoxTreeItem<String> rootItem2 = new CheckBoxTreeItem<String> ("Player Two");
+        rootItem.setExpanded(true);
+        rootItem2.setExpanded(true);
 
 
 
@@ -451,7 +500,7 @@ import javafx.scene.control.*;
     ArrayList<String> playerOne = new ArrayList<>(c.getPlayerOnesHand());
     ArrayList<String> playerTwo = new ArrayList<>(c.getPlayerTwosHand());
 
-/** 
+/**
 Beginning all of the hard-coded rectangles and
 the corresponding labels for all 12 cards;
 6 cards per each players hand
