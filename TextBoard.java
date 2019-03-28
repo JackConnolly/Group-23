@@ -15,6 +15,8 @@ public class TextBoard{
 	private static Scanner scan = new Scanner(System.in);
 	private Square[][] board;
 	private Cards cards;
+	boolean hasRolled;
+	boolean gameEnded = false;
 	
 	//Constructor
 		TextBoard(Player player1, Player player2, ArrayList<String> rooms, Cards cards){
@@ -193,6 +195,7 @@ public void chooseAction(Player currPlayer, Player otherPlayer, Room room) {
 
 public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 		Suspicion s;
+		currPlayer.setMoveAmount(0);
 		System.out.println("What person would you like to suspect? professor plum, miss scarlet, mr. green or mrs. white?");
 		Scanner keyboard1 = new Scanner(System.in);
 		String personName = keyboard1.nextLine();
@@ -303,7 +306,8 @@ public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 			}
 			System.out.println("room flag" + rf);
 		}
-
+		changePlayer();
+		hasRolled = false;
 	}
 
 	public void accuse(Player currPlayer, Room room) {
@@ -346,7 +350,7 @@ public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 		boolean winner = checkWinner(a,this.getCards());
 		System.out.println("winner="+ winner);
 		// if statements for each weapon // else invalid
-
+		gameEnded = true;
 
 	}
 
@@ -371,7 +375,17 @@ public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 
 //funtion controls and deals with user input and appropriate response
 public void displayPrompt(){
-	while (true){
+	while (!gameEnded){
+	hasRolled = false;
+	
+	if (turn == player1){
+		System.out.println(player1.getName() + " your cards are: ");
+		System.out.println(cards.getPlayerOnesHand());
+	}
+	else {
+		System.out.println(player2.getName() + " your cards are: ");
+		System.out.println(cards.getPlayerTwosHand());
+	}
 	
 	String action;
 	System.out.println("Press [R] to roll the dice");
@@ -379,6 +393,7 @@ public void displayPrompt(){
 	action = scan.nextLine().toLowerCase();
 	if(action.charAt(0) == 'r'){
 	int move = diceRoll();
+	hasRolled = true;
 	System.out.println("You rolled a " + move);
 	turn.setMoveAmount(move);
 	}
@@ -386,9 +401,12 @@ public void displayPrompt(){
 	System.out.println("Invalid Input");
 	}
 	
+	
+	
 	while(turn.getMoveAmount() > 0){
 	System.out.println("Use [W], [A], [S], and [D] to move your Player. When your turn is finished press [F]");
 	action = scan.nextLine();
+	action = action.toLowerCase();
 	char input = action.charAt(0);
 	switch(input){
 		case 'w':
@@ -396,34 +414,40 @@ public void displayPrompt(){
 			reprintBoard(5, 5);
 			System.out.println("You moved up. You have " + turn.getMoveAmount() + " moves left.");
 			checkForRoom();
+			if(turn.getMoveAmount() == 0 && hasRolled){
+				changePlayer();
+			}
 			break;
 		case 's':
 			turn.setPlayerPosition(0, 1);
 			reprintBoard(5, 5);
 			System.out.println("You moved down. You have " + turn.getMoveAmount() + " moves left.");
 			checkForRoom();
+			if(turn.getMoveAmount() == 0 && hasRolled){
+				changePlayer();
+			}
 			break;
 		case 'a':
 			turn.setPlayerPosition(-1, 0);
 			reprintBoard(5, 5);
 			System.out.println("You moved left. You have " + turn.getMoveAmount() + " moves left.");
 			checkForRoom();
+			if(turn.getMoveAmount() == 0 && hasRolled){
+				changePlayer();
+			}
 			break;
 		case 'd':
 			turn.setPlayerPosition(1, 0);
 			reprintBoard(5, 5 );
 			System.out.println("You moved right. You have " + turn.getMoveAmount() + " moves left.");
 			checkForRoom();
+			if(turn.getMoveAmount() == 0 && hasRolled){
+				changePlayer();
+			}
 			break;
 		case 'f':
 			turn.setMoveAmount(0);
-			System.out.print("You have ended your turn. ");
-			if (turn == player1)
-				turn = player2;
-			else
-				turn = player1;
-			System.out.print("It is now " + turn.getName() + "'s turn.");
-			System.out.println();
+			changePlayer();
 			break;
 		default:
 			System.out.println("Invalid Input");
@@ -434,6 +458,17 @@ public void displayPrompt(){
 	}
 
 		
+}
+
+public void changePlayer(){
+			System.out.print(turn.getName() + ", your turn has ended. ");
+			if (turn == player1)
+				turn = player2;
+			else
+				turn = player1;
+			System.out.print("It is now " + turn.getName() + "'s turn.");
+			System.out.println();
+	
 }
 
 
