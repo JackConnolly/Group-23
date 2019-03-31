@@ -139,7 +139,7 @@ public class TextBoard{
 	
 public static void main(String[] args){
 	
-	RoomEnum r = new RoomEnum();
+	RoomList r = new RoomList();
 	r.setPrintRoom();
 	Cards c = new Cards();
 	Player player1 = new Player("Anna", 0, 0, "#");
