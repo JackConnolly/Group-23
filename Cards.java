@@ -95,13 +95,13 @@ them to the array selectedCards
 
 	public void addSelectedCards(){
 
-		RoomEnum roomEnum = new RoomEnum();
-		PersonEnum personEnum = new PersonEnum();
-		WeaponEnum weaponEnum = new WeaponEnum();
+		RoomList roomList = new RoomList();
+		PersonList personList = new PersonList();
+		WeaponList weaponList = new WeaponList();
 
-		this.setWinningRoom(new Room(roomEnum.getWinningRoom()));
-		this.setWinningWeapon(new Weapon(weaponEnum.getWinningWeapon()));
-		this.setWinningPerson(new Person(personEnum.getWinningPerson()));
+		this.setWinningRoom(new Room(roomList.getWinningRoom()));
+		this.setWinningWeapon(new Weapon(weaponList.getWinningWeapon()));
+		this.setWinningPerson(new Person(personList.getWinningPerson()));
 	
 
 //adding the winning cards to the array selectedCards
@@ -122,9 +122,9 @@ them to the array selectedCards
 
 	public void addRemainingCards(){
 
-		RoomEnum room = new RoomEnum();
-		PersonEnum person = new PersonEnum();
-		WeaponEnum weapon = new WeaponEnum();
+		RoomList room = new RoomList();
+		PersonList person = new PersonList();
+		WeaponList weapon = new WeaponList();
 
 //adding the remaining cards (not winning) to remainderCards
 		remainderCards.addAll(room.getRoom());

@@ -1,7 +1,8 @@
 /**
-*
+* Suspicion Class
 * @author Kylie Sicat
 * @since 03-18-19
+* Last Updated : Kylie Sicat 03-31-19
 */
 
 
@@ -11,7 +12,6 @@ public class Suspicion {
 	private Weapon weapon;
 	private Room room;
 	private Person person;
-
 	private boolean weaponFlag;
 	private boolean roomFlag;
 	private boolean personFlag;
@@ -27,61 +27,50 @@ public class Suspicion {
 	//Getter Methods
 
 	public Weapon getWeapon() {
-
 		return weapon;
 
 	}
 
 	public Room getRoom() {
-
 		return room;
 
 	}
 
 	public Person getPerson() {
-
 		return person;
 
 	}
 
-	//Setter
+	// Setter Methods 
 
 	public void setWeapon(Weapon weapon) {
-
-		this.weapon = weapon;
-
-		
+		this.weapon = weapon;		
 
 	}
 
-	public void setRoom(Room room ) {
-
+	public void setRoom(Room room) {
 		this.room = room;
 
-
-		
-
 	}
 
-	public void setPerson(Person person ) {
-
+	public void setPerson(Person person) {
 		this.person = person;
 
 	}
 
 	public void setPersonFlag(boolean pf) {
-
 		this.personFlag = pf;
+
 	}
 
 	public void setRoomFlag(boolean rf) {
-
 		this.roomFlag = rf;
+
 	} 
 
 	public void setWeaponFlag(boolean wf) {
-
 		this.weaponFlag = wf;
+
 	}
 
 	//method where user can say yes or no for all 3
@@ -90,54 +79,14 @@ public class Suspicion {
 		this.setRoomFlag(rf);
 		this.setWeaponFlag(wf);
 
-	// method which verifies whether suspected cards are correct according to the winning cards??
-
 	}
-
+ 	
+ 	/** toString method
+ 	* @return the weapon, room, person
+ 	*/
 	public String toString() {
-
 		return "Weapon " + weapon.getName() + "; Room " + room.getName() + "; Person " + person.getName();
+
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 } // end of class 
