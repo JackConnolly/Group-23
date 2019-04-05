@@ -75,8 +75,8 @@ import javafx.scene.control.*;
 	   Label label = new Label(" ");
 	   int player1Position[] = player1.getPlayerPosition();
 	   int player2Position[] = player2.getPlayerPosition();
-	   ImageView token1 = new ImageView( getClass().getResource(player1.getPlayerToken()).toExternalForm());
-     ImageView token2 = new ImageView( getClass().getResource(player2.getPlayerToken()).toExternalForm());
+	   ImageView token1 = new ImageView( getClass().getResource(player1.getToken()).toExternalForm());
+     ImageView token2 = new ImageView( getClass().getResource(player2.getToken()).toExternalForm());
 		 if (player1Position == player2Position){
 			  hBox1.getChildren().addAll( token1, label, token2);
 		  } else {
@@ -98,8 +98,8 @@ import javafx.scene.control.*;
       actionKeys.setPrefWidth(150);
 
 	    // setting player names and initial positions
-	    player1 = new Player("Anna", 1, 1, "player1.png");
-	    player2 = new Player("Jack", 1, 0, "player2.png");
+	    player1 = new Player("Anna", 0, 0, "player1.png");
+	    player2 = new AIPlayer("Computer", 4, 4, "player2.png");
 	    turn = player1;
 
       VBox notePad = new VBox(20);
@@ -225,6 +225,8 @@ import javafx.scene.control.*;
 					turn = player2;
 				else
 					turn = player1;
+				if(turn.isAI())
+					turn.turnSequence();
 	  }
 	   }
 	  );
