@@ -34,6 +34,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
+import javafx.scene.text.*;
+import javafx.scene.control.*;
 
 /**
 * This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
@@ -100,8 +102,8 @@ import javafx.scene.control.*;
       actionKeys.setPrefWidth(150);
 
 	    // setting player names and initial positions
-	    player1 = new Player("Anna", 1, 1, "player1.png");
-	    player2 = new Player("Jack", 1, 0, "player2.png");
+	    player1 = new Player("", 1, 1, "player1.png");
+	    player2 = new Player("", 1, 0, "player2.png");
 	    turn = player1;
 
       VBox notePad = new VBox(20);
@@ -405,18 +407,18 @@ import javafx.scene.control.*;
         //Player 1 places
         CheckBoxTreeItem<String> place1 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place2 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Lounge");
         CheckBoxTreeItem<String> place4 = new CheckBoxTreeItem<String> ("Dining Room");
-        CheckBoxTreeItem<String> place5 = new CheckBoxTreeItem<String> ("Office");
-        CheckBoxTreeItem<String> place6 = new CheckBoxTreeItem<String> ("Bedroom");
+        CheckBoxTreeItem<String> place5 = new CheckBoxTreeItem<String> ("Study");
+        CheckBoxTreeItem<String> place6 = new CheckBoxTreeItem<String> ("Billiard Room");
 
         //Player 2 places
         CheckBoxTreeItem<String> place12 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place22 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Lounge");
         CheckBoxTreeItem<String> place42 = new CheckBoxTreeItem<String> ("Dining Room");
-        CheckBoxTreeItem<String> place52 = new CheckBoxTreeItem<String> ("Office");
-        CheckBoxTreeItem<String> place62 = new CheckBoxTreeItem<String> ("Bedroom");
+        CheckBoxTreeItem<String> place52 = new CheckBoxTreeItem<String> ("Study");
+        CheckBoxTreeItem<String> place62 = new CheckBoxTreeItem<String> ("Billiard Room");
 
         //Player 1 items
         CheckBoxTreeItem<String> item1 = new CheckBoxTreeItem<String> ("Trophy");
@@ -662,14 +664,145 @@ the corresponding labels for all 12 cards;
       root.setTop(cardGUI);
       root.setPadding(insetOne);
 
+//SCENE 1 --> titleScene
+    BorderPane titlePage = new BorderPane();
+    StackPane st = new StackPane();
 
-      Scene scene = new Scene(root, 800, 600);
+    Button start = new Button(" START HERE ");
+    start.setTextFill(Color.BLACK);
+
+    ImageView titlePicture = new ImageView(getClass().getResource("Clue-Poster.jpg").toExternalForm());
+    //titlePicture.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+    st.getChildren().addAll(titlePicture, start);
+    titlePage.setCenter(st);
+
+//SCENE 2 --> playerScene
+
+    VBox vert1 = new VBox(20);
+    VBox vert2 = new VBox(20);
+    VBox vert3 = new VBox(20);
+    HBox hor = new HBox(20);
+    HBox hor2 = new HBox(20);
+    HBox hor3 = new HBox(20);
+
+    Label playerChoice = new Label(" Enter your names: ");
+    playerChoice.setTextFill(Color.BLACK);
+    playerChoice.setFont(Font.font("Arial Rounded MT Bold", 20));
+
+    TextField txt = new TextField("");
+    hor.getChildren().add(playerChoice);
+    hor2.getChildren().add(new Label("Player One: "));
+    hor2.getChildren().add(txt);
+
+    TextField txt2 = new TextField("");
+    hor3.getChildren().add(new Label("Player Two: "));
+    hor3.getChildren().add(txt2);
+
+    vert2.getChildren().addAll(hor, hor2, hor3);
+
+    Button ready = new Button(" Our names are entered! ");
+    Button aiReady = new Button(" I have no friends :( ");
+
+    vert1.getChildren().add(aiReady);
+    vert1.getChildren().add(ready);
+
+    vert3.getChildren().addAll(vert2, vert1);
+
+//SCENE 3 --> ruleScene
+    VBox vb = new VBox(20);
+
+    Label rules = new Label(" Rules For Clue: ");
+    rules.setTextFill(Color.BLACK);
+    rules.setFont(Font.font("Arial Rounded MT Bold", 50));
+
+    Rules r = new Rules();
+    Label rules2 = new Label("Find way to print rules here");
+    rules2.setTextFill(Color.BLACK);
+    rules2.setFont(Font.font("Arial Rounded MT Bold", 20));
+
+    Button change = new Button(" I accept these rules ");
+
+    vb.getChildren().addAll(rules, rules2, change);
+
+//SCENE 4 --> aiScene
+
+    VBox vert4 = new VBox(20);
+    VBox vert5= new VBox(20);
+    VBox vert6 = new VBox(20);
+    HBox hor4 = new HBox(20);
+    HBox hor5 = new HBox(20);
+
+    Label playerChoice2 = new Label(" Enter your names: ");
+    playerChoice2.setTextFill(Color.BLACK);
+    playerChoice2.setFont(Font.font("Arial Rounded MT Bold", 20));
+
+    TextField txt3 = new TextField("");
+    hor4.getChildren().add(playerChoice2);
+    hor5.getChildren().add(new Label("Player One: "));
+    hor5.getChildren().add(txt3);
+
+    vert5.getChildren().addAll(hor5, hor4);
+
+    Button ready2 = new Button(" My name is entered! ");
+
+    vert4.getChildren().add(ready2);
+
+    vert6.getChildren().addAll(vert5, vert4);
+
+//Cretaing all different scenes and how to toggle between   
+
+    Scene ruleScene = new Scene(vb, 800, 600);
+
+    Scene playerScene = new Scene(vert3, 800, 600);
+
+    Scene rootScene = new Scene(root, 800, 600);
+
+    Scene titleScene = new Scene(titlePage, 800, 600);
+
+    Scene aiScene = new Scene(vert6, 800, 600);
+
+    start.setOnAction( e -> primaryStage.setScene(ruleScene));
+    change.setOnAction( e -> primaryStage.setScene(playerScene));
+    aiReady.setOnAction( e -> primaryStage.setScene(aiScene));
+
+    ready.setOnAction(new EventHandler<ActionEvent>(){
+      @Override
+      public void handle(ActionEvent event)
+      {
+
+      String playerOneName = txt.getText();
+      Player player1 = new Player(playerOneName);
+
+        String playerTwoName = txt2.getText();
+        Player player2 = new Player(playerTwoName);
+
+        ready.setOnAction( e -> primaryStage.setScene(rootScene));
+      }
+     }
+    );
+
+    ready2.setOnAction(new EventHandler<ActionEvent>(){
+      @Override
+      public void handle(ActionEvent event)
+      {
+
+      String playerOneName = txt3.getText();
+      Player player1 = new Player(playerOneName);
+
+      ready2.setOnAction( e -> primaryStage.setScene(rootScene));
+
+      }
+     }
+    );
+
+      Music m = new Music();
+      m.playMusic("C:\\Users\\Hailey\\Downloads\\j\\Final\\pinkpanther.wav");
+
       grid.getStylesheets().add(getClass().getResource("cluecss.css").toExternalForm());
       primaryStage.setTitle("BoardGUI");
-      primaryStage.setScene(scene);
+      primaryStage.setScene(titleScene);
       primaryStage.show();
-
-
 
 
     }//END OF START
