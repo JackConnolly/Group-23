@@ -346,32 +346,14 @@ public void suspect(Player currPlayer, Player otherPlayer, Room room) {
 		currPlayer.setAccused(weapon, room, person);
 		a = currPlayer.getAccused();
 		System.out.println("accused: " + a);
-		boolean winner = checkWinner(a,this.getCards());
+		boolean winner = a.checkWinner(this.getCards());
 		//System.out.println("winner="+ winner);
 		// if statements for each weapon // else invalid
 
 
 	}
 
-	public boolean checkWinner(Accusation accused, Cards cards) {
-		
-		if ( accused != null && cards != null && cards.getWinningRoom() != null
-			&& cards.getWinningWeapon() != null && cards.getWinningPerson() != null) {
-			if ( accused.getRoom().getName().trim().toLowerCase().equals(cards.getWinningRoom().getName().trim().toLowerCase())
-				&& accused.getWeapon().getName().trim().toLowerCase().equals(cards.getWinningWeapon().getName().trim().toLowerCase()) 
-				&& accused.getPerson().getName().trim().toLowerCase().equals(cards.getWinningPerson().getName().trim().toLowerCase()) ) {
-				System.out.println("Congratualations! you have accused the rightful murderer!");
-				return true;
-			} else {
-				System.out.println("the winning cards are" + cards.getWinningRoom() + " " + cards.getWinningWeapon() + " " + cards.getWinningPerson());
-				return false;
-
-			}
-			
-		} else {
-			return false;
-		}
-	}
+	
 
 //funtion controls and deals with user input and appropriate response
 public void displayPrompt(){
