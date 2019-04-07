@@ -1,7 +1,7 @@
 /** CPSC Team 23
 *Class Places extends Clue
 *@author Hailey Allen/ group 23
-*@since March 23, 2019
+*@since 04-07-19
 */
 
 import java.util.ArrayList;
@@ -32,10 +32,10 @@ be accused to the array places
 
 		room.add(" Library ");
 		room.add(" Kitchen ");
-		room.add(" Living_Room ");
+		room.add(" Lounge ");
 		room.add(" Dining_Room ");
-		room.add(" Office ");
-		room.add(" Bedroom ");
+		room.add(" Study ");
+		room.add(" Billiard_Room ");
 
 	}
 
@@ -43,10 +43,10 @@ be accused to the array places
 
 		printRoom.add(" Library ");
 		printRoom.add(" Kitchen ");
-		printRoom.add(" Living_Room ");
+		printRoom.add(" Lounge ");
 		printRoom.add(" Dining_Room ");
-		printRoom.add(" Office ");
-		printRoom.add(" Bedroom ");
+		printRoom.add(" Study ");
+		printRoom.add(" Billiard_Room ");
 
 	}
 
