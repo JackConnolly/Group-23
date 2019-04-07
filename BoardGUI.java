@@ -75,8 +75,8 @@ import javafx.scene.control.*;
 	   Label label = new Label(" ");
 	   int player1Position[] = player1.getPlayerPosition();
 	   int player2Position[] = player2.getPlayerPosition();
-	   ImageView token1 = new ImageView( getClass().getResource(player1.getToken()).toExternalForm());
-     ImageView token2 = new ImageView( getClass().getResource(player2.getToken()).toExternalForm());
+	   ImageView token1 = new ImageView( getClass().getResource(player1.getPlayerToken()).toExternalForm());
+     ImageView token2 = new ImageView( getClass().getResource(player2.getPlayerToken()).toExternalForm());
 		 if (player1Position == player2Position){
 			  hBox1.getChildren().addAll( token1, label, token2);
 		  } else {
@@ -98,8 +98,8 @@ import javafx.scene.control.*;
       actionKeys.setPrefWidth(150);
 
 	    // setting player names and initial positions
-	    player1 = new Player("Anna", 0, 0, "player1.png");
-	    player2 = new AIPlayer("Computer", 4, 4, "player2.png");
+	    player1 = new Player("Anna", 1, 1, "player1.png");
+	    player2 = new Player("Jack", 1, 0, "player2.png");
 	    turn = player1;
 
       VBox notePad = new VBox(20);
@@ -225,8 +225,6 @@ import javafx.scene.control.*;
 					turn = player2;
 				else
 					turn = player1;
-				if(turn.isAI())
-					turn.turnSequence();
 	  }
 	   }
 	  );
@@ -236,18 +234,18 @@ import javafx.scene.control.*;
     ComboBox<String> peopleBox = new ComboBox<String>();
     peopleBox.getItems().addAll(
     "Miss Scarlet",
-    "Mr. Green",
-    "Mrs. White",
-    "Prof Plum");
+    "Mr.Green",
+    "Mrs.White",
+    "Professor Plum");
     peopleBox.setPromptText("People");
     //Creates ComboBox type string, adds weapons
     ComboBox<String> weaponBox = new ComboBox<String>();
     weaponBox.getItems().addAll(
     "Revolver",
-    "Bucket",
+    "Water Bucket",
     "Candlestick",
     "Trophy",
-    "Horse Shoe");
+    "Horseshoe");
     weaponBox.setPromptText("Weapons");
 
     //event handlers for suspect and accuse buttons
@@ -379,20 +377,20 @@ import javafx.scene.control.*;
 
         //Player 1 People
         CheckBoxTreeItem<String> person1 = new CheckBoxTreeItem<String> ("Miss Scarlet");
-        CheckBoxTreeItem<String> person2 = new CheckBoxTreeItem<String> ("Mr. Green");
+        CheckBoxTreeItem<String> person2 = new CheckBoxTreeItem<String> ("Mr.Green");
         CheckBoxTreeItem<String> person3 = new CheckBoxTreeItem<String> ("Mrs.White");
-        CheckBoxTreeItem<String> person4 = new CheckBoxTreeItem<String> ("Prof. Plum");
+        CheckBoxTreeItem<String> person4 = new CheckBoxTreeItem<String> ("Professor Plum");
 
         //Player 2 people
         CheckBoxTreeItem<String> person12 = new CheckBoxTreeItem<String> ("Miss Scarlet");
-        CheckBoxTreeItem<String> person22 = new CheckBoxTreeItem<String> ("Mr. Green");
+        CheckBoxTreeItem<String> person22 = new CheckBoxTreeItem<String> ("Mr.Green");
         CheckBoxTreeItem<String> person32 = new CheckBoxTreeItem<String> ("Mrs.White");
-        CheckBoxTreeItem<String> person42 = new CheckBoxTreeItem<String> ("Prof. Plum");
+        CheckBoxTreeItem<String> person42 = new CheckBoxTreeItem<String> ("Professor Plum");
 
         //Player 1 places
         CheckBoxTreeItem<String> place1 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place2 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Living Room");
         CheckBoxTreeItem<String> place4 = new CheckBoxTreeItem<String> ("Dining Room");
         CheckBoxTreeItem<String> place5 = new CheckBoxTreeItem<String> ("Office");
         CheckBoxTreeItem<String> place6 = new CheckBoxTreeItem<String> ("Bedroom");
@@ -400,7 +398,7 @@ import javafx.scene.control.*;
         //Player 2 places
         CheckBoxTreeItem<String> place12 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place22 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Kitchen");
+        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Living Room");
         CheckBoxTreeItem<String> place42 = new CheckBoxTreeItem<String> ("Dining Room");
         CheckBoxTreeItem<String> place52 = new CheckBoxTreeItem<String> ("Office");
         CheckBoxTreeItem<String> place62 = new CheckBoxTreeItem<String> ("Bedroom");
@@ -409,15 +407,15 @@ import javafx.scene.control.*;
         CheckBoxTreeItem<String> item1 = new CheckBoxTreeItem<String> ("Trophy");
         CheckBoxTreeItem<String> item2 = new CheckBoxTreeItem<String> ("Revolver");
         CheckBoxTreeItem<String> item3 = new CheckBoxTreeItem<String> ("Candlestick");
-        CheckBoxTreeItem<String> item4 = new CheckBoxTreeItem<String> ("Bucket");
-        CheckBoxTreeItem<String> item5 = new CheckBoxTreeItem<String> ("Horse Shoe");
+        CheckBoxTreeItem<String> item4 = new CheckBoxTreeItem<String> ("Water Bucket");
+        CheckBoxTreeItem<String> item5 = new CheckBoxTreeItem<String> ("Horseshoe");
 
         //Player 2 items2
         CheckBoxTreeItem<String> item12 = new CheckBoxTreeItem<String> ("Trophy");
         CheckBoxTreeItem<String> item22 = new CheckBoxTreeItem<String> ("Revolver");
         CheckBoxTreeItem<String> item32 = new CheckBoxTreeItem<String> ("Candlestick");
-        CheckBoxTreeItem<String> item42 = new CheckBoxTreeItem<String> ("Bucket");
-        CheckBoxTreeItem<String> item52 = new CheckBoxTreeItem<String> ("Horse Shoe");
+        CheckBoxTreeItem<String> item42 = new CheckBoxTreeItem<String> ("Water Bucket");
+        CheckBoxTreeItem<String> item52 = new CheckBoxTreeItem<String> ("Horseshoe");
 
   /* Not sure why this doesnt work ??
         people.getChildren().addAll(person1,person2,person3,person4);
