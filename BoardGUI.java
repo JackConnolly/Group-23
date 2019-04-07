@@ -21,6 +21,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.CheckBoxTreeItem;
@@ -93,6 +94,7 @@ import javafx.scene.control.*;
       // Setup the panes
       BorderPane root = new BorderPane();
       GridPane grid = new GridPane();
+      grid.setGridLinesVisible(true);
       VBox actionKeys = new VBox(20);
       // setting preferred width for VBox actionKeys
       actionKeys.setPrefWidth(150);
@@ -125,10 +127,12 @@ import javafx.scene.control.*;
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
+
 	   	turn.setPlayerPosition(-1, 0);
 			grid.getChildren().clear(); //clears Board
       // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
+
           Button button = new Button();
 		      HBox[] boxes = displayPlayers(player1, player2);
 		      if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
@@ -140,6 +144,7 @@ import javafx.scene.control.*;
 		         grid.add(button, i % 5, i / 5);
 
         }
+          grid.setGridLinesVisible(true);
 	   	}
 	   }
 	  );
@@ -155,6 +160,7 @@ import javafx.scene.control.*;
       // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button =  new Button();
+          grid.setGridLinesVisible(true);
 		      HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
 			    button.setGraphic(boxes[0]);
@@ -164,6 +170,7 @@ import javafx.scene.control.*;
 		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
         }
+          grid.setGridLinesVisible(true);
 	   	}
 	   }
 	  );
@@ -179,6 +186,7 @@ import javafx.scene.control.*;
 // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button =  new Button();
+          grid.setGridLinesVisible(true);
 		  HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
 			  button.setGraphic(boxes[0]);
@@ -188,6 +196,7 @@ import javafx.scene.control.*;
 		  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
         }
+          grid.setGridLinesVisible(true);
 	   	}
 	   }
 	  );
@@ -201,17 +210,22 @@ import javafx.scene.control.*;
 	   	turn.setPlayerPosition(0, 1);
 			grid.getChildren().clear(); //clears Board
       // Redrawing Board
+
       for (int i = 0 ; i < 25  ; i++){
           Button button = new Button();
 		      HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
 			    button.setGraphic(boxes[0]);
+          grid.setGridLinesVisible(true);
 		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
 			    button.setGraphic(boxes[1]);
 		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
+
         }
+        grid.setGridLinesVisible(true);
+
 	  }
 	   }
 	  );
@@ -310,6 +324,7 @@ import javafx.scene.control.*;
 		      int move = p.diceRoll();
           moveAmount.setText("Movements Allowed: " + Integer.toString(move));
 			    turn.setMoveAmount(move);
+
         }
       });
 
@@ -630,7 +645,18 @@ the corresponding labels for all 12 cards;
 
     cardGUI.getChildren().addAll(v, v2);
 
-      root.setCenter(grid);
+    // Starting on the css down here
+
+
+    Image image = new Image("clue-image.png");
+    ImageView imageV = new ImageView();
+    imageV.setImage(image);
+
+    StackPane stackMid = new StackPane();
+    stackMid.getChildren().addAll(imageV,grid);
+
+
+      root.setCenter(stackMid);
       root.setLeft(actionKeys);
       root.setRight(rootRight);
       root.setTop(cardGUI);
@@ -638,6 +664,7 @@ the corresponding labels for all 12 cards;
 
 
       Scene scene = new Scene(root, 800, 600);
+      grid.getStylesheets().add(getClass().getResource("cluecss.css").toExternalForm());
       primaryStage.setTitle("BoardGUI");
       primaryStage.setScene(scene);
       primaryStage.show();
