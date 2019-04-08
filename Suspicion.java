@@ -1,99 +1,117 @@
 /**
-*
+* Suspicion Class
 * @author Kylie Sicat
 * @since 03-18-19
+* Last Updated : Kylie Sicat 03-31-19
 */
 
+import java.util.ArrayList;
 
 public class Suspicion {
 
 	// Instance Variables
-	private Weapon suspectWeapon;
-	private Room suspectRoom;
-	private Person suspectPerson;
+	private Weapon weapon;
+	private Room room;
+	private Person person;
+	private boolean weaponFlag;
+	private boolean roomFlag;
+	private boolean personFlag;
 
-	private boolean weaponCorrect;
-	private boolean roomCorrect;
-	private boolean personCorrect;
+	//Constructors
+
+	public Suspicion(Weapon weapon, Room room, Person person) {
+		this.weapon = weapon;
+		this.room = room;
+		this.person = person;
+	}
 
 	//Getter Methods
 
-	public void getSuspectWeapon() {
+	public Weapon getWeapon() {
+		return weapon;
 
 	}
 
-	public void getSuspectRoom() {
+	public Room getRoom() {
+		return room;
 
 	}
 
-	public void getSuspectPerson() {
+	public Person getPerson() {
+		return person;
 
 	}
 
-	//Setter
+	// Setter Methods 
 
-	public Weapon setSuspectWeapon(Weapon weapon) {
-
-		return suspectWeapon;
-
-	}
-
-	public Room setSuspectRoom(Room room ) {
-
-		return suspectRoom;
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;		
 
 	}
 
-	public Person setSuspectPerson(Person person ) {
+	public void setRoom(Room room) {
+		this.room = room;
 
-		return suspectPerson;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+
+	}
+
+	public void setPersonFlag(boolean pf) {
+		this.personFlag = pf;
+
+	}
+
+	public void setRoomFlag(boolean rf) {
+		this.roomFlag = rf;
+
+	} 
+
+	public void setWeaponFlag(boolean wf) {
+		this.weaponFlag = wf;
 
 	}
 
 	//method where user can say yes or no for all 3
-	public checkSuspected() {
+	public void setFlags(boolean pf, boolean rf, boolean wf) {
+		this.setPersonFlag(pf);
+		this.setRoomFlag(rf);
+		this.setWeaponFlag(wf);
 
-		
+	}
+ 	
+ 	/** toString method
+ 	* @return the weapon, room, person
+ 	*/
+	public String toString() {
+		return "Weapon " + weapon.getName() + "; Room " + room.getName() + "; Person " + person.getName();
+
 	}
 
+	public ArrayList<String> checkContested(Cards cards, Player contestingPlayer) {
+		//contestingPlayer = 
+		ArrayList<String> handsMatched = new ArrayList<String>();
+		ArrayList<String> playersHand = cards.getPlayersHand(contestingPlayer.getName());
 
+		for ( int i = 0 ; i < playersHand.size() ; i++ ) {
+			if ( compare(this.person.getName(), playersHand.get(i))
+				|| compare(this.room.getName(), playersHand.get(i))
+				|| compare(this.weapon.getName(), playersHand.get(i))
+				) {
+				handsMatched.add(playersHand.get(i));
+			} 
+		}
 
+		return handsMatched;
+	
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	protected boolean compare(String a, String b) {
+		return 	( a.trim().toLowerCase().equals(b.trim().toLowerCase()) );
+		
+	}
 
 
 } // end of class 

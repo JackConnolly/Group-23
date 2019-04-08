@@ -13,10 +13,11 @@ public class Rules {
 	public void printRules() {
 
 		System.out.println("Welcome To Clue!");
-		System.out.println("Rules:\nFor the Second Demo there are only 2 Human players");
-		System.out.println("The objective of the game is to access the room in which the murder was set placed");
-		System.out.println("You must click the button 'Roll Dice' and gives you the allow amount of spaces you can move for your turn, once your moves left is equal to zero you must click the Button 'End turn' and let the other player repeat.");
-		System.out.println("Once the command line prompt prints that you have found the room the murder was set placed you have won the game.");
-	
+		System.out.println("Objectives: The objective of the game is to figure out who the murder is! In order to do this, You must find the correct weapon, room, and person.");
+		System.out.println("To do so, you are each given 6 cards. Some cards are weapons, rooms, and people. The winning cards are not in either of the players hands.");
+		System.out.println("To play: Roll the dice to give you the amount of squares you can move on the board. If you end up in a room you are given the option to 'suspect' or 'accuse'.");
+		System.out.println("To suspect, you can choose who you think did it, and with what weapon, the other player is given the option to contest towards your suspicion if they have any of the cards you used to suspect with.");
+		System.out.println("To accuse, it is similar to suspecting HOWEVER! Be sure your accusation is correct or ELSE IF one or more of your weapon, room or person is wrong you lose and the other player Wins the Game.");
+
 	}
 }

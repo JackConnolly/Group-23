@@ -1,105 +1,208 @@
-/** Card Class which holds cards of the weapons, suspects, and rooms
-* @author Hailey Allen
-* Last updated by: Kylie Sicat
-* @since 03-13-19
+/** CPSC Team 23
+*Class Cards extends Clue
+*@author Hailey Allen/ group 23
+*@since March 23, 2019
 */
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Cards {
+public class Cards{
 
-//introducing the cards array
-	ArrayList<String> places = new ArrayList<>();
-	ArrayList<String> people = new ArrayList<>();
-	ArrayList<String> weapons = new ArrayList<>();
+/**
+This portion of code introduces all 
+private instance variables which will 
+be used throughout the class
+*/
 
-//making the array list which will have the randomized weapon, place, and person 
-	ArrayList<String> selectedCards = new ArrayList<>();
+//Making the 'winning' array of winning cards
+	private ArrayList<String> selectedCards = new ArrayList<>();
 
-//making the array which will hold the rest of the cards
-	ArrayList<String> remainderCards = new ArrayList<>();
+//Making the array which will hold the rest of the cards
+	private ArrayList<String> remainderCards = new ArrayList<>();
 
-//making the arrays for the two players hands
-	ArrayList<String> playerOne = new ArrayList<>();
-	ArrayList<String> playerTwo = new ArrayList<>();
+//Making the arrays for the two players hands
+	private ArrayList<String> playerOne = new ArrayList<>();
+	private ArrayList<String> playerTwo = new ArrayList<>();
+
+	private Player playerOneObject;
+	private Player playerTwoObject;
+
+	private String name;
+
+	//public Room room = new Room();
+	//public Person person = new Person();
+	//public Weapon weapon = new Weapon();
+
+	private Room winningRoom;
+	private Weapon winningWeapon;
+	private Person winningPerson;
+
+/**
+Constructor with no parameters; 
+sets the default variable used
+@param no parameters
+*/
 
 	public Cards(){
+	}
+
+/**
+Constructor which sets the name of the 
+weapon, place, or person beign accsued
+in clue
+@param name 
+*/
+
+	public Cards(String name){
+		this.name = name;
+	}
+
+	public void setPlayerOneObject(Player p1) {
+		this.playerOneObject = p1;
 
 	}
 
-	public void setPlaces(){
-
-//adding cards to places array
-		places.add("Library");
-		places.add("Kitchen");
-		places.add("Living Room");
-		places.add("Dining Room");
-		places.add("Office");
-		places.add("Bedroom");
+	public void setPlayerTwoObject(Player p2) {
+		this.playerTwoObject = p2;
 
 	}
 
-	public void setPeople(){
-
-//adding cards to people array
-		people.add("Miss Scarlet");
-		people.add("Mr.Green");
-		people.add("Mrs.White");
-		people.add("Professor Plum");
+	public Player getPlayerOneObject() {
+		return playerOneObject;
 
 	}
 
-	public void setWeapons(){
+	public Player getPlayerTwoObject() {
+		return playerTwoObject;
 
-//adding cards to weapons array
-		weapons.add("Candlestick");
-		weapons.add("Horseshoe");
-		weapons.add("Water Bucket");
-		weapons.add("Trophy");
-		weapons.add("Revolver");
 	}
+/**
+Sets the winning cards from the arrays
+weapons, places, and people and adds
+them to the array selectedCards
+@param weapons of object type Weapon (to access weapons array)
+@param people of object type Person (to access people array)
+@param places of object type Room (to access places array)
+*/
+	
+	public Room getWinningRoom() {
+		return winningRoom;
 
-	public String winningCards(){
+	}
+	public Weapon getWinningWeapon() {
+		return winningWeapon;
 
-//choosing the random cards to be the chosen ones
-		int random = new Random().nextInt(places.size());
-		int random2 = new Random().nextInt(people.size());
-		int random3 = new Random().nextInt(weapons.size());
-
-//adding chosen cards to the chosen cards array (winning cards)
-		selectedCards.add(places.get(random));
-		selectedCards.add(people.get(random2));
-		selectedCards.add(weapons.get(random3));
-
-//removing said chosen cards from their original array so they are not handed out
-		places.remove(random);
-		people.remove(random2);
-		weapons.remove(random3);
-
-//adding the remainder cards to one arraylist
-		remainderCards.addAll(places);
-		remainderCards.addAll(people);
-		remainderCards.addAll(weapons);
-
-		return "";
+	}
+	public Person getWinningPerson() {
+		return winningPerson;
 
 	}
 
-//handing out the remaining cards to the players
-	public void setPlayerOnesHand(){
+	public void setWinningRoom(Room room) {
+		this.winningRoom = room;
+
+	}
+	public void setWinningWeapon(Weapon weapon) {
+		this.winningWeapon = weapon;
+
+	}
+	public void setWinningPerson(Person person) {
+		this.winningPerson = person;
+
+
+	}
+	public void setPlayerOnesHand(ArrayList<String> p1Cards) {
+		this.playerOne = p1Cards;
+	}
+
+	public void setPlayerTwoHand(ArrayList<String> p2Cards) {
+		this.playerTwo = p2Cards;
+
+	}
+
+	public void addSelectedCards(){
+
+		RoomList roomList = new RoomList();
+		PersonList personList = new PersonList();
+		WeaponList weaponList = new WeaponList();
+
+		this.setWinningRoom(new Room(roomList.getWinningRoom()));
+		this.setWinningWeapon(new Weapon(weaponList.getWinningWeapon()));
+		this.setWinningPerson(new Person(personList.getWinningPerson()));
+	
+
+//adding the winning cards to the array selectedCards
+		//selectedCards.add(roomEnum.getWinningRoom());
+		//selectedCards.add(personEnum.getWinningPerson());
+		//selectedCards.add(weaponEnum.getWinningWeapon());
+
+	}
+
+/**
+Adds the remaining cards from the arrays
+weapons, places, and people and adds
+them to the array selectedCards
+@param weapons of object type Weapons (to access weapons array)
+@param people of object type People (to access people array)
+@param places of object type Places (to access places array)
+*/
+
+	public void addRemainingCards(){
+
+		RoomList room = new RoomList();
+		PersonList person = new PersonList();
+		WeaponList weapon = new WeaponList();
+
+//adding the remaining cards (not winning) to remainderCards
+		remainderCards.addAll(room.getRoom());
+		remainderCards.addAll(person.getPerson());
+		remainderCards.addAll(weapon.getWeapon());
+
+	}
+
+	public void playerOnesHand(){
+
+//using a for loop to repeat this process 6 times
 
 		for (int i=5; i>=0; i--){
-
-			int random = new Random().nextInt(remainderCards.size());
-			playerOne.add(remainderCards.get(random));
-			remainderCards.remove(random);
-
+			if(i == 5){
+				int random = new Random().nextInt(12);
+				playerOne.add(remainderCards.get(random));
+				remainderCards.remove(random);
+			}
+			if(i == 4){
+				int random = new Random().nextInt(11);
+				playerOne.add(remainderCards.get(random));
+				remainderCards.remove(random);
+			}
+			if(i == 3){
+				int random = new Random().nextInt(10);
+				playerOne.add(remainderCards.get(random));
+				remainderCards.remove(random);
+			}
+			if(i == 2){
+				int random = new Random().nextInt(9);
+				playerOne.add(remainderCards.get(random));
+				remainderCards.remove(random);
+			}
+			if(i == 1){
+				int random = new Random().nextInt(8);
+				playerOne.add(remainderCards.get(random));
+				remainderCards.remove(random);
+			}
+			if(i == 0){
+				int random = new Random().nextInt(7);
+				playerOne.add(remainderCards.get(random));
+				remainderCards.remove(random);
+			}
 		}
 
 	}
 
-	public void setPlayerTwosHand(){
+	public void playerTwosHand(){
+
+//using a for loop to repeat this process 6 times
 
 		for (int i=5; i>=0; i--){
 
@@ -107,28 +210,13 @@ public class Cards {
 			remainderCards.remove(i);
 
 		}
-
 	}
 
-//Getter Methods
-
-	public ArrayList<String> getPlaces(){
-
-		return places;
-
+	public void setName(String name){
+		this.name = name;
 	}
 
-	public ArrayList<String> getPeople(){
-
-		return people;
-
-	}
-
-	public ArrayList<String> getWeapons(){
-
-		return weapons;
-
-	}
+//getter methods
 
 	public ArrayList<String> getSelectedCards(){
 
@@ -150,21 +238,33 @@ public class Cards {
 		return playerTwo;
 	}
 
-
-public void printCards(){
-
-
-		setPlaces();
-		setPeople();
-		setWeapons();
-		winningCards();
-		setPlayerOnesHand();
-		setPlayerTwosHand();
-
-		System.out.println("Player Ones Cards are " + getPlayerOnesHand());
-		System.out.println("Player Twos Cards are " + getPlayerTwosHand());
-		System.out.println("The Winning Cards are " + getSelectedCards());
-
+	public String getName(){
+		return name;
 	}
+
+	public ArrayList<String> getPlayersHand(String playerName){
+		if ( playerName.equals(this.playerOneObject.getName()) )
+			return playerOne;
+		else if ( playerName.equals(this.playerTwoObject.getName()) )
+			return playerTwo;
+		else
+			return null;
+	}
+
+/**
+The main method of the class which
+prints off player one and twos cards,
+as well as the winning cards which
+have been randomly chosen- only used 
+for trouble shooting
+*/
+
+	public final void setAllCards(){
+		addSelectedCards();
+		addRemainingCards();
+		playerOnesHand();
+		playerTwosHand();
+	}
+	
 
 }
