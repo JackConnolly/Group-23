@@ -41,22 +41,22 @@ import javafx.scene.control.*;
 * This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
 * remove logic from the GUI
 * @author Jack Connolly, Anna Barrett, Kylie Sicat, Hailey Allen, Jung Ho Kim
-* last updated by: Jack Connolly
-* @since 03-13-19
+* last updated by: Hailey Allen
+* @since 04-07-19
 */
 
   public class BoardGUI extends Application{
 
 	//Game Instance Variables
 	private Player player1;
-	private Player player2;
-	private Player turn;
+  private Player player2;
+  private Player turn;
   private TextBoard textBoard;
   private ArrayList<String> rooms;
   private static Cards cards;
   private String selectedPerson;
   private String selectedWeapon;
-  //private Suspicion suspicion;
+
   // Variables for the dynamic buttons
   private int numRows = 5;
   private int numColumns = 5;
@@ -108,14 +108,9 @@ import javafx.scene.control.*;
 
 	    // setting player names and initial positions
 	    this.player1 = new Player("", 1, 1, "player1.png");
-	    this.player2 = new Player("", 1, 0, "player2.png");
-	    this.turn = player1;
+      this.player2 = new Player("", 1, 0, "player2.png");
+      this.turn = player1;
       this.rooms = rooms;
-      //this.cards = cards;
-      //this.selectedPerson = "";
-      //this.selectedWeapon = "";
-      TextBoard textBoard = new TextBoard(player1, player2, rooms, cards);
-
 
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -130,8 +125,8 @@ import javafx.scene.control.*;
       // Creating and Adding Buttons for VBox actionKeys
       Button rollDice = new Button("Roll Dice");
 	    Button endTurn = new Button("End Turn");
-      Button suspectPlayer = new Button("Suspect Player");
-      Button accusePlayer = new Button("Accuse Player");
+      Button suspectPlayer = new Button("Suspect");
+      Button accusePlayer = new Button("Accuse");
 	    Label moveAmount = new Label("Movement Allowed: ");
 
 	    Button moveLeft = new Button("Move Left");
@@ -269,7 +264,7 @@ import javafx.scene.control.*;
     ComboBox<String> weaponBox = new ComboBox<String>();
     weaponBox.getItems().addAll(
     "Revolver",
-    "water bucket",
+    "Water bucket",
     "Candlestick",
     "Trophy",
     "Horseshoe");
@@ -281,8 +276,7 @@ import javafx.scene.control.*;
      {
       @Override
       public void handle(ActionEvent event)
-      {
-        //turn.checkRoom();
+      { 
         String room = turn.checkRoom();
         Room r = new Room(room.toLowerCase());
         Person p = new Person(selectedPerson.toLowerCase());
@@ -333,8 +327,7 @@ import javafx.scene.control.*;
       {
         selectedPerson = peopleBox.getValue();
         System.out.println(selectedPerson.toLowerCase());
-        
-      }
+    }
      }
     );
 
@@ -557,8 +550,7 @@ import javafx.scene.control.*;
     ArrayList<String> playerTwo = new ArrayList<>(cards.getPlayerTwosHand());
     cards.setPlayerOneObject(player1);
     cards.setPlayerTwoObject(player2);
-
-
+    
 /**
 Beginning all of the hard-coded rectangles and
 the corresponding labels for all 12 cards;
@@ -700,11 +692,8 @@ the corresponding labels for all 12 cards;
     stackMid.getChildren().addAll(imageV,grid);
 
 
-      root.setCenter(stackMid);
-      root.setLeft(actionKeys);
-      root.setRight(rootRight);
-      root.setTop(cardGUI);
-      root.setPadding(insetOne);
+
+
 
 //SCENE 1 --> titleScene
     BorderPane titlePage = new BorderPane();
@@ -728,7 +717,7 @@ the corresponding labels for all 12 cards;
     HBox hor2 = new HBox(20);
     HBox hor3 = new HBox(20);
 
-    Label playerChoice = new Label(" Enter your names: ");
+    Label playerChoice = new Label("Enter your names: ");
     playerChoice.setTextFill(Color.BLACK);
     playerChoice.setFont(Font.font("Arial Rounded MT Bold", 20));
 
@@ -736,12 +725,10 @@ the corresponding labels for all 12 cards;
     hor.getChildren().add(playerChoice);
     hor2.getChildren().add(new Label("Player One: "));
     hor2.getChildren().add(txt);
-    //player1.setName(txt.getText());
 
     TextField txt2 = new TextField("");
     hor3.getChildren().add(new Label("Player Two: "));
     hor3.getChildren().add(txt2);
-   // player2.setName(txt2.getText());
 
     vert2.getChildren().addAll(hor, hor2, hor3);
 
@@ -753,31 +740,66 @@ the corresponding labels for all 12 cards;
 
     vert3.getChildren().addAll(vert2, vert1);
 
+    Insets insetScene2 = new Insets(200,200,200,300);
+    vert3.setPadding(insetScene2);
+
+
 //SCENE 3 --> ruleScene
     VBox vb = new VBox(20);
+    Insets insetScene3 = new Insets(75,200,200,250);
+    vb.setPadding(insetScene3);
 
-    Label rules = new Label(" Rules For Clue: ");
+    BorderPane border = new BorderPane();
+
+    Label rules = new Label("Rules For Clue: ");
     rules.setTextFill(Color.BLACK);
-    rules.setFont(Font.font("Arial Rounded MT Bold", 50));
+    rules.setFont(Font.font("Arial Rounded MT Bold", 30));
 
     Rules r = new Rules();
-    Label rules2 = new Label("Find way to print rules here");
-    rules2.setTextFill(Color.BLACK);
-    rules2.setFont(Font.font("Arial Rounded MT Bold", 20));
+
+    Label rules2 = new Label("Objectives: The objective of the game is to figure out who the murder is!");
+    Label rules3 = new Label("In order to do this, You must find the correct weapon, room, and person.");
+    Label rules4 = new Label("To do so, you are each given 6 cards. Some cards are weapons, rooms,");
+    Label rules5 = new Label("and people. The winning cards are not in either of the players hands.");
+    Label rules6 = new Label("To play: Roll the dice to give you the amount of squares you can");
+    Label rules7 = new Label(" move on the board. If you end up in a room you are given the ");
+    Label rules8 = new Label("option to 'suspect' or 'accuse'. To suspect, you can choose who ");
+    Label rules9 = new Label("you think did it, and with what weapon, the other player is given ");
+    Label rules10 = new Label("the option to contest towards your suspicion if they have any of ");
+    Label rules11 = new Label("the cards you used to suspect with. To accuse, it is similar to ");
+    Label rules12 = new Label("suspecting HOWEVER! Be sure your accusation is correct or ELSE IF ");
+    Label rules13 = new Label("one or more of your weapon, room or person is wrong you lose and ");
+    Label rules14 = new Label(" the other player wins the game!");
+
+    rules2.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules3.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules4.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules5.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules6.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules7.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules8.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules9.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules10.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules11.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules12.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules13.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules14.setFont(Font.font("Arial Rounded MT Bold", 10));
+
 
     Button change = new Button(" I accept these rules ");
 
-    vb.getChildren().addAll(rules, rules2, change);
+    vb.getChildren().addAll(rules, rules2, rules3, rules4, rules5, rules6, rules7, rules8, rules9, rules10, rules11, rules12, rules13, rules14, change);
+
+    //border.setCenter(vb);
 
 //SCENE 4 --> aiScene
 
     VBox vert4 = new VBox(20);
     VBox vert5= new VBox(20);
-    VBox vert6 = new VBox(20);
     HBox hor4 = new HBox(20);
     HBox hor5 = new HBox(20);
 
-    Label playerChoice2 = new Label(" Enter your names: ");
+    Label playerChoice2 = new Label("Enter your name: ");
     playerChoice2.setTextFill(Color.BLACK);
     playerChoice2.setFont(Font.font("Arial Rounded MT Bold", 20));
 
@@ -786,13 +808,12 @@ the corresponding labels for all 12 cards;
     hor5.getChildren().add(new Label("Player One: "));
     hor5.getChildren().add(txt3);
 
-    vert5.getChildren().addAll(hor5, hor4);
-
     Button ready2 = new Button(" My name is entered! ");
 
-    vert4.getChildren().add(ready2);
+    vert5.getChildren().addAll(hor4, hor5, ready2);
+    Insets insetScene4 = new Insets(200,200,200,300);
+    vert5.setPadding(insetScene4);
 
-    vert6.getChildren().addAll(vert5, vert4);
 
 //Cretaing all different scenes and how to toggle between   
 
@@ -804,7 +825,7 @@ the corresponding labels for all 12 cards;
 
     Scene titleScene = new Scene(titlePage, 800, 600);
 
-    Scene aiScene = new Scene(vert6, 800, 600);
+    Scene aiScene = new Scene(vert5, 800, 600);
 
     start.setOnAction( e -> primaryStage.setScene(ruleScene));
     change.setOnAction( e -> primaryStage.setScene(playerScene));
@@ -839,6 +860,12 @@ the corresponding labels for all 12 cards;
       }
      }
     );
+
+      root.setCenter(stackMid);
+      root.setLeft(actionKeys);
+      root.setRight(rootRight);
+      root.setTop(cardGUI);
+      root.setPadding(insetOne);
 
       Music m = new Music();
       m.playMusic("C:\\Users\\Hailey\\Downloads\\j\\Final\\pinkpanther.wav");
