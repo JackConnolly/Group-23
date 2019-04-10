@@ -21,7 +21,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.CheckBoxTreeItem;
@@ -32,8 +31,6 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.*;
-import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 
@@ -51,13 +48,7 @@ import javafx.scene.control.*;
 	private Player player1;
 	private Player player2;
 	private Player turn;
-  private Player noTurn;
-  private TextBoard textBoard;
-  private ArrayList<String> rooms;
-  private static Cards cards;
-  private String selectedPerson;
-  private String selectedWeapon;
-  //private Suspicion suspicion;
+
   // Variables for the dynamic buttons
   private int numRows = 5;
   private int numColumns = 5;
@@ -84,8 +75,8 @@ import javafx.scene.control.*;
 	   Label label = new Label(" ");
 	   int player1Position[] = player1.getPlayerPosition();
 	   int player2Position[] = player2.getPlayerPosition();
-	   ImageView token1 = new ImageView( getClass().getResource(player1.getPlayerToken()).toExternalForm());
-     ImageView token2 = new ImageView( getClass().getResource(player2.getPlayerToken()).toExternalForm());
+	   ImageView token1 = new ImageView( getClass().getResource(player1.getToken()).toExternalForm());
+     ImageView token2 = new ImageView( getClass().getResource(player2.getToken()).toExternalForm());
 		 if (player1Position == player2Position){
 			  hBox1.getChildren().addAll( token1, label, token2);
 		  } else {
@@ -102,21 +93,14 @@ import javafx.scene.control.*;
       // Setup the panes
       BorderPane root = new BorderPane();
       GridPane grid = new GridPane();
-      grid.setGridLinesVisible(true);
       VBox actionKeys = new VBox(20);
       // setting preferred width for VBox actionKeys
       actionKeys.setPrefWidth(150);
 
 	    // setting player names and initial positions
-	    this.player1 = new Player("", 1, 1, "player1.png");
-	    this.player2 = new Player("", 1, 0, "player2.png");
-	    this.turn = player1;
-      this.rooms = rooms;
-      //this.cards = cards;
-      //this.selectedPerson = "";
-      //this.selectedWeapon = "";
-      TextBoard textBoard = new TextBoard(player1, player2, rooms, cards);
-
+	    player1 = new Player("Anna", 0, 0, "player1.png");
+	    player2 = new AIPlayer("Computer", 4, 4, "player2.png");
+	    turn = player1;
 
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -131,8 +115,8 @@ import javafx.scene.control.*;
       // Creating and Adding Buttons for VBox actionKeys
       Button rollDice = new Button("Roll Dice");
 	    Button endTurn = new Button("End Turn");
-      Button suspectPlayer = new Button("Suspect");
-      Button accusePlayer = new Button("Accuse");
+      Button suspectPlayer = new Button("Suspect Player");
+      Button accusePlayer = new Button("Accuse Player");
 	    Label moveAmount = new Label("Movement Allowed: ");
 
 	    Button moveLeft = new Button("Move Left");
@@ -141,12 +125,10 @@ import javafx.scene.control.*;
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
-
 	   	turn.setPlayerPosition(-1, 0);
 			grid.getChildren().clear(); //clears Board
       // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
-
           Button button = new Button();
 		      HBox[] boxes = displayPlayers(player1, player2);
 		      if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
@@ -158,7 +140,6 @@ import javafx.scene.control.*;
 		         grid.add(button, i % 5, i / 5);
 
         }
-          grid.setGridLinesVisible(true);
 	   	}
 	   }
 	  );
@@ -174,7 +155,6 @@ import javafx.scene.control.*;
       // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button =  new Button();
-          grid.setGridLinesVisible(true);
 		      HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
 			    button.setGraphic(boxes[0]);
@@ -184,7 +164,6 @@ import javafx.scene.control.*;
 		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
         }
-          grid.setGridLinesVisible(true);
 	   	}
 	   }
 	  );
@@ -200,7 +179,6 @@ import javafx.scene.control.*;
 // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
           Button button =  new Button();
-          grid.setGridLinesVisible(true);
 		  HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
 			  button.setGraphic(boxes[0]);
@@ -210,7 +188,6 @@ import javafx.scene.control.*;
 		  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
         }
-          grid.setGridLinesVisible(true);
 	   	}
 	   }
 	  );
@@ -224,22 +201,17 @@ import javafx.scene.control.*;
 	   	turn.setPlayerPosition(0, 1);
 			grid.getChildren().clear(); //clears Board
       // Redrawing Board
-
       for (int i = 0 ; i < 25  ; i++){
           Button button = new Button();
 		      HBox[] boxes = displayPlayers(player1, player2);
 		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
 			    button.setGraphic(boxes[0]);
-          grid.setGridLinesVisible(true);
 		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
 			    button.setGraphic(boxes[1]);
 		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
-
         }
-        grid.setGridLinesVisible(true);
-
 	  }
 	   }
 	  );
@@ -249,13 +221,12 @@ import javafx.scene.control.*;
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
-	   		if (turn == player1){
-          turn = player2;
-          noTurn = player1;
-        } else {
-          turn = player1;
-          noTurn = player2;
-        }
+	   		if (turn == player1)
+					turn = player2;
+				else
+					turn = player1;
+				if(turn.isAI())
+					turn.turnSequence();
 	  }
 	   }
 	  );
@@ -265,18 +236,18 @@ import javafx.scene.control.*;
     ComboBox<String> peopleBox = new ComboBox<String>();
     peopleBox.getItems().addAll(
     "Miss Scarlet",
-    "Mr.Green",
-    "Mrs.White",
-    "Professor Plum");
+    "Mr. Green",
+    "Mrs. White",
+    "Prof Plum");
     peopleBox.setPromptText("People");
     //Creates ComboBox type string, adds weapons
     ComboBox<String> weaponBox = new ComboBox<String>();
     weaponBox.getItems().addAll(
     "Revolver",
-    "water bucket",
+    "Bucket",
     "Candlestick",
     "Trophy",
-    "Horseshoe");
+    "Horse Shoe");
     weaponBox.setPromptText("Weapons");
 
     //event handlers for suspect and accuse buttons
@@ -286,18 +257,7 @@ import javafx.scene.control.*;
       @Override
       public void handle(ActionEvent event)
       {
-        //turn.checkRoom();
-        String room = turn.checkRoom();
-        Room r = new Room(room.toLowerCase());
-        Person p = new Person(selectedPerson.toLowerCase());
-        Weapon w = new Weapon(selectedWeapon.toLowerCase());
-        turn.setAccused(w,r,p);
-        Accusation a = turn.getAccused();
-        System.out.println("accused: " + a);
-        boolean winner = a.checkWinner(cards);
-        System.out.println("winner: " + winner);
-        a.winningPrompt(cards);
-        //System.out.println("Who would you like to accuse?");
+        System.out.println("Who would you like to accuse?");
     }
      }
     );
@@ -306,16 +266,9 @@ import javafx.scene.control.*;
      {
       @Override
       public void handle(ActionEvent event)
-      { 
-        String room = turn.checkRoom();
-        Room r = new Room(room.toLowerCase());
-        Person p = new Person(selectedPerson.toLowerCase());
-        Weapon w = new Weapon(selectedWeapon.toLowerCase());
-        Suspicion s = turn.addSuspected(w,r,p);
-        System.out.println("suspected: " + s); 
-        ArrayList<String> contested = s.checkContested(cards, noTurn);
-        System.out.println("contested" + contested);
-      }
+      {
+        System.out.println("Who would you like to suspect?");
+    }
      }
     );
 
@@ -326,10 +279,9 @@ import javafx.scene.control.*;
       @Override
       public void handle(ActionEvent event)
       {
-        selectedPerson = peopleBox.getValue();
-        System.out.println(selectedPerson.toLowerCase());
-        
-      }
+        String selected = peopleBox.getValue();
+        System.out.println(selected);
+    }
      }
     );
 
@@ -338,8 +290,8 @@ import javafx.scene.control.*;
       @Override
       public void handle(ActionEvent event)
       {
-        selectedWeapon = weaponBox.getValue();
-        System.out.println(selectedWeapon.toLowerCase());
+        String selected = weaponBox.getValue();
+        System.out.println(selected);
     }
      }
     );
@@ -360,7 +312,6 @@ import javafx.scene.control.*;
 		      int move = p.diceRoll();
           moveAmount.setText("Movements Allowed: " + Integer.toString(move));
 			    turn.setMoveAmount(move);
-
         }
       });
 
@@ -441,18 +392,18 @@ import javafx.scene.control.*;
         //Player 1 places
         CheckBoxTreeItem<String> place1 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place2 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Lounge");
+        CheckBoxTreeItem<String> place3 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place4 = new CheckBoxTreeItem<String> ("Dining Room");
-        CheckBoxTreeItem<String> place5 = new CheckBoxTreeItem<String> ("Study");
-        CheckBoxTreeItem<String> place6 = new CheckBoxTreeItem<String> ("Billiard Room");
+        CheckBoxTreeItem<String> place5 = new CheckBoxTreeItem<String> ("Office");
+        CheckBoxTreeItem<String> place6 = new CheckBoxTreeItem<String> ("Bedroom");
 
         //Player 2 places
         CheckBoxTreeItem<String> place12 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place22 = new CheckBoxTreeItem<String> ("Library");
-        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Lounge");
+        CheckBoxTreeItem<String> place32 = new CheckBoxTreeItem<String> ("Kitchen");
         CheckBoxTreeItem<String> place42 = new CheckBoxTreeItem<String> ("Dining Room");
-        CheckBoxTreeItem<String> place52 = new CheckBoxTreeItem<String> ("Study");
-        CheckBoxTreeItem<String> place62 = new CheckBoxTreeItem<String> ("Billiard Room");
+        CheckBoxTreeItem<String> place52 = new CheckBoxTreeItem<String> ("Office");
+        CheckBoxTreeItem<String> place62 = new CheckBoxTreeItem<String> ("Bedroom");
 
         //Player 1 items
         CheckBoxTreeItem<String> item1 = new CheckBoxTreeItem<String> ("Trophy");
@@ -545,14 +496,11 @@ import javafx.scene.control.*;
 
         rootRight.getChildren().addAll(checkTree,checkTree2);
 
-    cards = new Cards();
-    cards.setAllCards();
+    Cards c = new Cards();
+    c.setAllCards();
 
-    ArrayList<String> playerOne = new ArrayList<>(cards.getPlayerOnesHand());
-    ArrayList<String> playerTwo = new ArrayList<>(cards.getPlayerTwosHand());
-    cards.setPlayerOneObject(player1);
-    cards.setPlayerTwoObject(player2);
-
+    ArrayList<String> playerOne = new ArrayList<>(c.getPlayerOnesHand());
+    ArrayList<String> playerTwo = new ArrayList<>(c.getPlayerTwosHand());
 
 /**
 Beginning all of the hard-coded rectangles and
@@ -684,164 +632,19 @@ the corresponding labels for all 12 cards;
 
     cardGUI.getChildren().addAll(v, v2);
 
-    // Starting on the css down here
-
-
-    Image image = new Image("clue-image.png");
-    ImageView imageV = new ImageView();
-    imageV.setImage(image);
-
-    StackPane stackMid = new StackPane();
-    stackMid.getChildren().addAll(imageV,grid);
-
-
-      root.setCenter(stackMid);
+      root.setCenter(grid);
       root.setLeft(actionKeys);
       root.setRight(rootRight);
       root.setTop(cardGUI);
       root.setPadding(insetOne);
 
-//SCENE 1 --> titleScene
-    BorderPane titlePage = new BorderPane();
-    StackPane st = new StackPane();
 
-    Button start = new Button(" START HERE ");
-    start.setTextFill(Color.BLACK);
-
-    ImageView titlePicture = new ImageView(getClass().getResource("Clue-Poster.jpg").toExternalForm());
-    //titlePicture.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-    st.getChildren().addAll(titlePicture, start);
-    titlePage.setCenter(st);
-
-//SCENE 2 --> playerScene
-
-    VBox vert1 = new VBox(20);
-    VBox vert2 = new VBox(20);
-    VBox vert3 = new VBox(20);
-    HBox hor = new HBox(20);
-    HBox hor2 = new HBox(20);
-    HBox hor3 = new HBox(20);
-
-    Label playerChoice = new Label(" Enter your names: ");
-    playerChoice.setTextFill(Color.BLACK);
-    playerChoice.setFont(Font.font("Arial Rounded MT Bold", 20));
-
-    TextField txt = new TextField("");
-    hor.getChildren().add(playerChoice);
-    hor2.getChildren().add(new Label("Player One: "));
-    hor2.getChildren().add(txt);
-    //player1.setName(txt.getText());
-
-    TextField txt2 = new TextField("");
-    hor3.getChildren().add(new Label("Player Two: "));
-    hor3.getChildren().add(txt2);
-   // player2.setName(txt2.getText());
-
-    vert2.getChildren().addAll(hor, hor2, hor3);
-
-    Button ready = new Button(" Our names are entered! ");
-    Button aiReady = new Button(" I have no friends :( ");
-
-    vert1.getChildren().add(aiReady);
-    vert1.getChildren().add(ready);
-
-    vert3.getChildren().addAll(vert2, vert1);
-
-//SCENE 3 --> ruleScene
-    VBox vb = new VBox(20);
-
-    Label rules = new Label(" Rules For Clue: ");
-    rules.setTextFill(Color.BLACK);
-    rules.setFont(Font.font("Arial Rounded MT Bold", 50));
-
-    Rules r = new Rules();
-    Label rules2 = new Label("Find way to print rules here");
-    rules2.setTextFill(Color.BLACK);
-    rules2.setFont(Font.font("Arial Rounded MT Bold", 20));
-
-    Button change = new Button(" I accept these rules ");
-
-    vb.getChildren().addAll(rules, rules2, change);
-
-//SCENE 4 --> aiScene
-
-    VBox vert4 = new VBox(20);
-    VBox vert5= new VBox(20);
-    VBox vert6 = new VBox(20);
-    HBox hor4 = new HBox(20);
-    HBox hor5 = new HBox(20);
-
-    Label playerChoice2 = new Label(" Enter your names: ");
-    playerChoice2.setTextFill(Color.BLACK);
-    playerChoice2.setFont(Font.font("Arial Rounded MT Bold", 20));
-
-    TextField txt3 = new TextField("");
-    hor4.getChildren().add(playerChoice2);
-    hor5.getChildren().add(new Label("Player One: "));
-    hor5.getChildren().add(txt3);
-
-    vert5.getChildren().addAll(hor5, hor4);
-
-    Button ready2 = new Button(" My name is entered! ");
-
-    vert4.getChildren().add(ready2);
-
-    vert6.getChildren().addAll(vert5, vert4);
-
-//Cretaing all different scenes and how to toggle between   
-
-    Scene ruleScene = new Scene(vb, 800, 600);
-
-    Scene playerScene = new Scene(vert3, 800, 600);
-
-    Scene rootScene = new Scene(root, 800, 600);
-
-    Scene titleScene = new Scene(titlePage, 800, 600);
-
-    Scene aiScene = new Scene(vert6, 800, 600);
-
-    start.setOnAction( e -> primaryStage.setScene(ruleScene));
-    change.setOnAction( e -> primaryStage.setScene(playerScene));
-    aiReady.setOnAction( e -> primaryStage.setScene(aiScene));
-
-    ready.setOnAction(new EventHandler<ActionEvent>(){
-      @Override
-      public void handle(ActionEvent event)
-      {
-
-      String playerOneName = txt.getText();
-      Player player1 = new Player(playerOneName);
-
-        String playerTwoName = txt2.getText();
-        Player player2 = new Player(playerTwoName);
-
-        ready.setOnAction( e -> primaryStage.setScene(rootScene));
-      }
-     }
-    );
-
-    ready2.setOnAction(new EventHandler<ActionEvent>(){
-      @Override
-      public void handle(ActionEvent event)
-      {
-
-      String playerOneName = txt3.getText();
-      Player player1 = new Player(playerOneName);
-
-      ready2.setOnAction( e -> primaryStage.setScene(rootScene));
-
-      }
-     }
-    );
-
-      Music m = new Music();
-      m.playMusic("C:\\Users\\Hailey\\Downloads\\j\\Final\\pinkpanther.wav");
-
-      grid.getStylesheets().add(getClass().getResource("cluecss.css").toExternalForm());
+      Scene scene = new Scene(root, 800, 600);
       primaryStage.setTitle("BoardGUI");
-      primaryStage.setScene(titleScene);
+      primaryStage.setScene(scene);
       primaryStage.show();
+
+
 
 
     }//END OF START

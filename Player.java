@@ -34,46 +34,38 @@ public class Player {
 		//this.accused = new Accusation();
 	}
 
-	/** getPlayerPosition
-	* gets the players position using its x Position and Y Position
-	* @return pos which is the new array position
-	* called and used in GUI for eventhandling
-	*/
 	public int[] getPlayerPosition() {
 
-		int[] pos = new int[]{xPos, yPos};
-		return pos;
+		int[] a = new int[]{xPos, yPos};
+		return a;
 
 	}
 
-	//Getter Methods
-
+	
 	public String getName(){
 		return name;
 	}
 
-	public String getPlayerToken() {
-		return token;
+	//Getter Methods
 
-	}
 
 	public int getMoveAmount() {
+
 		return moveAmount;
 
 	}
-
-	public int getXPosition() {
+	
+	//returns xpos
+	public int getXPosition(){
 		return xPos;
-
 	}
 
-	public int getYPosition() {
+//returns ypos
+	public int getYPosition(){
 		return yPos;
-
 	}
-	public String getToken() {
+	public String getToken(){
 		return token;
-
 	}
 
 	public Accusation getAccused() {
@@ -81,26 +73,6 @@ public class Player {
 
 	}
 	// Setter Methods
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	* used in GUI to set the players Token on the board
-	* @param imageName is a .png image passed for the token 
-	*/
-	public void setPlayerToken(String imageName) {
-		token = imageName;
-
-	}
-
-	/**
-	* sets the move amount
-	* @param move number of moves allowed
-	*/
-	public void setMoveAmount(int move) {
-		moveAmount = move;
-
-	}
 
 	/** Sets the Players position & calls the checkRoom method
 	* @param xDistance distance player travelled horizontally
@@ -138,60 +110,52 @@ public class Player {
 
 	}
 
-	/**
-	* checks if Player has reached a room GUI version
-	* @return String of the room player is in 
-	*/
-	public String checkRoom() {
-		//Creating room variable
-		String room = "";
-		// Room position for Library
-		if (xPos == 0 && yPos == 0) {
-			room = "Library";
-			System.out.println("You've reached the" + room );
-			return room;
+	public void setPlayerToken(String imageName) {
 
-		// Room position for Dining Room
-		} else if (xPos == 4 && yPos == 0 ) {
-			room = "Dining_Room";
-			System.out.println("You've reached the " + room );
-			return room;
+		token = imageName;
+
+	}
+
+	public void setMoveAmount(int move) {
+
+		moveAmount = move;
+
+	}
+
+	/**
+	* checks if Player has reached a room
+	*/
+	public void checkRoom() {
+	// Room position for Library
+		if (xPos == 0 && yPos == 0) {
+			System.out.println("You've reached the Library");
 
 		// Room position for Kitchen
+		} else if (xPos == 4 && yPos == 0 ) {
+			System.out.println("You've reached the Kitchen");
+
+		// Room position for Living Room
 		}  else if (xPos == 0 && yPos == 2 ) {
-			room = "Kitchen";
-			System.out.println("You've reached the " + room );
-			return room;
+			System.out.println("You've reached the Living Room");
 
-		// Room position for Study
+		// Room position for Dining Room
 		}  else if (xPos == 4 && yPos == 2 ) {
-			room = "Study";
-			System.out.println("You've reached the " + room );
-			return room;
+			System.out.println("You've reached the Dining Room");
 
-		// Room position for Lounge
+		// Room position for Bedroom
 		}  else if (xPos == 0 && yPos == 4 ) {
-			room = "Lounge";
-			System.out.println("You've reached the " + room );
-			return room;
+			System.out.println("You've reached the Bedroom");
 
-		// Room position for Billiard Room
+		// Room position for Office
 		}  else if (xPos == 4 && yPos == 4 ) {
-			room = "Billiard_Room";
-			System.out.println("You've reached the " + room );
-			return room; 
-
-		} 
-		// if not in a room returns blank string room
-			return room;
+			System.out.println("You've reached Office");
+		}
 
 	}
 
 
 	/** adds players choice of suspected
-	* @param weapon weapon suspected by player
-	* @param room room player is in while suspecting
-	* @param person person suspected by player
+	*
 	*/
 	public Suspicion addSuspected(Weapon weapon, Room room , Person person) {
 		//Creates new suspicion
@@ -201,22 +165,22 @@ public class Player {
 		return s;
 	}
 
-	/** gets the suspected list
-	* @return the suspected arraylist with added suspected
-	*/
 	public ArrayList<Suspicion> getSuspectedList() {
 		return suspected;
 	}
 	
-	/** sets the Accused to be used in accusation 
-	* @param weapon weapon accused by player
-	* @param room room player is in while accusing
-	* @param person person accused by player
+	/**
+	*
 	*/
 	public void setAccused(Weapon weapon, Room room , Person person) {
 		this.accused = new Accusation(weapon, room, person);
-
+		//return this.accused;
 	}
+
+	//public ArrayList<Accusation> getAccusedList() {
+	//	return accused;
+	//}
+	
 
 
 
