@@ -312,9 +312,10 @@ import javafx.scene.control.*;
         Person p = new Person(selectedPerson.toLowerCase());
         Weapon w = new Weapon(selectedWeapon.toLowerCase());
         Suspicion s = turn.addSuspected(w,r,p);
-        System.out.println("suspected: " + s); 
+        System.out.println("suspected: " + s);
         ArrayList<String> contested = s.checkContested(cards, noTurn);
         System.out.println("contested" + contested);
+
       }
      }
     );

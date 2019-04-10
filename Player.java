@@ -148,7 +148,7 @@ public class Player {
 		// Room position for Library
 		if (xPos == 0 && yPos == 0) {
 			room = "Library";
-			System.out.println("You've reached the" + room );
+			System.out.println("You've reached the " + room );
 			return room;
 
 		// Room position for Dining Room
