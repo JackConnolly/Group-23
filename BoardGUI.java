@@ -745,7 +745,9 @@ import javafx.scene.control.*;
 
     ArrayList<String> playerOne = new ArrayList<>(c.getPlayerOnesHand());
     ArrayList<String> playerTwo = new ArrayList<>(c.getPlayerTwosHand());
-
+    //cards.setPlayerOneObject(player1);	
+    //cards.setPlayerTwoObject(player2);
+	
 	player3.getHands(playerTwo);
 /**
 Beginning all of the hard-coded rectangles and
@@ -992,6 +994,7 @@ the corresponding labels for all 12 cards;
 
     VBox vert4 = new VBox(20);
     VBox vert5= new VBox(20);
+	VBox vert6 = new VBox(20);
     HBox hor4 = new HBox(20);
     HBox hor5 = new HBox(20);
 
@@ -1066,7 +1069,7 @@ the corresponding labels for all 12 cards;
       root.setPadding(insetOne);
 
       Music m = new Music();
-      m.playMusic("C:\\Users\\Hailey\\Downloads\\j\\Final\\pinkpanther.wav");
+      //m.playMusic("C:\\Users\\Hailey\\Downloads\\j\\Final\\pinkpanther.wav");
 
       grid.getStylesheets().add(getClass().getResource("cluecss.css").toExternalForm());
       primaryStage.setTitle("BoardGUI");
