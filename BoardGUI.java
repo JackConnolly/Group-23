@@ -15,13 +15,8 @@ import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
-import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
@@ -39,27 +34,30 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
+import javafx.scene.text.*;
+import javafx.scene.control.*;
 
 /**
 * This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
 * remove logic from the GUI
 * @author Jack Connolly, Anna Barrett, Kylie Sicat, Hailey Allen, Jung Ho Kim
-* last updated by: Hailey Allen
-* @since 04-07-19
+* last updated by: Jack Connolly
+* @since 03-13-19
 */
 
   public class BoardGUI extends Application{
 
 	//Game Instance Variables
 	private Player player1;
-  private Player player2;
-  private Player turn;
+	private Player player2;
+	private Player turn;
+  private Player noTurn;
   private TextBoard textBoard;
   private ArrayList<String> rooms;
   private static Cards cards;
   private String selectedPerson;
   private String selectedWeapon;
-
+  //private Suspicion suspicion;
   // Variables for the dynamic buttons
   private int numRows = 5;
   private int numColumns = 5;
@@ -111,9 +109,14 @@ import javafx.scene.control.*;
 
 	    // setting player names and initial positions
 	    this.player1 = new Player("", 1, 1, "player1.png");
-      this.player2 = new Player("", 1, 0, "player2.png");
-      this.turn = player1;
+	    this.player2 = new Player("", 1, 0, "player2.png");
+	    this.turn = player1;
       this.rooms = rooms;
+      //this.cards = cards;
+      //this.selectedPerson = "";
+      //this.selectedWeapon = "";
+      TextBoard textBoard = new TextBoard(player1, player2, rooms, cards);
+
 
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -153,80 +156,6 @@ import javafx.scene.control.*;
              button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		         moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
 		         grid.add(button, i % 5, i / 5);
-             if (i == 0){
-               //button.setText("Library");
-               Image i2 = new Image("book2.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 4){
-               //button.setText("Kitchen");
-               //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
-               Image i2 = new Image("dining.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-
-             }
-             if (i == 10){
-              // button.setText("Living Room");
-              Image i2 = new Image("kitchen.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(50);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-             }
-             if (i == 14){
-               //button.setText("Dining Room");
-               Image i2 = new Image("study.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 20){
-               //button.setText("Bedroom");
-               Image i2 = new Image("lounge.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(60);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 24){
-              //button.setText("Office");
-              Image i2 = new Image("billiards.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(60);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-            }
 
         }
           grid.setGridLinesVisible(true);
@@ -254,81 +183,6 @@ import javafx.scene.control.*;
 		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
-          if (i == 0){
-               //button.setText("Library");
-               Image i2 = new Image("book2.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 4){
-               //button.setText("Kitchen");
-               //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
-               Image i2 = new Image("dining.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-
-             }
-             if (i == 10){
-              // button.setText("Living Room");
-              Image i2 = new Image("kitchen.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(50);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-             }
-             if (i == 14){
-               //button.setText("Dining Room");
-               Image i2 = new Image("study.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 20){
-               //button.setText("Bedroom");
-               Image i2 = new Image("lounge.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(60);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 24){
-              //button.setText("Office");
-              Image i2 = new Image("billiards.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(60);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-            }
-
         }
           grid.setGridLinesVisible(true);
 	   	}
@@ -355,80 +209,6 @@ import javafx.scene.control.*;
 		  button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
-          if (i == 0){
-               //button.setText("Library");
-               Image i2 = new Image("book2.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 4){
-               //button.setText("Kitchen");
-               //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
-               Image i2 = new Image("dining.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-
-             }
-             if (i == 10){
-              // button.setText("Living Room");
-              Image i2 = new Image("kitchen.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(50);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-             }
-             if (i == 14){
-               //button.setText("Dining Room");
-               Image i2 = new Image("study.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 20){
-               //button.setText("Bedroom");
-               Image i2 = new Image("lounge.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(60);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 24){
-              //button.setText("Office");
-              Image i2 = new Image("billiards.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(60);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-            }
         }
           grid.setGridLinesVisible(true);
 	   	}
@@ -456,80 +236,6 @@ import javafx.scene.control.*;
 		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
           grid.add(button, i % 5, i / 5);
-          if (i == 0){
-               //button.setText("Library");
-               Image i2 = new Image("book2.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 4){
-               //button.setText("Kitchen");
-               //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
-               Image i2 = new Image("dining.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-
-             }
-             if (i == 10){
-              // button.setText("Living Room");
-              Image i2 = new Image("kitchen.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(50);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-             }
-             if (i == 14){
-               //button.setText("Dining Room");
-               Image i2 = new Image("study.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 20){
-               //button.setText("Bedroom");
-               Image i2 = new Image("lounge.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(60);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 24){
-              //button.setText("Office");
-              Image i2 = new Image("billiards.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(60);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-            }
 
         }
         grid.setGridLinesVisible(true);
@@ -543,10 +249,13 @@ import javafx.scene.control.*;
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
-	   		if (turn == player1)
-					turn = player2;
-				else
-					turn = player1;
+	   		if (turn == player1){
+          turn = player2;
+          noTurn = player1;
+        } else {
+          turn = player1;
+          noTurn = player2;
+        }
 	  }
 	   }
 	  );
@@ -564,7 +273,7 @@ import javafx.scene.control.*;
     ComboBox<String> weaponBox = new ComboBox<String>();
     weaponBox.getItems().addAll(
     "Revolver",
-    "Water bucket",
+    "water bucket",
     "Candlestick",
     "Trophy",
     "Horseshoe");
@@ -576,7 +285,8 @@ import javafx.scene.control.*;
      {
       @Override
       public void handle(ActionEvent event)
-      { 
+      {
+        //turn.checkRoom();
         String room = turn.checkRoom();
         Room r = new Room(room.toLowerCase());
         Person p = new Person(selectedPerson.toLowerCase());
@@ -597,23 +307,14 @@ import javafx.scene.control.*;
       @Override
       public void handle(ActionEvent event)
       { 
-        //Suspicion s;
         String room = turn.checkRoom();
         Room r = new Room(room.toLowerCase());
-        textBoard.suspect();
-        System.out.println("Who would you like to suspect?");
-        Person p = null;
-        Weapon w = null;
-        if (selectedPerson != null && selectedWeapon != null) {
-          p = new Person(selectedPerson.toLowerCase());
-          w = new Weapon(selectedWeapon.toLowerCase());
-        } else {
-          //TODO
-        }
-        //Person p = new Person(selectedPerson.toLowerCase());
-        //Weapon w = new Weapon(selectedWeapon.toLowerCase());
+        Person p = new Person(selectedPerson.toLowerCase());
+        Weapon w = new Weapon(selectedWeapon.toLowerCase());
         Suspicion s = turn.addSuspected(w,r,p);
         System.out.println("suspected: " + s); 
+        ArrayList<String> contested = s.checkContested(cards, noTurn);
+        System.out.println("contested" + contested);
       }
      }
     );
@@ -627,7 +328,8 @@ import javafx.scene.control.*;
       {
         selectedPerson = peopleBox.getValue();
         System.out.println(selectedPerson.toLowerCase());
-    }
+        
+      }
      }
     );
 
@@ -693,80 +395,6 @@ import javafx.scene.control.*;
 		      if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
 			       button.setGraphic(boxes[1]);
              grid.add(button, i % 5, i / 5);
-             if (i == 0){
-               //button.setText("Library");
-               Image i2 = new Image("book2.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 4){
-               //button.setText("Kitchen");
-               //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
-               Image i2 = new Image("dining.jpg");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-
-             }
-             if (i == 10){
-              // button.setText("Living Room");
-              Image i2 = new Image("kitchen.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(50);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-             }
-             if (i == 14){
-               //button.setText("Dining Room");
-               Image i2 = new Image("study.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(50);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 20){
-               //button.setText("Bedroom");
-               Image i2 = new Image("lounge.png");
-               ImageView iv2 = new ImageView();
-               iv2.setImage(i2);
-               iv2.setFitWidth(60);
-               iv2.setFitHeight(50);
-               //iv2.setPreserveRatio(true);
-               //iv2.setSmooth(true);
-               //iv2.setCache(true);
-               button.setGraphic(iv2);
-             }
-             if (i == 24){
-              //button.setText("Office");
-              Image i2 = new Image("billiards.png");
-              ImageView iv2 = new ImageView();
-              iv2.setImage(i2);
-              iv2.setFitWidth(60);
-              iv2.setFitHeight(50);
-              //iv2.setPreserveRatio(true);
-              //iv2.setSmooth(true);
-              //iv2.setCache(true);
-              button.setGraphic(iv2);
-             }
         }
 /*  THe following is the GUI for the notepad, I had to do the
  long way for a couple of things, because for some reason addAll wasnt working
@@ -924,7 +552,8 @@ import javafx.scene.control.*;
     ArrayList<String> playerTwo = new ArrayList<>(cards.getPlayerTwosHand());
     cards.setPlayerOneObject(player1);
     cards.setPlayerTwoObject(player2);
-    
+
+
 /**
 Beginning all of the hard-coded rectangles and
 the corresponding labels for all 12 cards;
@@ -1058,36 +687,19 @@ the corresponding labels for all 12 cards;
     // Starting on the css down here
 
 
-   // background image settings
-    Image image = new Image("clue-image-real.png");
+    Image image = new Image("clue-image.png");
     ImageView imageV = new ImageView();
     imageV.setImage(image);
-    imageV.setFitWidth(400);
-    imageV.setPreserveRatio(true);
-    imageV.setSmooth(true);
-    imageV.setCache(true);
 
     StackPane stackMid = new StackPane();
     stackMid.getChildren().addAll(imageV,grid);
-    stackMid.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
+
 
       root.setCenter(stackMid);
       root.setLeft(actionKeys);
       root.setRight(rootRight);
       root.setTop(cardGUI);
       root.setPadding(insetOne);
-
-
-      Scene scene = new Scene(root, 800, 600);
-      grid.getStylesheets().add(getClass().getResource("cluecss.css").toExternalForm());
-      primaryStage.setTitle("BoardGUI");
-      primaryStage.setScene(scene);
-      primaryStage.setMaximized(true);
-      primaryStage.show();
-
-
-
-
 
 //SCENE 1 --> titleScene
     BorderPane titlePage = new BorderPane();
@@ -1111,7 +723,7 @@ the corresponding labels for all 12 cards;
     HBox hor2 = new HBox(20);
     HBox hor3 = new HBox(20);
 
-    Label playerChoice = new Label("Enter your names: ");
+    Label playerChoice = new Label(" Enter your names: ");
     playerChoice.setTextFill(Color.BLACK);
     playerChoice.setFont(Font.font("Arial Rounded MT Bold", 20));
 
@@ -1119,10 +731,12 @@ the corresponding labels for all 12 cards;
     hor.getChildren().add(playerChoice);
     hor2.getChildren().add(new Label("Player One: "));
     hor2.getChildren().add(txt);
+    //player1.setName(txt.getText());
 
     TextField txt2 = new TextField("");
     hor3.getChildren().add(new Label("Player Two: "));
     hor3.getChildren().add(txt2);
+   // player2.setName(txt2.getText());
 
     vert2.getChildren().addAll(hor, hor2, hor3);
 
@@ -1134,66 +748,31 @@ the corresponding labels for all 12 cards;
 
     vert3.getChildren().addAll(vert2, vert1);
 
-    Insets insetScene2 = new Insets(200,200,200,300);
-    vert3.setPadding(insetScene2);
-
-
 //SCENE 3 --> ruleScene
     VBox vb = new VBox(20);
-    Insets insetScene3 = new Insets(75,200,200,250);
-    vb.setPadding(insetScene3);
 
-    BorderPane border = new BorderPane();
-
-    Label rules = new Label("Rules For Clue: ");
+    Label rules = new Label(" Rules For Clue: ");
     rules.setTextFill(Color.BLACK);
-    rules.setFont(Font.font("Arial Rounded MT Bold", 30));
+    rules.setFont(Font.font("Arial Rounded MT Bold", 50));
 
     Rules r = new Rules();
-
-    Label rules2 = new Label("Objectives: The objective of the game is to figure out who the murder is!");
-    Label rules3 = new Label("In order to do this, You must find the correct weapon, room, and person.");
-    Label rules4 = new Label("To do so, you are each given 6 cards. Some cards are weapons, rooms,");
-    Label rules5 = new Label("and people. The winning cards are not in either of the players hands.");
-    Label rules6 = new Label("To play: Roll the dice to give you the amount of squares you can");
-    Label rules7 = new Label(" move on the board. If you end up in a room you are given the ");
-    Label rules8 = new Label("option to 'suspect' or 'accuse'. To suspect, you can choose who ");
-    Label rules9 = new Label("you think did it, and with what weapon, the other player is given ");
-    Label rules10 = new Label("the option to contest towards your suspicion if they have any of ");
-    Label rules11 = new Label("the cards you used to suspect with. To accuse, it is similar to ");
-    Label rules12 = new Label("suspecting HOWEVER! Be sure your accusation is correct or ELSE IF ");
-    Label rules13 = new Label("one or more of your weapon, room or person is wrong you lose and ");
-    Label rules14 = new Label(" the other player wins the game!");
-
-    rules2.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules3.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules4.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules5.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules6.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules7.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules8.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules9.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules10.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules11.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules12.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules13.setFont(Font.font("Arial Rounded MT Bold", 10));
-    rules14.setFont(Font.font("Arial Rounded MT Bold", 10));
-
+    Label rules2 = new Label("Find way to print rules here");
+    rules2.setTextFill(Color.BLACK);
+    rules2.setFont(Font.font("Arial Rounded MT Bold", 20));
 
     Button change = new Button(" I accept these rules ");
 
-    vb.getChildren().addAll(rules, rules2, rules3, rules4, rules5, rules6, rules7, rules8, rules9, rules10, rules11, rules12, rules13, rules14, change);
-
-    //border.setCenter(vb);
+    vb.getChildren().addAll(rules, rules2, change);
 
 //SCENE 4 --> aiScene
 
     VBox vert4 = new VBox(20);
     VBox vert5= new VBox(20);
+    VBox vert6 = new VBox(20);
     HBox hor4 = new HBox(20);
     HBox hor5 = new HBox(20);
 
-    Label playerChoice2 = new Label("Enter your name: ");
+    Label playerChoice2 = new Label(" Enter your names: ");
     playerChoice2.setTextFill(Color.BLACK);
     playerChoice2.setFont(Font.font("Arial Rounded MT Bold", 20));
 
@@ -1202,12 +781,13 @@ the corresponding labels for all 12 cards;
     hor5.getChildren().add(new Label("Player One: "));
     hor5.getChildren().add(txt3);
 
+    vert5.getChildren().addAll(hor5, hor4);
+
     Button ready2 = new Button(" My name is entered! ");
 
-    vert5.getChildren().addAll(hor4, hor5, ready2);
-    Insets insetScene4 = new Insets(200,200,200,300);
-    vert5.setPadding(insetScene4);
+    vert4.getChildren().add(ready2);
 
+    vert6.getChildren().addAll(vert5, vert4);
 
 //Cretaing all different scenes and how to toggle between   
 
@@ -1219,7 +799,7 @@ the corresponding labels for all 12 cards;
 
     Scene titleScene = new Scene(titlePage, 800, 600);
 
-    Scene aiScene = new Scene(vert5, 800, 600);
+    Scene aiScene = new Scene(vert6, 800, 600);
 
     start.setOnAction( e -> primaryStage.setScene(ruleScene));
     change.setOnAction( e -> primaryStage.setScene(playerScene));
@@ -1254,12 +834,6 @@ the corresponding labels for all 12 cards;
       }
      }
     );
-
-      root.setCenter(stackMid);
-      root.setLeft(actionKeys);
-      root.setRight(rootRight);
-      root.setTop(cardGUI);
-      root.setPadding(insetOne);
 
       Music m = new Music();
       m.playMusic("C:\\Users\\Hailey\\Downloads\\j\\Final\\pinkpanther.wav");
