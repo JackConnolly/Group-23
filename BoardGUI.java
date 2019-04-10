@@ -12,15 +12,24 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+
+
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.cell.CheckBoxTreeCell;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.CheckBoxTreeItem;
@@ -93,6 +102,7 @@ import javafx.scene.control.*;
       // Setup the panes
       BorderPane root = new BorderPane();
       GridPane grid = new GridPane();
+      grid.setGridLinesVisible(true);
       VBox actionKeys = new VBox(20);
       // setting preferred width for VBox actionKeys
       actionKeys.setPrefWidth(150);
@@ -116,18 +126,23 @@ import javafx.scene.control.*;
       Button rollDice = new Button("Roll Dice");
 	    Button endTurn = new Button("End Turn");
       Button suspectPlayer = new Button("Suspect Player");
+      Button accusePlayer = new Button("Accuse Player");
 	    Label moveAmount = new Label("Movement Allowed: ");
 
 	    Button moveLeft = new Button("Move Left");
-	    moveLeft.setOnAction(new EventHandler<ActionEvent>()
+	    rollDice.setOnKeyPressed(new EventHandler<KeyEvent>()
 	    {
+
 	   	@Override
-	   	public void handle(ActionEvent event)
+	   	public void handle(KeyEvent event)
 	   	{
+        if(event.getCode()==KeyCode.A){
+
 	   	turn.setPlayerPosition(-1, 0);
 			grid.getChildren().clear(); //clears Board
       // Redrawing Board
       for (int i = 0 ; i < 25  ; i++){
+
           Button button = new Button();
 		      HBox[] boxes = displayPlayers(player1, player2);
 		      if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
@@ -137,83 +152,357 @@ import javafx.scene.control.*;
              button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		         moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
 		         grid.add(button, i % 5, i / 5);
+             if (i == 0){
+               //button.setText("Library");
+               Image i2 = new Image("book2.jpg");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(50);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+             }
+             if (i == 4){
+               //button.setText("Kitchen");
+               //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
+               Image i2 = new Image("dining.jpg");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(50);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+
+             }
+             if (i == 10){
+              // button.setText("Living Room");
+              Image i2 = new Image("kitchen.png");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(50);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
+             }
+             if (i == 14){
+               //button.setText("Dining Room");
+               Image i2 = new Image("study.png");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(50);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+             }
+             if (i == 20){
+               //button.setText("Bedroom");
+               Image i2 = new Image("lounge.png");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(60);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+             }
+             if (i == 24){
+              //button.setText("Office");
+              Image i2 = new Image("billiards.png");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(60);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
+             }
 
         }
-	   	}
-	   }
-	  );
+          grid.setGridLinesVisible(true);
+	   	} else if (event.getCode() == KeyCode.D){
+        turn.setPlayerPosition(1, 0);
+  			grid.getChildren().clear(); //clears Board
+        // Redrawing Board
+        for (int i = 0 ; i < 25  ; i++){
+            Button button =  new Button();
+            grid.setGridLinesVisible(true);
+  		      HBox[] boxes = displayPlayers(player1, player2);
+  		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
+  			    button.setGraphic(boxes[0]);
+  		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
+  			    button.setGraphic(boxes[1]);
+  		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+  		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
+            grid.add(button, i % 5, i / 5);
+            if (i == 0){
+              //button.setText("Library");
+              Image i2 = new Image("book2.jpg");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(50);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
+            }
+            if (i == 4){
+              //button.setText("Kitchen");
+              //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
+              Image i2 = new Image("dining.jpg");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(50);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
 
-      Button moveRight = new Button("Move Right");
-	  	moveRight.setOnAction(new EventHandler<ActionEvent>()
-	   {
-	   	@Override
-	   	public void handle(ActionEvent event)
-	   	{
-	   	turn.setPlayerPosition(1, 0);
-			grid.getChildren().clear(); //clears Board
-      // Redrawing Board
-      for (int i = 0 ; i < 25  ; i++){
-          Button button =  new Button();
-		      HBox[] boxes = displayPlayers(player1, player2);
-		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			    button.setGraphic(boxes[0]);
-		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			    button.setGraphic(boxes[1]);
-		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
-          grid.add(button, i % 5, i / 5);
+            }
+            if (i == 10){
+             // button.setText("Living Room");
+             Image i2 = new Image("kitchen.png");
+             ImageView iv2 = new ImageView();
+             iv2.setImage(i2);
+             iv2.setFitWidth(50);
+             iv2.setFitHeight(50);
+             //iv2.setPreserveRatio(true);
+             //iv2.setSmooth(true);
+             //iv2.setCache(true);
+             button.setGraphic(iv2);
+            }
+            if (i == 14){
+              //button.setText("Dining Room");
+              Image i2 = new Image("study.png");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(50);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
+            }
+            if (i == 20){
+              //button.setText("Bedroom");
+              Image i2 = new Image("lounge.png");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(60);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
+            }
+            if (i == 24){
+             //button.setText("Office");
+             Image i2 = new Image("billiards.png");
+             ImageView iv2 = new ImageView();
+             iv2.setImage(i2);
+             iv2.setFitWidth(60);
+             iv2.setFitHeight(50);
+             //iv2.setPreserveRatio(true);
+             //iv2.setSmooth(true);
+             //iv2.setCache(true);
+             button.setGraphic(iv2);
+
+      }
+    }
+  }  else if (event.getCode() == KeyCode.S){
+    turn.setPlayerPosition(0, 1);
+    grid.getChildren().clear(); //clears Board
+    // Redrawing Board
+
+    for (int i = 0 ; i < 25  ; i++){
+        Button button = new Button();
+        HBox[] boxes = displayPlayers(player1, player2);
+    if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
+        button.setGraphic(boxes[0]);
+        grid.setGridLinesVisible(true);
+    if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
+        button.setGraphic(boxes[1]);
+        button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
+        grid.add(button, i % 5, i / 5);
+        if (i == 0){
+          //button.setText("Library");
+          Image i2 = new Image("book2.jpg");
+          ImageView iv2 = new ImageView();
+          iv2.setImage(i2);
+          iv2.setFitWidth(50);
+          iv2.setFitHeight(50);
+          //iv2.setPreserveRatio(true);
+          //iv2.setSmooth(true);
+          //iv2.setCache(true);
+          button.setGraphic(iv2);
         }
-	   	}
-	   }
-	  );
+        if (i == 4){
+          //button.setText("Kitchen");
+          //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
+          Image i2 = new Image("dining.jpg");
+          ImageView iv2 = new ImageView();
+          iv2.setImage(i2);
+          iv2.setFitWidth(50);
+          iv2.setFitHeight(50);
+          //iv2.setPreserveRatio(true);
+          //iv2.setSmooth(true);
+          //iv2.setCache(true);
+          button.setGraphic(iv2);
 
-	  Button moveUp = new Button("Move Up");
-	  	moveUp.setOnAction(new EventHandler<ActionEvent>()
-	   {
-	   	@Override
-	   	public void handle(ActionEvent event)
-	   	{
-	   		turn.setPlayerPosition(0, -1);
-			grid.getChildren().clear(); //clears Board
+        }
+        if (i == 10){
+         // button.setText("Living Room");
+         Image i2 = new Image("kitchen.png");
+         ImageView iv2 = new ImageView();
+         iv2.setImage(i2);
+         iv2.setFitWidth(50);
+         iv2.setFitHeight(50);
+         //iv2.setPreserveRatio(true);
+         //iv2.setSmooth(true);
+         //iv2.setCache(true);
+         button.setGraphic(iv2);
+        }
+        if (i == 14){
+          //button.setText("Dining Room");
+          Image i2 = new Image("study.png");
+          ImageView iv2 = new ImageView();
+          iv2.setImage(i2);
+          iv2.setFitWidth(50);
+          iv2.setFitHeight(50);
+          //iv2.setPreserveRatio(true);
+          //iv2.setSmooth(true);
+          //iv2.setCache(true);
+          button.setGraphic(iv2);
+        }
+        if (i == 20){
+          //button.setText("Bedroom");
+          Image i2 = new Image("lounge.png");
+          ImageView iv2 = new ImageView();
+          iv2.setImage(i2);
+          iv2.setFitWidth(60);
+          iv2.setFitHeight(50);
+          //iv2.setPreserveRatio(true);
+          //iv2.setSmooth(true);
+          //iv2.setCache(true);
+          button.setGraphic(iv2);
+        }
+        if (i == 24){
+         //button.setText("Office");
+         Image i2 = new Image("billiards.png");
+         ImageView iv2 = new ImageView();
+         iv2.setImage(i2);
+         iv2.setFitWidth(60);
+         iv2.setFitHeight(50);
+         //iv2.setPreserveRatio(true);
+         //iv2.setSmooth(true);
+         //iv2.setCache(true);
+         button.setGraphic(iv2);
+    }}
+  } else if (event.getCode() == KeyCode.W){
+    turn.setPlayerPosition(0, -1);
+  grid.getChildren().clear(); //clears Board
 // Redrawing Board
-      for (int i = 0 ; i < 25  ; i++){
-          Button button =  new Button();
-		  HBox[] boxes = displayPlayers(player1, player2);
-		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[0]);
-		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			  button.setGraphic(boxes[1]);
-		  button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
-          grid.add(button, i % 5, i / 5);
-        }
-	   	}
-	   }
+  for (int i = 0 ; i < 25  ; i++){
+      Button button =  new Button();
+      grid.setGridLinesVisible(true);
+  HBox[] boxes = displayPlayers(player1, player2);
+  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
+    button.setGraphic(boxes[0]);
+  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
+    button.setGraphic(boxes[1]);
+  button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+  moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
+      grid.add(button, i % 5, i / 5);
+      if (i == 0){
+        //button.setText("Library");
+        Image i2 = new Image("book2.jpg");
+        ImageView iv2 = new ImageView();
+        iv2.setImage(i2);
+        iv2.setFitWidth(50);
+        iv2.setFitHeight(50);
+        //iv2.setPreserveRatio(true);
+        //iv2.setSmooth(true);
+        //iv2.setCache(true);
+        button.setGraphic(iv2);
+      }
+      if (i == 4){
+        //button.setText("Kitchen");
+        //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
+        Image i2 = new Image("dining.jpg");
+        ImageView iv2 = new ImageView();
+        iv2.setImage(i2);
+        iv2.setFitWidth(50);
+        iv2.setFitHeight(50);
+        //iv2.setPreserveRatio(true);
+        //iv2.setSmooth(true);
+        //iv2.setCache(true);
+        button.setGraphic(iv2);
+
+      }
+      if (i == 10){
+       // button.setText("Living Room");
+       Image i2 = new Image("kitchen.png");
+       ImageView iv2 = new ImageView();
+       iv2.setImage(i2);
+       iv2.setFitWidth(50);
+       iv2.setFitHeight(50);
+       //iv2.setPreserveRatio(true);
+       //iv2.setSmooth(true);
+       //iv2.setCache(true);
+       button.setGraphic(iv2);
+      }
+      if (i == 14){
+        //button.setText("Dining Room");
+        Image i2 = new Image("study.png");
+        ImageView iv2 = new ImageView();
+        iv2.setImage(i2);
+        iv2.setFitWidth(50);
+        iv2.setFitHeight(50);
+        //iv2.setPreserveRatio(true);
+        //iv2.setSmooth(true);
+        //iv2.setCache(true);
+        button.setGraphic(iv2);
+      }
+      if (i == 20){
+        //button.setText("Bedroom");
+        Image i2 = new Image("lounge.png");
+        ImageView iv2 = new ImageView();
+        iv2.setImage(i2);
+        iv2.setFitWidth(60);
+        iv2.setFitHeight(50);
+        //iv2.setPreserveRatio(true);
+        //iv2.setSmooth(true);
+        //iv2.setCache(true);
+        button.setGraphic(iv2);
+      }
+      if (i == 24){
+       //button.setText("Office");
+       Image i2 = new Image("billiards.png");
+       ImageView iv2 = new ImageView();
+       iv2.setImage(i2);
+       iv2.setFitWidth(60);
+       iv2.setFitHeight(50);
+       //iv2.setPreserveRatio(true);
+       //iv2.setSmooth(true);
+       //iv2.setCache(true);
+       button.setGraphic(iv2);
+  }
+}}}}
 	  );
 
-      Button moveDown = new Button("Move Down");
-	  	moveDown.setOnAction(new EventHandler<ActionEvent>()
-	   {
-	   	@Override
-	   	public void handle(ActionEvent event)
-	   	{
-	   	turn.setPlayerPosition(0, 1);
-			grid.getChildren().clear(); //clears Board
-      // Redrawing Board
-      for (int i = 0 ; i < 25  ; i++){
-          Button button = new Button();
-		      HBox[] boxes = displayPlayers(player1, player2);
-		  if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
-			    button.setGraphic(boxes[0]);
-		  if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
-			    button.setGraphic(boxes[1]);
-		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		      moveAmount.setText("Movements Allowed: " + Integer.toString(turn.getMoveAmount()));
-          grid.add(button, i % 5, i / 5);
-        }
-	  }
-	   }
-	  );
+
 
 	  endTurn.setOnAction(new EventHandler<ActionEvent>()
 	   {
@@ -247,6 +536,18 @@ import javafx.scene.control.*;
     "Horse Shoe");
     weaponBox.setPromptText("Weapons");
 
+    //event handlers for suspect and accuse buttons
+
+    accusePlayer.setOnAction(new EventHandler<ActionEvent>()
+     {
+      @Override
+      public void handle(ActionEvent event)
+      {
+        System.out.println("Who would you like to accuse?");
+    }
+     }
+    );
+
     suspectPlayer.setOnAction(new EventHandler<ActionEvent>()
      {
       @Override
@@ -265,7 +566,7 @@ import javafx.scene.control.*;
       public void handle(ActionEvent event)
       {
         String selected = peopleBox.getValue();
-        System.out.println("You have suspected "+ selected);
+        System.out.println(selected);
     }
      }
     );
@@ -281,7 +582,7 @@ import javafx.scene.control.*;
      }
     );
 
-      actionKeys.getChildren().addAll(suspectPlayer,peopleBox,weaponBox,moveLeft,moveRight,moveUp,moveDown, endTurn);
+      actionKeys.getChildren().addAll(suspectPlayer,accusePlayer,peopleBox,weaponBox,endTurn);
 
 
 
@@ -297,6 +598,7 @@ import javafx.scene.control.*;
 		      int move = p.diceRoll();
           moveAmount.setText("Movements Allowed: " + Integer.toString(move));
 			    turn.setMoveAmount(move);
+
         }
       });
 
@@ -324,6 +626,8 @@ import javafx.scene.control.*;
       // Makes the buttons in a 5 x 5
       for (int i = 0 ; i < 25  ; i++){
           Button button = new Button();
+          Label l1 = new Label("Test 1");
+          Label l2 = new Label("Test2");
 		      button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		      HBox[] boxes = displayPlayers(player1, player2);
 		      if(player1.getPlayerPosition()[0] == i % 5 && player1.getPlayerPosition()[1] == i / 5)
@@ -331,6 +635,84 @@ import javafx.scene.control.*;
 		      if(player2.getPlayerPosition()[0] == i % 5 && player2.getPlayerPosition()[1] == i / 5)
 			       button.setGraphic(boxes[1]);
              grid.add(button, i % 5, i / 5);
+             if (i == 0){
+               //button.setText("Library");
+               Image i2 = new Image("book2.jpg");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(50);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+             }
+             if (i == 4){
+               //button.setText("Kitchen");
+               //button.setGraphic(ImageView iv2 = new ImageView("library.png"));
+               Image i2 = new Image("dining.jpg");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(50);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+
+             }
+             if (i == 10){
+              // button.setText("Living Room");
+              Image i2 = new Image("kitchen.png");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(50);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
+             }
+             if (i == 14){
+               //button.setText("Dining Room");
+               Image i2 = new Image("study.png");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(50);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+             }
+             if (i == 20){
+               //button.setText("Bedroom");
+               Image i2 = new Image("lounge.png");
+               ImageView iv2 = new ImageView();
+               iv2.setImage(i2);
+               iv2.setFitWidth(60);
+               iv2.setFitHeight(50);
+               //iv2.setPreserveRatio(true);
+               //iv2.setSmooth(true);
+               //iv2.setCache(true);
+               button.setGraphic(iv2);
+             }
+             if (i == 24){
+              //button.setText("Office");
+              Image i2 = new Image("billiards.png");
+              ImageView iv2 = new ImageView();
+              iv2.setImage(i2);
+              iv2.setFitWidth(60);
+              iv2.setFitHeight(50);
+              //iv2.setPreserveRatio(true);
+              //iv2.setSmooth(true);
+              //iv2.setCache(true);
+              button.setGraphic(iv2);
+             }
+
+
+
+
         }
 /*  THe following is the GUI for the notepad, I had to do the
  long way for a couple of things, because for some reason addAll wasnt working
@@ -617,16 +999,35 @@ the corresponding labels for all 12 cards;
 
     cardGUI.getChildren().addAll(v, v2);
 
-      root.setCenter(grid);
+    // Starting on the css down here
+
+
+    // background image settings
+    Image image = new Image("clue-image-real.png");
+    ImageView imageV = new ImageView();
+    imageV.setImage(image);
+    imageV.setFitWidth(400);
+    imageV.setPreserveRatio(true);
+    imageV.setSmooth(true);
+    imageV.setCache(true);
+
+    StackPane stackMid = new StackPane();
+    stackMid.getChildren().addAll(imageV,grid);
+    stackMid.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
+
+      root.setCenter(stackMid);
       root.setLeft(actionKeys);
       root.setRight(rootRight);
       root.setTop(cardGUI);
       root.setPadding(insetOne);
 
 
+
       Scene scene = new Scene(root, 800, 600);
+      grid.getStylesheets().add(getClass().getResource("cluecss.css").toExternalForm());
       primaryStage.setTitle("BoardGUI");
       primaryStage.setScene(scene);
+      primaryStage.setMaximized(true);
       primaryStage.show();
 
 
