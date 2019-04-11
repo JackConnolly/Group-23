@@ -38,6 +38,9 @@ import javafx.scene.text.*;
 import javafx.scene.control.*;
 import javafx.util.*;	
 import javafx.util.converter.DefaultStringConverter;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 
 /**
 * This is the GUI Board for the Game Clue, as per feedback from Demo 2 we re trying to
@@ -152,7 +155,8 @@ import javafx.util.converter.DefaultStringConverter;
      Button start = new Button(" START HERE ");	
     start.setTextFill(Color.BLACK);	
 
-     ImageView titlePicture = new ImageView(getClass().getResource("Clue-Poster.jpg").toExternalForm());	
+     ImageView titlePicture = new ImageView(getClass().getResource("Clue-Poster.jpg").toExternalForm());
+      st.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY))); 	
     //titlePicture.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);	
 
      st.getChildren().addAll(titlePicture, start);	
@@ -160,7 +164,7 @@ import javafx.util.converter.DefaultStringConverter;
 
  //SCENE 2 --> playerScene	
 
-     VBox vert1 = new VBox(20);	
+    VBox vert1 = new VBox(20);	
     VBox vert2 = new VBox(20);	
     VBox vert3 = new VBox(20);	
     HBox hor = new HBox(20);	
@@ -172,7 +176,7 @@ import javafx.util.converter.DefaultStringConverter;
     playerChoice.setTextFill(Color.BLACK);	
     playerChoice.setFont(Font.font("Arial Rounded MT Bold", 20));	
 
-     TextField txt = new TextField("");	
+    TextField txt = new TextField("");	
     hor.getChildren().add(playerChoice);	
     Label name2 = new Label("Player One: ");	
     name2.setTextFill(Color.RED);	
@@ -181,7 +185,7 @@ import javafx.util.converter.DefaultStringConverter;
 
      TextField txt2 = new TextField("");	
 
-     Label name3 = new Label("Player Two: ");	
+    Label name3 = new Label("Player Two: ");	
     name3.setTextFill(Color.BLUE);	
     hor3.getChildren().add(name3);	
     hor3.getChildren().add(txt2);	
@@ -203,7 +207,7 @@ import javafx.util.converter.DefaultStringConverter;
 
  //SCENE 3 --> ruleScene	
     VBox vb = new VBox(20);	
-    Insets insetScene3 = new Insets(75,200,200,250);	
+    Insets insetScene3 = new Insets(50,200,200,250);	
     vb.setPadding(insetScene3);	
 
      BorderPane border = new BorderPane();	
@@ -215,22 +219,23 @@ import javafx.util.converter.DefaultStringConverter;
      Rules r = new Rules();	
 
  //print statements for all of the rules	
-    Label rules2 = new Label("Objectives: The objective of the game is to figure out who the murder is!");	
-    Label rules3 = new Label("In order to do this, You must find the correct weapon, room, and person.");	
-    Label rules4 = new Label("To do so, you are each given 6 cards. Some cards are weapons, rooms,");	
-    Label rules5 = new Label("and people. The winning cards are not in either of the players hands.");	
-    Label rules6 = new Label("To play: Roll the dice to give you the amount of squares you can");	
-    Label rules7 = new Label(" move on the board. If you end up in a room you are given the ");	
-    Label rules8 = new Label("option to 'suspect' or 'accuse'. To suspect, you can choose who ");	
-    Label rules9 = new Label("you think did it, and with what weapon, the other player is given ");	
-    Label rules10 = new Label("the option to contest towards your suspicion if they have any of ");	
-    Label rules11 = new Label("the cards you used to suspect with. To accuse, it is similar to ");	
-    Label rules12 = new Label("suspecting HOWEVER! Be sure your accusation is correct or ELSE IF ");	
-    Label rules13 = new Label("one or more of your weapon, room or person is wrong you lose and ");	
-    Label rules14 = new Label(" the other player wins the game!");	
+    Label rules2 = new Label("Objective: Figure out who the murderer is!"); 
+    Label rules3 = new Label("In order to do this, you must find the correct weapon, room, and person."); 
+    Label rules4 = new Label("To do so, you are each given 6 cards. The cards are weapons, rooms,");  
+    Label rules5 = new Label("and people. The winning cards are not in either of the players hands.");  
+    Label rules6 = new Label("To play: Press the 'Roll' button to give you the amount of squares you"); 
+    Label rules7 = new Label("can move on the board. You may move using the buttons WASD. If you end"); 
+    Label rules8 = new Label("up in a room you are given the option to 'suspect' or 'accuse'.");  
+    Label rules9 = new Label("To suspect, you can choose who you think did it, and with what weapon,"); 
+    Label rules10 = new Label("by using the drop down person and weapon lists on the side."); 
+    Label rules11 = new Label("The other player will automatically contest towards your suspicion");  
+    Label rules12 = new Label("if they have any of the cards you used to suspect with. To accuse,");  
+    Label rules13 = new Label("it is similar to suspecting HOWEVER! Be sure your accusation");  
+    Label rules14 = new Label("is correct or ELSE IF one or more of your weapon, room or person");  
+    Label rules15 = new Label("is wrong, you lose and the other player wins the game!!");
 
  //changing size and font of rules	
-    rules2.setFont(Font.font("Arial Rounded MT Bold", 10));	
+    rules2.setFont(Font.font("Arial Rounded MT Bold", 15));	
     rules3.setFont(Font.font("Arial Rounded MT Bold", 10));	
     rules4.setFont(Font.font("Arial Rounded MT Bold", 10));	
     rules5.setFont(Font.font("Arial Rounded MT Bold", 10));	
@@ -242,12 +247,13 @@ import javafx.util.converter.DefaultStringConverter;
     rules11.setFont(Font.font("Arial Rounded MT Bold", 10));	
     rules12.setFont(Font.font("Arial Rounded MT Bold", 10));	
     rules13.setFont(Font.font("Arial Rounded MT Bold", 10));	
-    rules14.setFont(Font.font("Arial Rounded MT Bold", 10));	
+    rules14.setFont(Font.font("Arial Rounded MT Bold", 10));
+    rules15.setFont(Font.font("Arial Rounded MT Bold", 10));  	
 
 
      Button change = new Button(" I accept these rules ");	
 
-     vb.getChildren().addAll(rules, rules2, rules3, rules4, rules5, rules6, rules7, rules8, rules9, rules10, rules11, rules12, rules13, rules14, change);	
+     vb.getChildren().addAll(rules, rules2, rules3, rules4, rules5, rules6, rules7, rules8, rules9, rules10, rules11, rules12, rules13, rules14, rules15, change);	
 
      //border.setCenter(vb);	
 
@@ -297,7 +303,7 @@ import javafx.util.converter.DefaultStringConverter;
       @Override	
       public void handle(ActionEvent event)	
       {	
-		playingWithAI = true;
+		playingWithAI = false;
          String playerOneName = txt.getText();	
         player1.setName(playerOneName);	
 
@@ -323,6 +329,8 @@ import javafx.util.converter.DefaultStringConverter;
        }	
      }	
     );	
+	Cards cards = new Cards();	
+    cards.setAllCards();
 
 	    // setting player names and initial positions
 	    player1 = new HumanPlayer("", 1, 0, "player1.png");
@@ -332,9 +340,9 @@ import javafx.util.converter.DefaultStringConverter;
 		
 		 this.rooms = rooms;
 		 if(playingWithAI)
-			textBoard = new TextBoard(player1, player2, rooms, cards);
-		else
 			textBoard = new TextBoard(player1, player3, rooms, cards);
+		else
+			textBoard = new TextBoard(player1, player2, rooms, cards);
 		
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -543,12 +551,15 @@ import javafx.util.converter.DefaultStringConverter;
 	  
 	  
 
-       Cards c = new Cards();	
-    c.setAllCards();	
+    	
 
-     ArrayList<String> playerOne = new ArrayList<>(c.getPlayerOnesHand());	
-    ArrayList<String> playerTwo = new ArrayList<>(c.getPlayerTwosHand());	
-
+     ArrayList<String> playerOne = new ArrayList<>(cards.getPlayerOnesHand());	
+    ArrayList<String> playerTwo = new ArrayList<>(cards.getPlayerTwosHand());	
+	cards.setPlayerOneObject(player1);
+	cards.setPlayerThreeObject(player3);
+	cards.setPlayerTwoObject(player2);
+	
+	player3.getHands(playerTwo);
  /**	
 Beginning all of the hard-coded rectangles and	
 the corresponding labels for all 12 cards;	
@@ -878,6 +889,39 @@ the corresponding labels for all 12 cards;
 		}
         System.out.println("accused: " + a);	
         boolean winner = a.checkWinner(cards);	
+        if(winner == true){
+
+          StackPane win = new StackPane();
+          ImageView winPicture = new ImageView(getClass().getResource("winImage.jpg").toExternalForm());
+          win.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
+          winPicture.setFitWidth(500);
+          winPicture.setFitHeight(500);
+
+          win.getChildren().add(winPicture);
+
+          Scene winScene = new Scene(win, 800, 600);
+
+          primaryStage.setScene(winScene);
+          primaryStage.show();
+
+        } 
+
+        else{
+
+          StackPane lose = new StackPane();
+          ImageView losePicture = new ImageView(getClass().getResource("LoseImage.png").toExternalForm());
+          losePicture.setFitWidth(500);
+          losePicture.setFitHeight(500);
+
+          lose.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
+
+          lose.getChildren().add(losePicture);
+          
+          Scene loseScene = new Scene(lose, 800, 600);
+          primaryStage.setScene(loseScene);
+          primaryStage.show();
+
+        }
         System.out.println("winner: " + winner);	
         a.winningPrompt(cards);
     }
