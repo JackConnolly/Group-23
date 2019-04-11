@@ -297,7 +297,7 @@ import javafx.util.converter.DefaultStringConverter;
       @Override	
       public void handle(ActionEvent event)	
       {	
-		playingWithAI = true;
+		playingWithAI = false;
          String playerOneName = txt.getText();	
         player1.setName(playerOneName);	
 
@@ -323,6 +323,8 @@ import javafx.util.converter.DefaultStringConverter;
        }	
      }	
     );	
+	Cards cards = new Cards();	
+    cards.setAllCards();
 
 	    // setting player names and initial positions
 	    player1 = new HumanPlayer("", 1, 0, "player1.png");
@@ -332,9 +334,9 @@ import javafx.util.converter.DefaultStringConverter;
 		
 		 this.rooms = rooms;
 		 if(playingWithAI)
-			textBoard = new TextBoard(player1, player2, rooms, cards);
-		else
 			textBoard = new TextBoard(player1, player3, rooms, cards);
+		else
+			textBoard = new TextBoard(player1, player2, rooms, cards);
 		
       VBox notePad = new VBox(20);
       // setting preferred width for VBox notePad
@@ -543,12 +545,15 @@ import javafx.util.converter.DefaultStringConverter;
 	  
 	  
 
-       Cards c = new Cards();	
-    c.setAllCards();	
+    	
 
-     ArrayList<String> playerOne = new ArrayList<>(c.getPlayerOnesHand());	
-    ArrayList<String> playerTwo = new ArrayList<>(c.getPlayerTwosHand());	
-
+     ArrayList<String> playerOne = new ArrayList<>(cards.getPlayerOnesHand());	
+    ArrayList<String> playerTwo = new ArrayList<>(cards.getPlayerTwosHand());	
+	cards.setPlayerOneObject(player1);
+	cards.setPlayerThreeObject(player3);
+	cards.setPlayerTwoObject(player2);
+	
+	player3.getHands(playerTwo);
  /**	
 Beginning all of the hard-coded rectangles and	
 the corresponding labels for all 12 cards;	

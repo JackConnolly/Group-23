@@ -27,7 +27,8 @@ be used throughout the class
 
 	private Player playerOneObject;
 	private Player playerTwoObject;
-
+	private AIPlayer playerThreeObject;
+	
 	private String name;
 
 	//public Room room = new Room();
@@ -57,15 +58,17 @@ in clue
 	public Cards(String name){
 		this.name = name;
 	}
-
-	public void setPlayerOneObject(Player p1) {
+public void setPlayerOneObject(HumanPlayer p1) {
 		this.playerOneObject = p1;
 
 	}
 
-	public void setPlayerTwoObject(Player p2) {
+	public void setPlayerTwoObject(HumanPlayer p2) {
 		this.playerTwoObject = p2;
 
+	}
+	public void setPlayerThreeObject(AIPlayer p3){
+		this.playerThreeObject = p3;
 	}
 
 	public Player getPlayerOneObject() {
@@ -77,6 +80,11 @@ in clue
 		return playerTwoObject;
 
 	}
+	
+	public AIPlayer getPlayerThreeObject(){
+		return playerThreeObject;
+	}
+
 /**
 Sets the winning cards from the arrays
 weapons, places, and people and adds
@@ -112,14 +120,8 @@ them to the array selectedCards
 
 
 	}
-	public void setPlayerOnesHand(ArrayList<String> p1Cards) {
-		this.playerOne = p1Cards;
-	}
 
-	public void setPlayerTwoHand(ArrayList<String> p2Cards) {
-		this.playerTwo = p2Cards;
 
-	}
 
 	public void addSelectedCards(){
 
@@ -241,11 +243,13 @@ them to the array selectedCards
 	public String getName(){
 		return name;
 	}
-
+	
 	public ArrayList<String> getPlayersHand(String playerName){
 		if ( playerName.equals(this.playerOneObject.getName()) )
 			return playerOne;
 		else if ( playerName.equals(this.playerTwoObject.getName()) )
+			return playerTwo;
+		else if ( playerName.equals(this.playerThreeObject.getName()) )
 			return playerTwo;
 		else
 			return null;

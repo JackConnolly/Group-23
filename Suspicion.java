@@ -90,7 +90,24 @@ public class Suspicion {
 
 	}
 
-	public ArrayList<String> checkContested(Cards cards, Player contestingPlayer) {
+	public ArrayList<String> checkContested(Cards cards, HumanPlayer contestingPlayer) {
+		//contestingPlayer = 
+		ArrayList<String> handsMatched = new ArrayList<String>();
+		ArrayList<String> playersHand = cards.getPlayersHand(contestingPlayer.getName());
+
+		for ( int i = 0 ; i < playersHand.size() ; i++ ) {
+			if ( compare(this.person.getName(), playersHand.get(i))
+				|| compare(this.room.getName(), playersHand.get(i))
+				|| compare(this.weapon.getName(), playersHand.get(i))
+				) {
+				handsMatched.add(playersHand.get(i));
+			} 
+		}
+
+		return handsMatched;
+	
+	}
+	public ArrayList<String> checkContested(Cards cards, AIPlayer contestingPlayer) {
 		//contestingPlayer = 
 		ArrayList<String> handsMatched = new ArrayList<String>();
 		ArrayList<String> playersHand = cards.getPlayersHand(contestingPlayer.getName());

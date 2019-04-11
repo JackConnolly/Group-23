@@ -18,7 +18,7 @@ private ArrayList<String> allPossiblePeople = new ArrayList<String>(); //list of
 private ArrayList<String> hand; //growing list of innocent cards
 
 private Cards cards;
-private Player otherPlayer;
+private HumanPlayer otherPlayer;
 
 
 
@@ -26,12 +26,12 @@ public AIPlayer(String name){
 	super(name);
 }
 
-public AIPlayer(Cards aCards, Player player1){
+public AIPlayer(Cards aCards, HumanPlayer player1){
 	super("Computer");
 	cards = aCards;
 	otherPlayer = player1;
 }
-public AIPlayer(String name, int xPos, int yPos, String token, Cards aCards, Player other){
+public AIPlayer(String name, int xPos, int yPos, String token, Cards aCards, HumanPlayer other){
 	super(name, xPos, yPos, token);
 	cards = aCards;
 	otherPlayer = other;
