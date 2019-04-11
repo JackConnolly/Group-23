@@ -168,7 +168,9 @@ public void checkingPossible(){
 			}
 		}	
 	}
-		
+		System.out.println(allPossiblePeople);
+		System.out.println(allPossibleRooms);
+		System.out.println(allPossibleWeapons);
 }
 
 public void suspect(String room){
