@@ -185,7 +185,14 @@ System.out.println("Suspected: " + s.toString());
 ArrayList<String> contested;
 contested = s.checkContested(cards, otherPlayer);
 System.out.println("Contested cards: " + contested);
-//contested = s.checkContested(c, otherplayer);//how do I access the cards and instance of other player?????
+for(int i = 0; i < contested.size(); i++){
+	if(contested.get(i) == allPossiblePeople.get(0))
+		allPossiblePeople.remove(0);
+	if(contested.get(i) == allPossibleRooms.get(0))
+		allPossibleRooms.remove(0);
+	if(contested.get(i) == allPossibleWeapons.get(0))
+		allPossibleWeapons.remove(0);
+}
 //method to remove innocent things
 	
 }
