@@ -33,11 +33,11 @@ public class Player {
 		this.suspected = new ArrayList<Suspicion>();
 		//this.accused = new Accusation();
 	}
-
-	/** getPlayerPosition
-	* gets the players position using its x Position and Y Position
-	* @return pos which is the new array position
-	* called and used in GUI for eventhandling
+	
+	/** getPlayerPosition	
+	* gets the players position using its x Position and Y Position	
+	* @return pos which is the new array position	
+	* called and used in GUI for eventhandling	
 	*/
 	public int[] getPlayerPosition() {
 
@@ -47,33 +47,31 @@ public class Player {
 	}
 
 	//Getter Methods
-
 	public String getName(){
 		return name;
 	}
 
 	public String getPlayerToken() {
 		return token;
-
 	}
 
 	public int getMoveAmount() {
+
 		return moveAmount;
 
 	}
-
-	public int getXPosition() {
+	
+	//returns xpos
+	public int getXPosition(){
 		return xPos;
-
 	}
 
-	public int getYPosition() {
+//returns ypos
+	public int getYPosition(){
 		return yPos;
-
 	}
-	public String getToken() {
+	public String getToken(){
 		return token;
-
 	}
 
 	public Accusation getAccused() {
@@ -81,26 +79,6 @@ public class Player {
 
 	}
 	// Setter Methods
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	* used in GUI to set the players Token on the board
-	* @param imageName is a .png image passed for the token 
-	*/
-	public void setPlayerToken(String imageName) {
-		token = imageName;
-
-	}
-
-	/**
-	* sets the move amount
-	* @param move number of moves allowed
-	*/
-	public void setMoveAmount(int move) {
-		moveAmount = move;
-
-	}
 
 	/** Sets the Players position & calls the checkRoom method
 	* @param xDistance distance player travelled horizontally
@@ -137,24 +115,44 @@ public class Player {
 		checkRoom();
 
 	}
+	
+	public void setName(String name) {	
+		this.name = name;	
+	}	
+	
+	/**	
+	* used in GUI to set the players Token on the board	
+	* @param imageName is a .png image passed for the token 	
+	*/
+	public void setPlayerToken(String imageName) {
 
-	/**
+		token = imageName;
+
+	}
+
+	public void setMoveAmount(int move) {
+
+		moveAmount = move;
+
+	}
+
+	/**	
 	* checks if Player has reached a room GUI version
-	* @return String of the room player is in 
+	* @return String of the room player is in 	
 	*/
 	public String checkRoom() {
-		//Creating room variable
+		
 		String room = "";
-		// Room position for Library
+	// Room position for Library
 		if (xPos == 0 && yPos == 0) {
 			room = "Library";
-			System.out.println("You've reached the " + room );
+			System.out.println("You've reached the" + room );	
 			return room;
 
 		// Room position for Dining Room
 		} else if (xPos == 4 && yPos == 0 ) {
-			room = "Dining_Room";
-			System.out.println("You've reached the " + room );
+			room = "Dining_Room";				
+			System.out.println("You've reached the " + room );	
 			return room;
 
 		// Room position for Kitchen
@@ -175,15 +173,14 @@ public class Player {
 			System.out.println("You've reached the " + room );
 			return room;
 
+
 		// Room position for Billiard Room
 		}  else if (xPos == 4 && yPos == 4 ) {
 			room = "Billiard_Room";
 			System.out.println("You've reached the " + room );
 			return room; 
-
-		} 
-		// if not in a room returns blank string room
-			return room;
+		}
+		return null;
 
 	}
 
@@ -192,7 +189,17 @@ public class Player {
 	* @param weapon weapon suspected by player
 	* @param room room player is in while suspecting
 	* @param person person suspected by player
+	*
 	*/
+	public boolean isAI(){
+		return false;
+	}
+	
+	public void turnSequence(){
+	}
+	public void getHands(ArrayList<String> cards){
+	}
+	
 	public Suspicion addSuspected(Weapon weapon, Room room , Person person) {
 		//Creates new suspicion
 		Suspicion s = new Suspicion(weapon, room, person);
@@ -215,9 +222,8 @@ public class Player {
 	*/
 	public void setAccused(Weapon weapon, Room room , Person person) {
 		this.accused = new Accusation(weapon, room, person);
-
+		//return this.accused;
 	}
 
-
-
+	
 }
