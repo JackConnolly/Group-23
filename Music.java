@@ -89,7 +89,7 @@ in the background
 			}
 //If it cannot find the specified file pathway, print an error statement
 			else{
-				System.out.print("cant find");
+				//System.out.print("cant find");
 			}
 
 		}
