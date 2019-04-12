@@ -82,8 +82,6 @@ be accused to the array places
 		winRoom = room.get(rand);
 		room.remove(rand);
 
-		System.out.println("winroom " + winRoom);
-
 		return winRoom;
 	}
 

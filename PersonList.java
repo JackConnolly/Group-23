@@ -63,8 +63,6 @@ be accused to the array people
 		winPerson = person.get(rand);
 		person.remove(rand);
 
-		System.out.println("Winperson " + winPerson);
-
 		return winPerson;
 	}
 

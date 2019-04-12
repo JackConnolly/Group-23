@@ -14,8 +14,8 @@ public class AccusationTest {
 			this.setWinningWeapon(w);
 			this.setWinningRoom(r);
 			this.setWinningPerson(p);
-			Player p1 = new Player("Anna");
-			Player p2 = new Player("Jack");
+			HumanPlayer p1 = new HumanPlayer("Anna");
+			HumanPlayer p2 = new HumanPlayer("Jack");
 			this.setPlayerOneObject(p1);
 			this.setPlayerTwoObject(p2);
 				
@@ -25,8 +25,8 @@ public class AccusationTest {
 			this.setWinningWeapon(w);
 			this.setWinningRoom(r);
 			this.setWinningPerson(p);
-			Player p1 = new Player("Anna");
-			Player p2 = new Player("Jack");
+			HumanPlayer p1 = new HumanPlayer("Anna");
+			HumanPlayer p2 = new HumanPlayer("Jack");
 			this.setPlayerOneObject(p1);
 			this.setPlayerTwoObject(p2);
 			this.setPlayerTwoHand(p2Cards);
@@ -77,7 +77,7 @@ public class AccusationTest {
 		Weapon w = new Weapon("revolver");
 		Person p= new Person("miss scArLET");
 		Room r = new Room("kitchen");
-		Player cp = new Player("Jack");
+		HumanPlayer cp = new HumanPlayer("Jack");
 		ArrayList<String> p2Cards = new ArrayList<String>();
 		p2Cards.add("revolver");
 		p2Cards.add("Library");

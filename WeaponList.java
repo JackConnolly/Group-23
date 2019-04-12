@@ -63,8 +63,6 @@ be accused to the array weapons
 		winWeapon = weapon.get(rand);
 		weapon.remove(rand);
 
-		System.out.println("winweapon " + winWeapon);
-
 		return winWeapon;
 	}
 

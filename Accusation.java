@@ -30,9 +30,12 @@ public class Accusation extends Suspicion {
 		} else {
 			return false;
 		}
+		
+		
 	}
 
 	public boolean winningPrompt(Cards cards) {
+		
 		if (checkWinner(cards) == true) {
 			System.out.println("Congratualations! you have accused the rightful murderer!");
 			return true;
@@ -41,6 +44,8 @@ public class Accusation extends Suspicion {
 			return false;
 			//System.out.println("the winning cards are" + cards.getWinningRoom() + " " + cards.getWinningWeapon() + " " + cards.getWinningPerson());
 		}
+	
+		
 	}
 
 	
